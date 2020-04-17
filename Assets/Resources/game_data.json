@@ -1,0 +1,16 @@
+{
+    "levels": [
+        {
+            "id": 1,
+            "mapId": 1,
+            "showAd": 0
+        }
+    ],
+    "adsConfig": {
+        "masterSwitch": 0,
+        "retryAdSeq": [],
+        "retryAdPeriod": 99,
+        "noNextLevelAdsDays": 1,
+        "nextLevelSafeDuration": 30
+    }
+}		

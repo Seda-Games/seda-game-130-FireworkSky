@@ -67,4 +67,9 @@ public class PlayUI : MonoBehaviour
         AudioManager.instance?.Tap();
         ToastManager.Show("This is a test toast!");
     }
+
+    public void TestHapticsFeedback(float intensity)
+    {
+        Haptics.Feedback(intensity);
+    }
 }

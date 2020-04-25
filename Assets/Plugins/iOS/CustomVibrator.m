@@ -2,12 +2,13 @@
 //  CustomVibrator.m
 //  Unity-iPhone
 //
-//  Created by Donhui Li on 9/19/19.
+//  Created by Donghui Li on 9/19/19.
 //
 
 #import <UIKit/UIFeedbackGenerator.h>
 
-void setVibratorIOS(){
-    UIImpactFeedbackGenerator *feedBackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+void SetVibratorIOS(int intensityLevel){
+    UIImpactFeedbackStyle ifs = UIImpactFeedbackStyleLight + intensityLevel;
+    UIImpactFeedbackGenerator *feedBackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:ifs];
     [feedBackGenerator impactOccurred];
 }

@@ -8,7 +8,12 @@
 #import <UIKit/UIFeedbackGenerator.h>
 
 void SetVibratorIOS(int intensityLevel){
-    UIImpactFeedbackStyle ifs = UIImpactFeedbackStyleLight + intensityLevel;
+    UIImpactFeedbackStyle ifs = UIImpactFeedbackStyleLight;
+    if(intensityLevel == 1){
+        ifs = UIImpactFeedbackStyleMedium;
+    } else if(intensityLevel == 2){
+        ifs = UIImpactFeedbackStyleHeavy;
+    }
     UIImpactFeedbackGenerator *feedBackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:ifs];
     [feedBackGenerator impactOccurred];
 }

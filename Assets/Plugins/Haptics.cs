@@ -46,9 +46,9 @@ public static class Haptics
     static void InitVibratorAndroid()
     {
         var ajc = new AndroidJavaClass("android.view.HapticFeedbackConstants");
-        HapticFeedbackLight = ajc.GetStatic<int>("KEYBOARD_TAP");
+        HapticFeedbackLight = ajc.GetStatic<int>("LONG_PRESS");
         HapticFeedbackMedium = ajc.GetStatic<int>("VIRTUAL_KEY");
-        HapticFeedbackHeavy = ajc.GetStatic<int>("LONG_PRESS");
+        HapticFeedbackHeavy = ajc.GetStatic<int>("KEYBOARD_TAP");
         UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity").Get<AndroidJavaObject>("mUnityPlayer");
         Debug.Log("Haptics::InitVibratorAndroid!");
         //Alternative way to get the UnityPlayer:

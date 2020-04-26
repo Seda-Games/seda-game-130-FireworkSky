@@ -52,6 +52,17 @@ public static class G
             Object.Destroy(child.gameObject);
         }
     }
+
+    public static void DebugArray(IEnumerable arr, string arrName = "")
+    {
+        var s = (arrName.Length > 0 ? arrName+": " : arrName) + "[ ";
+        foreach(var e in arr)
+        {
+            s += e.ToString() + " ";
+        }
+        s += "]";
+        Debug.Log(s);
+    }
 }
 
 public static class Scenes

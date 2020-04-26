@@ -23,7 +23,8 @@ public static class Haptics
     /// <param name="intensity"></param>
     public static void Feedback(float intensity = 0.5f)
     {
-        HapticIntensity hi = HapticIntensity.Light + Mathf.Min(2, (int)(intensity / 0.33f));
+        int i = (int)(Mathf.Abs(intensity) / 0.33f);
+        HapticIntensity hi = HapticIntensity.Light + Mathf.Min(2, i);
         Feedback(hi);
     }
 

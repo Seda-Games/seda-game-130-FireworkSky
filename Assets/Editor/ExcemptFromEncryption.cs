@@ -23,7 +23,23 @@ public class ExcemptFromEncryption : IPostprocessBuildWithReport // Will execute
             rootDict.SetBoolean("ITSAppUsesNonExemptEncryption", false);
 
             File.WriteAllText(plistPath, plist.WriteToString()); // Override Info.plist
+
+            DisableBitcode(report.summary.outputPath); // Disable Bitcode
         }
+    }
+
+    void DisableBitcode(string basePath)
+    {
+        string projPath = basePath + "/Unity-iPhone.xcodeproj/project.pbxproj";
+
+        PBXProject proj = new PBXProject();
+        proj.ReadFromString(File.ReadAllText(projPath));
+
+        string target = proj.GetUnityMainTargetGuid();
+        proj.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+        string target2 = proj.GetUnityFrameworkTargetGuid();
+        proj.SetBuildProperty(target2, "ENABLE_BITCODE", "NO");
+        File.WriteAllText(projPath, proj.WriteToString());
     }
 }
 #endif

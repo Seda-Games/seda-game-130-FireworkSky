@@ -46,6 +46,7 @@ public static class Haptics
 #if UNITY_ANDROID
     static void InitVibratorAndroid()
     {
+        androidInited = true;
         var ajc = new AndroidJavaClass("android.view.HapticFeedbackConstants");
         HapticFeedbackLight = ajc.GetStatic<int>("LONG_PRESS");
         HapticFeedbackMedium = ajc.GetStatic<int>("VIRTUAL_KEY");

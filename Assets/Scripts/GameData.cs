@@ -27,7 +27,7 @@ public class GameData
 
     public LevelData GetLevelData(int curLevel)
     {
-        if (curLevel < levels.Length)
+        if (curLevel <= levels.Length)
             return levels[curLevel-1];
         return FakeLevelData(curLevel);
     }

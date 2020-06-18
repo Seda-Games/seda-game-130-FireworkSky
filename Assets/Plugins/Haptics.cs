@@ -30,7 +30,7 @@ public static class Haptics
 
     public static void Feedback(HapticIntensity hapticIntensity)
     {
-        int hapticsOn = PlayerPrefs.GetInt("Haptic", 1);
+        int hapticsOn = PlayerPrefs.GetInt("Haptics", 1);
         if (hapticsOn == 0)
             return;
         

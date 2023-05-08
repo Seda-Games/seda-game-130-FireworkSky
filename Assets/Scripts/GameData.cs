@@ -27,7 +27,7 @@ public class GameData
         {
             levelDict[v.id] = v;
         }
-        foreach (var v in unlockDatas)
+        /*foreach (var v in unlockDatas)
         {
             unlockDatasDict[v.id] = v;
         }
@@ -60,7 +60,7 @@ public class GameData
                     break;
                 }
             }
-        }
+        }*/
         foreach (var v in adsConfig.retryAdSeq)
         {
             if (v > maxRetryAdSeqId)

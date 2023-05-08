@@ -31,7 +31,7 @@ public class GameManager : SingleInstance<GameManager>
     [SerializeField] public int curMoney;
     [SerializeField] public int curSizeValue;
 
-   
+    public PlayGame playGame;
 
 
     private void Awake()
@@ -48,6 +48,7 @@ public class GameManager : SingleInstance<GameManager>
         G.dc.Load();
         InitGameData();
         playUI.UpdateUI(curLevel);
+        playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
     }
@@ -62,6 +63,11 @@ public class GameManager : SingleInstance<GameManager>
     {
         return curLevelData;
     }
+    public void GameStartClick()
+    {
+        playUI.GameStartClick();
+        gp = GamePhase.Play;
+    }
 
     // Update is called once per frame
     void Update()
@@ -71,6 +77,7 @@ public class GameManager : SingleInstance<GameManager>
             case GamePhase.Start:
                 break;
             case GamePhase.Play:
+                userInput.UserControl();
                 break;
         }
     }
@@ -78,8 +85,14 @@ public class GameManager : SingleInstance<GameManager>
 
     void ControlStart(Vector2 pos)
     {
+        mouseDownPos = pos;
         if (gp == GamePhase.Start)
         {
+
+        }
+        if (gp == GamePhase.Play)
+        {
+            
         }
     }
 

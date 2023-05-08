@@ -10,7 +10,7 @@ public class PlayUI : MonoBehaviour
     [SerializeField]
     Image moneyIcon;
     [SerializeField]
-    Button nextButton;
+    Button nextButton, startButton;
     [SerializeField]
     Animator coinTextAnim;
 
@@ -23,6 +23,18 @@ public class PlayUI : MonoBehaviour
     public Vector3 CollectMoneyPosition()
     {
         return moneyIcon.transform.position;
+    }
+    public void GameStartUI()
+    {
+        SetStartButton(true);
+    }
+    public void GameStartClick()
+    {
+        SetStartButton(false);
+    }
+    public void SetStartButton(bool isTure)
+    {
+        startButton.gameObject.SetActive(isTure);
     }
 
     public void ShowTip(string v = null)

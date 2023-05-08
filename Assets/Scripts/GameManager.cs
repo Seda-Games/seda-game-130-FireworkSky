@@ -8,7 +8,7 @@ public enum GamePhase
     Prepare, Start, Play, GameOver, DoNothing
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingleInstance<GameManager>
 {
     public static GameManager instance;
 
@@ -21,11 +21,18 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public GamePhase gp;
-    
+
+    [HideInInspector] public Vector2 mouseDownPos, mouseFromDownToNowPos, mouseLastPos, mouseUpPos;
 
     UserInput userInput;
     LevelData curLevelData;
-    int curLevel;
+    public int curLevel;
+
+    [SerializeField] public int curMoney;
+    [SerializeField] public int curSizeValue;
+
+   
+
 
     private void Awake()
     {

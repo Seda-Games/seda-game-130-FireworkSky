@@ -15,6 +15,7 @@ public static class G
 
     public const string FIRST_LOGIN_TIME = "first_login_time";
     public const string LOGIN_TIME = "login_time";
+    public const string PLAYER = "Player";
 
     public static string FormatNum(int num)
     {
@@ -75,4 +76,13 @@ public static class Messages
 {
     public const string NO_ADS = "No ads now, try later :(";
     public const string NO_MONEY = "Not enough money :(";
+}
+public static class Tag
+{
+    public const string OBSTACLE = "obstacle";
+
+}
+public static class Layer
+{
+    public const int EXHIBITION = 8;
 }

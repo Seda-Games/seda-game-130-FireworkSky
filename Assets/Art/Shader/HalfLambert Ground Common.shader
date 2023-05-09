@@ -75,6 +75,7 @@ Shader "ccc/HalfLambert Ground Common"
                 //BaseColor
                 half3 diffuseCol = tex2D(_DiffuseTex, i.uv).rgb;
                 half3 baseColor = diffuseCol * _BaseColor.rgb;
+                half3 ambientColor = UNITY_LIGHTMODEL_AMBIENT.rgb;
 
                 //ShadowColor
                 half3 shadowColor = diffuseCol * _ShadowColor.rgb;

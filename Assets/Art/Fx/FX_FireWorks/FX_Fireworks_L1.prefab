@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449775390362500468}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.01999998, y: 1.066, z: 0.07999992}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -37,8 +37,7 @@ Transform:
 --- !u!198 &7350301937246619095
 ParticleSystem:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6755244375777889065, guid: 5ecc1dc9296dd634e8115cb78ea8b267,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449775390362500468}
@@ -1418,8 +1417,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 0, a: 1}
-        key1: {r: 0.3882353, g: 0.95686275, b: 0, a: 1}
+        key0: {r: 1, g: 0.19551288, b: 0, a: 1}
+        key1: {r: 0.95686275, g: 0.8668457, b: 0, a: 1}
         key2: {r: 0, g: 1, b: 1, a: 0}
         key3: {r: 1, g: 0, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6351,15 +6350,15 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 0, a: 1}
+        key0: {r: 1, g: 0.09661572, b: 0, a: 1}
         key1: {r: 0.3882353, g: 0.95686275, b: 0, a: 1}
-        key2: {r: 0, g: 1, b: 1, a: 0}
+        key2: {r: 1, g: 0.9600028, b: 0, a: 0}
         key3: {r: 1, g: 0, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 13107
+        ctime0: 12914
         ctime1: 32298
         ctime2: 48917
         ctime3: 65535
@@ -9881,7 +9880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3996613138644027446
 Transform:
   m_ObjectHideFlags: 0

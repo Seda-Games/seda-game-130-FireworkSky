@@ -15,11 +15,11 @@ public class GameManager : SingleInstance<GameManager>
     public SettingsUI settingsUI;
     public PlayUI playUI;
     public ResultUI resultUI;
-
+    public FireWorkMove fireWorkMove;
     [SerializeField]
     GameObject flyCoinPrefab;
 
-    [HideInInspector]
+    
     public GamePhase gp;
 
     [HideInInspector] public Vector2 mouseDownPos, mouseFromDownToNowPos, mouseLastPos, mouseUpPos;
@@ -32,8 +32,13 @@ public class GameManager : SingleInstance<GameManager>
     [SerializeField] public int curSizeValue;
 
     public PlayGame playGame;
-
-
+    Vector2 mouseOriginalPoint, mouseLastPoint;
+    private Vector3 target;
+    public Player player;
+    bool onClick = false;
+    bool is_element=false;
+    public GameObject element;
+    public GameObject element2;
     private void Awake()
     {
         if (instance == null)
@@ -51,6 +56,7 @@ public class GameManager : SingleInstance<GameManager>
         playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
+        target = player.transform.position;
     }
 
     void InitGameData()
@@ -94,13 +100,15 @@ public class GameManager : SingleInstance<GameManager>
         {
             
         }
+         
     }
 
     void ControlMove(Vector2 pos)
     {
-        if(gp == GamePhase.Play)
-        {
-        }
+        
+            
+        
+        
     }
 
     void ControlStationary(Vector2 pos)
@@ -110,10 +118,47 @@ public class GameManager : SingleInstance<GameManager>
 
     void ControlEnd(Vector2 pos)
     {
+        mouseLastPoint = Vector2.zero;
         if (gp == GamePhase.Play)
         {
-           
+            Ray ray = Camera.main.ScreenPointToRay(pos);
+            RaycastHit hit,hit2;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.transform.CompareTag(Tag.LV1))
+                {
+                    is_element = true;
+                    element = hit.collider.gameObject;
+                    player.pp = PlayerPhase.Selected;
+                }
+            }
+            if (is_element)
+            {
+                if (Physics.Raycast(ray, out hit2, Mathf.Infinity))
+                {
+                    if (hit2.transform.CompareTag(Tag.Plane))
+                    {
+                        element2 = hit2.collider.gameObject;
+                        element.transform.position = element2.transform.position + new Vector3(0, 0.01f, 0);
+                        player.pp = PlayerPhase.UnSelected;
+                        is_element = false;
+                    }
+                    if (hit2.transform.CompareTag(Tag.LV1))
+                    {
+                        Debug.Log("点击了方块");
+                    }
+                    //playGame.cub.transform.position = element.transform.position + new Vector3(0, 0.01f, 0);
+                    /*Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(element.transform.position);
+                    Vector3 mousePos = new Vector3(pos.x, pos.y,targetScreenPos.z);
+                    player.transform.position = Camera.main.ScreenToWorldPoint(mousePos);*/
+                }
+
+            }
         }
+
+
+
+
     }
 
     public void GameOver()
@@ -169,7 +214,17 @@ public class GameManager : SingleInstance<GameManager>
         Haptics.Feedback();
         StartCoroutine(FLyCoins_(amount, count, startPos));
     }
-
+    //移动方法
+    void Move(Vector3 target)
+    {
+        if (Vector3.Distance(player.transform.position, target) > 0.1f)
+        {
+            player.transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime);
+        }
+        //如果物体的位置和目标点的位置距离小于 0.1时直接等于目标点
+        else
+            player.transform.position = target;
+    }
     IEnumerator FLyCoins_(int amount, int count, Vector3 startPos)
     {
         float timer = 0, duration = G.FLY_COINS_DURATION;

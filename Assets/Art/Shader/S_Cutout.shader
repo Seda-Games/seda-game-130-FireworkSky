@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "ccc/HalfLambert Ground Common"
+Shader "ccc/HalfLambert Ground Common Cutout"
 {
     Properties
     {

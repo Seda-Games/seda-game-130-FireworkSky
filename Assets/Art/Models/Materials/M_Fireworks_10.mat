@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Scene_Metal
+  m_Name: M_Fireworks_10
   m_Shader: {fileID: 4800000, guid: 0a6546038b0c05a4d952ef21baf57ad9, type: 3}
   m_ShaderKeywords: _ACES_ON
   m_LightmapFlags: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 745c02b7cf262fd40be230cb042c8420, type: 3}
+        m_Texture: {fileID: 2800000, guid: 739854f7ad3049f4cb1ae4ef86c2b6c2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 745c02b7cf262fd40be230cb042c8420, type: 3}
+        m_Texture: {fileID: 2800000, guid: 05c85a716c91dfb4d9c69dfd5940d899, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Matcap:
@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapAdd:
-        m_Texture: {fileID: 2800000, guid: df1c0b7b6a2938c4398c57dce5b3ae84, type: 3}
+        m_Texture: {fileID: 2800000, guid: e3e7f73dd4b072043acd59c5f6dd5d82, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -103,8 +103,8 @@ Material:
     - _Float0: 0.5
     - _Float3: 1
     - _Float4: 0.22
-    - _FresnelIntesity: 0.15
-    - _FresnelPow: 5
+    - _FresnelIntesity: 0.29
+    - _FresnelPow: 3.34
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -112,7 +112,7 @@ Material:
     - _LightMul: 0
     - _LmpIntensity: 0
     - _MatcapAddIntensity: 0.18
-    - _MatcapIntensity: 1.29
+    - _MatcapIntensity: 1.26
     - _Max: 0.16
     - _Metallic: 0
     - _Mode: 0
@@ -127,14 +127,15 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TopColorConcrol: 0
-    - _TopMatcapAddIntensity: 1
-    - _TopMatcapIntensity: 1.29
+    - _TopMatcapAddIntensity: 0.62
+    - _TopMatcapIntensity: 1.32
     - _UVSec: 0
     - _UseLmp: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BackColor: {r: 0.56054217, g: 0, b: 0.5660378, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color0: {r: 1, g: 0.30585113, b: 0, a: 0}
@@ -142,5 +143,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LmpColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShaowColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
-    - _TopColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TexColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TopColor: {r: 0.32373303, g: 0.17528479, b: 0.3679245, a: 1}
   m_BuildTextureStacks: []

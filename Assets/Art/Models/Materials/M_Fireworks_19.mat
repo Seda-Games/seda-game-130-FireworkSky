@@ -111,7 +111,7 @@ Material:
     - _Keyword0: 0
     - _LightMul: 0
     - _LmpIntensity: 0
-    - _MatcapAddIntensity: 0.18
+    - _MatcapAddIntensity: 1
     - _MatcapIntensity: 1.26
     - _Max: 0.16
     - _Metallic: 0
@@ -144,5 +144,5 @@ Material:
     - _LmpColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShaowColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
     - _TexColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 0.32373303, g: 0.17528479, b: 0.3679245, a: 1}
+    - _TopColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

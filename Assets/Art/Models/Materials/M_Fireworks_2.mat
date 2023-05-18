@@ -111,7 +111,7 @@ Material:
     - _Keyword0: 0
     - _LightMul: 0
     - _LmpIntensity: 0
-    - _MatcapAddIntensity: 0.18
+    - _MatcapAddIntensity: 1
     - _MatcapIntensity: 1.26
     - _Max: 0.16
     - _Metallic: 0

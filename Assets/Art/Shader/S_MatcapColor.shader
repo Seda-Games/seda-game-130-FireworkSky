@@ -85,7 +85,8 @@ Shader "ccc/MatcapColor"
                 half4 MainTexColor = tex2D(_MainTex, i.uv) ;
                 half4 dColor = (MatcapColor * MainTexColor)+ fresnel;
                 half4 topColor = (MatcapAddColor * _TopMatcapAddIntensity * _TopColor ) + fresnel;
-                 topColor = lerp(dColor, topColor, _TopColorConcrol);
+                half4 topColor0 = (MatcapAddColor * MainTexColor) + fresnel;
+                 topColor = lerp(topColor0, topColor, _TopColorConcrol);
                 half4 finalColor = lerp(topColor, dColor, i.color.r);
 
                 return finalColor;

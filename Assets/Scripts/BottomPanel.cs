@@ -23,7 +23,7 @@ public class BottomPanel : MonoBehaviour
     }
     public void OnClickAddButton()
     {
-        GameManager.Instance.playGame.AddFireWork();
+        GameManager.Instance.fireWorkManager.AddFireWork();
     }
 
 }

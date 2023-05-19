@@ -80,16 +80,16 @@ public static class Messages
 public static class Tag
 {
     public const string OBSTACLE = "obstacle";
-    public const string LV1 = "lv1";
-    public const string LV2 = "lv2";
-    public const string LV3 = "lv3";
-    public const string LV4 = "lv4";
-    public const string LV5 = "lv5";
-    public const string Plane = "plane";
+    public const string FireWork = "firework";
+    public const string FirePlane = "fireplane";
+    public const string PreparePlane = "prepareplane";
 
 }
 public static class Layer
 {
-    public const int EXHIBITION = 8;
-    public const int FireWork = 9;
+    public const int FireWork = 6;
+    public const int Plane = 7;
+    public const int floor = 8;
+    public const int Fire = 9;
+    public const int EXHIBITION = 10;
 }

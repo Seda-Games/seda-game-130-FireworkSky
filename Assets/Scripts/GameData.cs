@@ -17,9 +17,12 @@ public class GameData
     public ExhibitData[] exhibitDatas;
     public List<ExhibitData> exhibitDatasList = new List<ExhibitData>();
     public Dictionary<int, ExhibitData> exhibitDatasDict = new Dictionary<int, ExhibitData>();
-
-
-    
+    public FireWorkData[] fireWorkDatas;
+    public Dictionary<int, FireWorkData> fireWorkDataDict = new Dictionary<int, FireWorkData>();
+    public HumanData[] humanDatas;
+    public Dictionary<int, HumanData> humanDataDataDict = new Dictionary<int, HumanData>();
+    public AddIncomeData[] addIncomeDatas;
+    public Dictionary<int, AddIncomeData> AddIncomeDataDict = new Dictionary<int, AddIncomeData>();
 
     public void Init()
     {
@@ -27,6 +30,19 @@ public class GameData
         {
             levelDict[v.id] = v;
         }
+        foreach (var v in fireWorkDatas)
+        {
+            fireWorkDataDict[v.level] = v;
+        }
+        foreach (var v in humanDatas)
+        {
+            humanDataDataDict[v.level] = v;
+        }
+        foreach (var v in addIncomeDatas)
+        {
+            AddIncomeDataDict[v.level] = v;
+        }
+
         /*foreach (var v in unlockDatas)
         {
             unlockDatasDict[v.id] = v;
@@ -87,6 +103,9 @@ public class LevelData
 {
     public int id;
     public int showAd = 0;
+    public int duration;
+    public int fireworkcost;
+    public int firelevel;
 }
 [System.Serializable]
 public class UserControl
@@ -126,4 +145,26 @@ public class ExhibitData
     public int cost;
     public int index;
     public bool isUnlock = false;
+}
+[System.Serializable]
+public class FireWorkData
+{
+    public int level;
+    public int income;
+}
+[System.Serializable]
+
+public class HumanData
+{
+    public int level;
+    public int flow;
+    public int second;
+    public int cost;
+}
+[System.Serializable]
+public class AddIncomeData
+{
+    public int level;
+    public int income;
+    public int cost;
 }

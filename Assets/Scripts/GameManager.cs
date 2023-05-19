@@ -30,7 +30,10 @@ public class GameManager : SingleInstance<GameManager>
 
     [SerializeField] public int curMoney;
     [SerializeField] public int curSizeValue;
-
+    public FireWorkManager fireWorkManager;
+    public FirePlaneManager firePlaneManager;
+    public PreparePlaneManager preparePlaneManager;
+    public FireWork fireWork;
     public PlayGame playGame;
     Vector2 mouseOriginalPoint, mouseLastPoint;
     private Vector3 target;
@@ -57,6 +60,8 @@ public class GameManager : SingleInstance<GameManager>
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
         target = player.transform.position;
+        preparePlaneManager.InitPrepareFirePlane();
+        firePlaneManager.InitFirePlane();
     }
 
     void InitGameData()
@@ -98,17 +103,14 @@ public class GameManager : SingleInstance<GameManager>
         }
         if (gp == GamePhase.Play)
         {
-            
+            //fireWorkManager.FireWorkStart(pos);
         }
          
     }
 
     void ControlMove(Vector2 pos)
     {
-        
-            
-        
-        
+        //fireWorkManager.FireWorkMove(pos);
     }
 
     void ControlStationary(Vector2 pos)
@@ -121,14 +123,15 @@ public class GameManager : SingleInstance<GameManager>
         mouseLastPoint = Vector2.zero;
         if (gp == GamePhase.Play)
         {
-            Ray ray = Camera.main.ScreenPointToRay(pos);
+            /*Ray ray = Camera.main.ScreenPointToRay(pos);
             RaycastHit hit,hit2;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.transform.CompareTag(Tag.LV1))
+                if (hit.transform.CompareTag(Tag.FireWork))
                 {
                     is_element = true;
                     element = hit.collider.gameObject;
+                    Player player = element.GetComponent<Player>();
                     player.pp = PlayerPhase.Selected;
                 }
             }
@@ -138,22 +141,28 @@ public class GameManager : SingleInstance<GameManager>
                 {
                     if (hit2.transform.CompareTag(Tag.Plane))
                     {
+                        playGame.allCub.Remove(element);
                         element2 = hit2.collider.gameObject;
                         element.transform.position = element2.transform.position + new Vector3(0, 0.01f, 0);
+                        Player player = element.GetComponent<Player>();
                         player.pp = PlayerPhase.UnSelected;
+                        player.PlayFx();
                         is_element = false;
                     }
-                    if (hit2.transform.CompareTag(Tag.LV1))
+                    if (hit2.transform.CompareTag(Tag.FireWork))
                     {
+                        
                         Debug.Log("点击了方块");
+                        
                     }
                     //playGame.cub.transform.position = element.transform.position + new Vector3(0, 0.01f, 0);
-                    /*Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(element.transform.position);
+                    Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(element.transform.position);
                     Vector3 mousePos = new Vector3(pos.x, pos.y,targetScreenPos.z);
-                    player.transform.position = Camera.main.ScreenToWorldPoint(mousePos);*/
+                    player.transform.position = Camera.main.ScreenToWorldPoint(mousePos);
                 }
 
-            }
+            }*/
+            //fireWorkManager.FireWorkMoveEnd(pos);
         }
 
 

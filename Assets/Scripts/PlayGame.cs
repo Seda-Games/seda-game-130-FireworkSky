@@ -17,21 +17,17 @@ public class PlayGame : MonoBehaviour
     }
     public void AddFireWork()
     {
-        if (!isfull)
-        {
+        if (allCub.Count < transforms.Count) { 
             if (currentSpawnIndex < transforms.Count)
             {
                 cub = Instantiate(prefab, transforms[currentSpawnIndex].position, Quaternion.identity);
+                cub.transform.parent = GameObject.Find("GameScene/PreparePlaneManager/PreparePlane_" + currentSpawnIndex).transform;
                 currentSpawnIndex++;
-                if (allCub.Count < 3)
-                {
-                    allCub.Add(cub);
-                }
+                allCub.Add(cub);
             }
             else
             {
                 currentSpawnIndex = 0;
-                isfull = true;
             }
         }
     }
@@ -40,4 +36,5 @@ public class PlayGame : MonoBehaviour
     {
         
     }
+   
 }

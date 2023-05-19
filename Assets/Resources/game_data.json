@@ -3,7 +3,10 @@
         {
             "id": 1,
             "mapId": 1,
-            "showAd": 0
+            "showAd": 0,
+            "duration":10,
+            "fireworkcost":1,
+            "firelevel":1
         }
     ],
     "adsConfig": {
@@ -12,5 +15,27 @@
         "retryAdPeriod": 99,
         "noNextLevelAdsDays": 1,
         "nextLevelSafeDuration": 30
-    }
+    },
+    "fireWorkDatas":[
+        {"level":1,"income":1},
+        {"level":2,"income":2},
+        {"level":3,"income":4},
+        {"level":4,"income":4},
+        {"level":5,"income":5}
+    ],
+    "humanDatas":[
+        {"level":1,"flow":2,"second":3600,"cost":50},
+        {"level":2,"flow":4,"second":2400,"cost":100},
+        {"level":3,"flow":6,"second":1600,"cost":200},
+        {"level":4,"flow":8,"second":800,"cost":400},
+        {"level":5,"flow":10,"second":400,"cost":800}
+    ],
+    "addIncomeDatas":[
+        {"level":1,"income":0,"cost":50},
+        {"level":2,"income":10,"cost":200},
+        {"level":3,"income":15,"cost":400},
+        {"level":4,"income":20,"cost":800},
+        {"level":5,"income":25,"cost":1600}
+    ]
+    
 }		

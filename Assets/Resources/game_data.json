@@ -21,7 +21,22 @@
         {"level":2,"income":2},
         {"level":3,"income":4},
         {"level":4,"income":4},
-        {"level":5,"income":5}
+        {"level":5,"income":5},
+        {"level":6,"income":6},
+        {"level":7,"income":7},
+        {"level":8,"income":8},
+        {"level":9,"income":9},
+        {"level":10,"income":10},
+        {"level":11,"income":11},
+        {"level":12,"income":12},
+        {"level":13,"income":13},
+        {"level":14,"income":14},
+        {"level":15,"income":15},
+        {"level":16,"income":16},
+        {"level":17,"income":17},
+        {"level":18,"income":18},
+        {"level":19,"income":19},
+        {"level":20,"income":20}
     ],
     "humanDatas":[
         {"level":1,"flow":2,"second":3600,"cost":50},

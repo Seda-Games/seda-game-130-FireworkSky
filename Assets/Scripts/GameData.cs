@@ -106,6 +106,7 @@ public class LevelData
     public int duration;
     public int fireworkcost;
     public int firelevel;
+    public int money;
 }
 [System.Serializable]
 public class UserControl

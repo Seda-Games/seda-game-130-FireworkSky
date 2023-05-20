@@ -48,6 +48,7 @@ public class GameManager : SingleInstance<GameManager>
             instance = this;
         else
             Destroy(gameObject);
+      
     }
 
     // Start is called before the first frame update
@@ -55,7 +56,14 @@ public class GameManager : SingleInstance<GameManager>
     {
         G.dc.Load();
         InitGameData();
+        if (!PlayerPrefs.HasKey(G.FIRST_LOGIN_TIME))
+        {
+            int curlevel = PlayerPrefs.GetInt(G.LEVEL, 1);
+            PlayerPrefs.SetInt(G.MONEY, G.dc.gd.levelDict[curlevel].money);
+        }
+        
         playUI.UpdateUI(curLevel);
+       
         playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
@@ -64,7 +72,7 @@ public class GameManager : SingleInstance<GameManager>
         firePlaneManager.InitFirePlane();
     }
 
-    void InitGameData()
+    public void InitGameData()
     {
         curLevel = PlayerPrefs.GetInt(G.LEVEL, 1);
         curLevelData = G.dc.gd.GetLevelData(curLevel);
@@ -178,6 +186,13 @@ public class GameManager : SingleInstance<GameManager>
     public void AddMoney(int amount)
     {
         G.dc.AddMoney(amount);
+        G.dc.Save();
+        playUI.UpdateUI(curLevel);
+    }
+
+    public void UseMoney(int level)
+    {
+        G.dc.UseMoney(G.dc.gd.levelDict[level].fireworkcost);
         G.dc.Save();
         playUI.UpdateUI(curLevel);
     }

@@ -707,35 +707,41 @@ public class FireWorkManager : MonoBehaviour
                 //item1 = item;
             }
         }*/
-        for (int i = 0; i < GameManager.instance.preparePlaneManager.preparePlanes.Count; i++)
+        AudioManager.instance?.Tap();
+        int curlevel = PlayerPrefs.GetInt(G.LEVEL, 1);
+        if (G.dc.GetMoney() >= G.dc.gd.levelDict[curlevel].fireworkcost)
         {
-            int level = PlayerPrefs.GetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[i].PreparePlaneID, 0);
-            if (level == 0)
+            for (int i = 0; i < GameManager.instance.preparePlaneManager.preparePlanes.Count; i++)
             {
-                item1 = i;
-                break;
+                int level = PlayerPrefs.GetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[i].PreparePlaneID, 0);
+                if (level == 0)
+                {
+                    item1 = i;
+                    break;
+                }
+                else
+                {
+                    item1 = 3;
+                }
+            }
+            if (item1 < 3)
+            {
+
+                cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
+                GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
+                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
+                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
+                cub.GetComponent<FireWork>().ShowModel(1);
+                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
+                Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
+                //fireworkNum.Add(cub);
+                GameManager.instance.UseMoney(curlevel);
+
             }
             else
             {
-                item1 = 3;
+                Debug.LogError("准备台已满，无法继续添加");
             }
-        }
-        if (item1 < 3)
-        {
-            
-            cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
-            GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
-            cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
-            cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
-            cub.GetComponent<FireWork>().ShowModel(1);
-            PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
-            Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
-            //fireworkNum.Add(cub);
-            
-        }
-        else
-        {
-            Debug.LogError("准备台已满，无法继续添加");
         }
                    
                 

@@ -265,8 +265,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &154054839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6140,8 +6140,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &360845392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6618,9 +6618,7 @@ MonoBehaviour:
   - {fileID: 512374243}
   - {fileID: 1182902788}
   - {fileID: 2108177335}
-  ddd:
-    serializedVersion: 2
-    m_Bits: 512
+  newfirework: {fileID: 0}
 --- !u!1 &460386992
 GameObject:
   m_ObjectHideFlags: 0
@@ -18370,8 +18368,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &974886148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29121,8 +29119,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &1187782580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34555,8 +34553,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &1318860120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34800,8 +34798,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &1361125127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50092,8 +50090,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 10, y: 15, z: 15}
+  m_Center: {x: 0, y: 5, z: 2.5}
 --- !u!114 &1534321303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51568,9 +51566,7 @@ MonoBehaviour:
   - {fileID: 512374243}
   - {fileID: 1182902788}
   - {fileID: 2108177335}
-  ddd:
-    serializedVersion: 2
-    m_Bits: 0
+  newfirework: {fileID: 0}
 --- !u!1 &1926154308
 GameObject:
   m_ObjectHideFlags: 0

@@ -179,7 +179,22 @@ public class FireWorkManager : MonoBehaviour
                                     else
                                     if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
                                     {
+                                        //交换位置 
+                                        element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                        element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
 
+                                        FireWork temp;
+                                        temp = element2.GetComponent<FirePlane>().fireWork;
+                                        element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
+                                        element3.GetComponent<FirePlane>().fireWork = temp;
+
+
+                                        
+
+
+
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
                                     }
                                 }
 
@@ -225,7 +240,26 @@ public class FireWorkManager : MonoBehaviour
                                     else
                                     if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
                                     {
+                                        //交换位置
+                                        element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                        element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
 
+                                        FireWork temp;
+                                        temp = element2.GetComponent<PreparePlane>().fireWork;
+                                        element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
+                                        element3.GetComponent<FirePlane>().fireWork = temp;
+
+
+                                        element2.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
+                                        element2.GetComponent<PreparePlane>().fireWork.PlayFx(element2.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
+
+                                        element3.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
+                                        element3.GetComponent<FirePlane>().fireWork.PlayFx(element3.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
+
+
+
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
                                     }
                                 }
 
@@ -302,7 +336,27 @@ public class FireWorkManager : MonoBehaviour
                                     else
                                     if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
                                     {
+                                        //交换位置
+                                        element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                        element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+                                        
 
+                                        FireWork temp;
+                                        temp = element2.GetComponent<FirePlane>().fireWork;
+                                        element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
+                                        element3.GetComponent<PreparePlane>().fireWork = temp;
+
+                                        element2.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
+                                        element2.GetComponent<FirePlane>().fireWork.PlayFx(element2.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
+
+                                        element3.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
+                                        element3.GetComponent<PreparePlane>().fireWork.PlayFx(element3.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
+
+
+
+
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
                                     }
                                 }
 
@@ -346,8 +400,22 @@ public class FireWorkManager : MonoBehaviour
                                     }
                                     else
                                     if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
-                                    {
+                                    {//交换位置
+                                        element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                        element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+                                        FireWork temp;
+                                        temp = element2.GetComponent<PreparePlane>().fireWork;
+                                        element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
+                                        element3.GetComponent<PreparePlane>().fireWork = temp;
                                         
+                                        
+                                        
+                                        
+                                        
+
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
                                     }
                                 }
                                
@@ -662,7 +730,7 @@ public class FireWorkManager : MonoBehaviour
             cub.GetComponent<FireWork>().ShowModel(1);
             PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
             Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
-            fireworkNum.Add(cub);
+            //fireworkNum.Add(cub);
             
         }
         else

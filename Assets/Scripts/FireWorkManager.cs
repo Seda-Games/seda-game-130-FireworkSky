@@ -26,6 +26,7 @@ public class FireWorkManager : MonoBehaviour
     public List<GameObject> gameObjects;
     public GameObject newfirework;
     public ParticleSystem particleSystem;
+    bool isGet=true;
     void Awake()
     {
         //InitFireWork();
@@ -68,6 +69,15 @@ public class FireWorkManager : MonoBehaviour
                     Debug.Log(hit.transform.tag);
                 }
             }
+            else
+            if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.FireWork))
+            {
+                if (hit.transform.CompareTag(Tag.FireWork))
+                {
+                    element = hit.collider.gameObject;
+                }
+            }
+            isGet = true;
         }
 
         if (Input.GetMouseButton(0))//开始移动
@@ -86,6 +96,27 @@ public class FireWorkManager : MonoBehaviour
                 {
                     element = hit.collider.gameObject;
                     
+                    if (isGet == true)
+                    {
+                        foreach (var item in FindObjectsOfType<FireWork>())
+                        {
+                            fireworkNum.Add(item.gameObject);
+                        }
+                        foreach (var item in fireworkNum)
+                        {
+                            if (item != element)
+                            {
+                                if (item.GetComponent<BoxCollider>() != null)
+                                {
+                                    item.GetComponent<BoxCollider>().enabled = false;
+                                }
+                            }
+
+                        }
+                        isGet = false;
+                    }
+                    
+                    
                     element.layer = LayerMask.NameToLayer("Ignore Raycast");//物体不检测射线，避免挡住鼠标检测移动层
                     StartCoroutine(ItemMove(element));
                     Debug.Log("移动了物体");
@@ -98,6 +129,14 @@ public class FireWorkManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))//停止移动
         {
+            foreach (var item in fireworkNum)
+            {
+               if (item.GetComponent<BoxCollider>() != null)
+               {
+                   item.GetComponent<BoxCollider>().enabled = true;
+               }
+            }
+            fireworkNum.Clear();
             /*if (element)
             {
                 element.layer = LayerMask.NameToLayer("Fire");//物体回到初始层

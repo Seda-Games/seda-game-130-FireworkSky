@@ -7,7 +7,7 @@
             "duration":10,
             "fireworkcost":1,
             "firelevel":1,
-            "money":1000
+            "money":10
         }
     ],
     "adsConfig": {
@@ -20,7 +20,7 @@
     "fireWorkDatas":[
         {"level":1,"income":1},
         {"level":2,"income":2},
-        {"level":3,"income":4},
+        {"level":3,"income":3},
         {"level":4,"income":4},
         {"level":5,"income":5},
         {"level":6,"income":6},

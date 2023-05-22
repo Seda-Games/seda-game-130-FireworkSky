@@ -25,7 +25,7 @@ public class FireWorkManager : MonoBehaviour
     int currentSpawnIndex=0;
     public List<GameObject> gameObjects;
     public GameObject newfirework;
-
+    public ParticleSystem particleSystem;
     void Awake()
     {
         //InitFireWork();
@@ -43,6 +43,7 @@ public class FireWorkManager : MonoBehaviour
     {
         ResetLastPos();
         ItemMove();
+        GetFireWorkIncome();
     }
 
 
@@ -509,6 +510,28 @@ public class FireWorkManager : MonoBehaviour
             lastPos = Vector3.zero;
         }
     }
+
+    /// <summary>
+    /// 获得烟花的钱数
+    /// </summary>
+    /// <param name="pos"></param>
+    public void GetFireWorkIncome()
+    {
+        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+        {
+            if (item.fireWork)
+            {
+                particleSystem = item.fireWork.GetComponentInChildren<ParticleSystem>();
+                if (particleSystem.time > particleSystem.main.duration - 0.5f)
+                {
+                    GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome);
+                    particleSystem.time = 0;
+                }
+            }
+        }
+        
+    }
+
     #region 暂时不用
     public void FireWorkStart(Vector2 pos)
     {

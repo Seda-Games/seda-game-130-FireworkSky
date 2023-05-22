@@ -14,6 +14,7 @@ public static class G
     public const float FLY_COINS_DURATION = 0.5f;
 
     public const string FIRST_LOGIN_TIME = "first_login_time";
+    public const string FIRST_LOGIN_TIME_MONEY = "first_login_time_money";
     public const string LOGIN_TIME = "login_time";
     public const string PLAYER = "Player";
 

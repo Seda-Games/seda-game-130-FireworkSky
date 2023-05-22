@@ -56,13 +56,17 @@ public class GameManager : SingleInstance<GameManager>
     {
         G.dc.Load();
         InitGameData();
-        if (!PlayerPrefs.HasKey(G.FIRST_LOGIN_TIME))
+        if (!PlayerPrefs.HasKey(G.FIRST_LOGIN_TIME_MONEY))
         {
-            int curlevel = PlayerPrefs.GetInt(G.LEVEL, 1);
-            PlayerPrefs.SetInt(G.MONEY, G.dc.gd.levelDict[curlevel].money);
+            curLevel = PlayerPrefs.GetInt(G.LEVEL, 1);
+            //PlayerPrefs.SetInt(G.MONEY, G.dc.gd.levelDict[curLevel].money);
+            AddMoney(G.dc.gd.levelDict[curLevel].money);
+            var now = System.DateTime.Now;
+            PlayerPrefs.SetString(G.FIRST_LOGIN_TIME_MONEY, now.ToBinary().ToString());
         }
         
         playUI.UpdateUI(curLevel);
+        
        
         playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);

@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - lv1
   - firework
   - plane
+  - lv1
+  - prepareplane
+  - fireplane
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,10 @@ TagManager:
   - Water
   - UI
   - FireWork
-  - 
-  - 
-  - 
-  - 
+  - Plane
+  - floor
+  - Fire
+  - EXHIBITION
   - 
   - 
   - 

@@ -562,7 +562,7 @@ public class FireWorkManager : MonoBehaviour
             if (item.fireWork)
             {
                 particleSystem = item.fireWork.GetComponentInChildren<ParticleSystem>();
-                if (particleSystem.time > particleSystem.main.duration - 0.01f)
+                if (particleSystem.time > particleSystem.main.duration - 0.5f)
                 {
                     GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome);
                     GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome);
@@ -773,6 +773,7 @@ public class FireWorkManager : MonoBehaviour
         }*/
         AudioManager.instance?.Tap();
         fireWorkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1);
+        fireWorkLevel = Mathf.Clamp(fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.addFireWorkDataDict[fireWorkLevel].cost)
         {
             for (int i = 0; i < GameManager.instance.preparePlaneManager.preparePlanes.Count; i++)

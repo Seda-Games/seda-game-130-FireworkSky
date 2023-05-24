@@ -198,6 +198,8 @@ public class GameManager : SingleInstance<GameManager>
 
     public void UseFireWorkMoney(int level)
     {
+        level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length-1].level);
+        Debug.Log(level);
         G.dc.UseMoney(G.dc.gd.addFireWorkDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelUI(level);

@@ -17,6 +17,7 @@ public static class G
     public const string FIRST_LOGIN_TIME_MONEY = "first_login_time_money";
     public const string LOGIN_TIME = "login_time";
     public const string PLAYER = "Player";
+    public const string VISITOR = "visitor";
 
     public static string FormatNum(int num)
     {

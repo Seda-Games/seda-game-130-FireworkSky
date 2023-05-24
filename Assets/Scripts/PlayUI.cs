@@ -18,7 +18,7 @@ public class PlayUI : MonoBehaviour
     {
         coinText.text = G.FormatNum(G.dc.GetMoney());
         levelText.text = "Level " + curLevel;
-        Debug.Log(coinText.text);
+        //Debug.Log(coinText.text);
     }
     public void MoneyUI(int curLevel)
     {

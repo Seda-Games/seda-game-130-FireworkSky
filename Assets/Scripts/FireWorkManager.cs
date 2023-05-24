@@ -797,7 +797,7 @@ public class FireWorkManager : MonoBehaviour
                 PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
                 Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
-                GameManager.instance.UseMoney(curlevel);
+                GameManager.instance.UseFireWorkMoney(curlevel);
 
             }
             else

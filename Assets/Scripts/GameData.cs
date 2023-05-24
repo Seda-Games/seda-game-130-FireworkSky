@@ -161,6 +161,7 @@ public class HumanData
     public int flow;
     public int second;
     public int cost;
+    public int income;
 }
 [System.Serializable]
 public class AddIncomeData

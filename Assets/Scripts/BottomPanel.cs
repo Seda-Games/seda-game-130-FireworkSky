@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BottomPanel : MonoBehaviour
 {
     public Button addButton;
+    public Button visitorButton;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,8 @@ public class BottomPanel : MonoBehaviour
     void Init()
     {
         addButton.onClick.AddListener(OnClickAddButton);
+        visitorButton.onClick.AddListener(OnClickVisitorButton);
+        PlayerPrefs.GetInt(G.VISITOR, 1);
     }
 
     // Update is called once per frame
@@ -24,6 +28,10 @@ public class BottomPanel : MonoBehaviour
     public void OnClickAddButton()
     {
         GameManager.Instance.fireWorkManager.AddFireWork();
+    }
+    public void OnClickVisitorButton()
+    {
+        GameManager.Instance.humanManager.AddVisitor();
     }
 
 }

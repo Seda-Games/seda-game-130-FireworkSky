@@ -33,6 +33,7 @@ public class GameManager : SingleInstance<GameManager>
     public FireWorkManager fireWorkManager;
     public FirePlaneManager firePlaneManager;
     public PreparePlaneManager preparePlaneManager;
+    public HumanManager humanManager;
     public FireWork fireWork;
     public PlayGame playGame;
     Vector2 mouseOriginalPoint, mouseLastPoint;
@@ -48,14 +49,14 @@ public class GameManager : SingleInstance<GameManager>
             instance = this;
         else
             Destroy(gameObject);
-      
+        G.dc.Load();
+        InitGameData();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        G.dc.Load();
-        InitGameData();
+        
         if (!PlayerPrefs.HasKey(G.FIRST_LOGIN_TIME_MONEY))
         {
             curLevel = PlayerPrefs.GetInt(G.LEVEL, 1);
@@ -194,9 +195,15 @@ public class GameManager : SingleInstance<GameManager>
         playUI.UpdateUI(curLevel);
     }
 
-    public void UseMoney(int level)
+    public void UseFireWorkMoney(int level)
     {
         G.dc.UseMoney(G.dc.gd.levelDict[level].fireworkcost);
+        G.dc.Save();
+        playUI.UpdateUI(curLevel);
+    }
+    public void UseHumanMoney(int level)
+    {
+        G.dc.UseMoney(G.dc.gd.humanDataDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateUI(curLevel);
     }

@@ -40,11 +40,11 @@
         {"level":20,"income":20}
     ],
     "humanDatas":[
-        {"level":1,"flow":2,"second":3600,"cost":50},
-        {"level":2,"flow":4,"second":2400,"cost":100},
-        {"level":3,"flow":6,"second":1600,"cost":200},
-        {"level":4,"flow":8,"second":800,"cost":400},
-        {"level":5,"flow":10,"second":400,"cost":800}
+        {"level":1,"flow":1,"second":36,"cost":50,"income":1},
+        {"level":2,"flow":2,"second":24,"cost":100,"income":2},
+        {"level":3,"flow":4,"second":16,"cost":200,"income":3},
+        {"level":4,"flow":6,"second":8,"cost":400,"income":4},
+        {"level":5,"flow":8,"second":4,"cost":800,"income":5}
     ],
     "addIncomeDatas":[
         {"level":1,"income":0,"cost":50},

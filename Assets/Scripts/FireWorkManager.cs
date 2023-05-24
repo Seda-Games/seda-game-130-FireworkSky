@@ -564,6 +564,7 @@ public class FireWorkManager : MonoBehaviour
                 if (particleSystem.time > particleSystem.main.duration - 0.5f)
                 {
                     GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome);
+                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome);
                     particleSystem.time = 0;
                 }
             }

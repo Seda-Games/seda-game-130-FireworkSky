@@ -68,6 +68,7 @@ public class HumanManager : MonoBehaviour
                     DOVirtual.DelayedCall(10f, () =>
                     {
                         GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position+ Vector3.up, characterObj.GetComponent<Human>().curIncome);
                         animator.SetTrigger("Walk");
                         // 使用 DOTween 让人物始终面向移动方向
                         characterObj.transform.DOLookAt(destroyPoint, 0.1f).OnComplete(() =>

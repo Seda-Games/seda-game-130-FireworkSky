@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSceneManager : SingleInstance<GameSceneManager>
 {
     public GameObject plane,testSceneModel;
+    public SceneCanvas sceneCanvas;
     private void Awake()
     {
         Destroy(testSceneModel);

@@ -6733,6 +6733,7 @@ MonoBehaviour:
   - {fileID: 2108177335}
   newfirework: {fileID: 0}
   particleSystem: {fileID: 0}
+  fireWorkLevel: 0
 --- !u!1 &460386992
 GameObject:
   m_ObjectHideFlags: 0
@@ -17519,7 +17520,6 @@ MonoBehaviour:
   fireWork: {fileID: 2466938713647541464, guid: 6c991cc27b4c7fc41a329d818e02361f,
     type: 3}
   playGame: {fileID: 1814401910}
-  sceneCanvas: {fileID: 1621567848}
   player: {fileID: 1651427891270246966, guid: 8fc14bbfc61b2064abd674deb66dad0b, type: 3}
   element: {fileID: 0}
   element2: {fileID: 0}
@@ -52235,6 +52235,7 @@ MonoBehaviour:
   - {fileID: 2108177335}
   newfirework: {fileID: 0}
   particleSystem: {fileID: 0}
+  fireWorkLevel: 0
 --- !u!1 &1926154308
 GameObject:
   m_ObjectHideFlags: 0

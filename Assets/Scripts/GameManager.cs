@@ -28,6 +28,7 @@ public class GameManager : SingleInstance<GameManager>
     LevelData curLevelData;
     public int curLevel;
 
+
     [SerializeField] public int curMoney;
     [SerializeField] public int curSizeValue;
     public FireWorkManager fireWorkManager;
@@ -197,20 +198,24 @@ public class GameManager : SingleInstance<GameManager>
 
     public void UseFireWorkMoney(int level)
     {
-        G.dc.UseMoney(G.dc.gd.levelDict[level].fireworkcost);
+        G.dc.UseMoney(G.dc.gd.addFireWorkDataDict[level].cost);
         G.dc.Save();
-        playUI.UpdateUI(curLevel);
+        playUI.UpdateLevelUI(level);
     }
     public void UseHumanMoney(int level)
     {
         G.dc.UseMoney(G.dc.gd.humanDataDataDict[level].cost);
         G.dc.Save();
-        playUI.UpdateUI(curLevel);
+        playUI.UpdateLevelUI(level);
     }
 
     void AddLevel()
     {
         PlayerPrefs.SetInt(G.LEVEL, curLevel + 1);
+    }
+    void AddFireWorkLevel(int level)
+    {
+        PlayerPrefs.SetInt(G.FIREWORKLEVEL, level + 1);
     }
 
     public void ReloadLevel()

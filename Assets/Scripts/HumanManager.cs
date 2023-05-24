@@ -93,12 +93,14 @@ public class HumanManager : MonoBehaviour
    
     public void AddVisitor()
     {
+        Debug.Log(visitorLevel);
         Debug.Log(G.dc.gd.humanDataDataDict[visitorLevel].cost);
         if (G.dc.GetMoney() >= G.dc.gd.humanDataDataDict[visitorLevel].cost)
         {
             visitorLevel += 1;
             PlayerPrefs.SetInt(G.VISITOR, visitorLevel);
             GameManager.instance.UseHumanMoney(PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
+            Debug.Log(PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
         }
         else
         {

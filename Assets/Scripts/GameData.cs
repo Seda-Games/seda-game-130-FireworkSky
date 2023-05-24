@@ -23,6 +23,8 @@ public class GameData
     public Dictionary<int, HumanData> humanDataDataDict = new Dictionary<int, HumanData>();
     public AddIncomeData[] addIncomeDatas;
     public Dictionary<int, AddIncomeData> AddIncomeDataDict = new Dictionary<int, AddIncomeData>();
+    public AddFireWorkData[] addFireWorkDatas;
+    public Dictionary<int, AddFireWorkData> addFireWorkDataDict = new Dictionary<int, AddFireWorkData>();
 
     public void Init()
     {
@@ -42,7 +44,10 @@ public class GameData
         {
             AddIncomeDataDict[v.level] = v;
         }
-
+        foreach (var v in addFireWorkDatas)
+        {
+            addFireWorkDataDict[v.level] = v;
+        }
         /*foreach (var v in unlockDatas)
         {
             unlockDatasDict[v.id] = v;
@@ -168,5 +173,11 @@ public class AddIncomeData
 {
     public int level;
     public int income;
+    public int cost;
+}
+[System.Serializable]
+public class AddFireWorkData
+{
+    public int level;
     public int cost;
 }

@@ -12,6 +12,7 @@ public static class G
     public const string LEVEL = "Level";
     public const string DATA_CENTER = "data_center";
     public const float FLY_COINS_DURATION = 0.5f;
+    public const string FIREWORKLEVEL = "FireWorkLevel";
 
     public const string FIRST_LOGIN_TIME = "first_login_time";
     public const string FIRST_LOGIN_TIME_MONEY = "first_login_time_money";

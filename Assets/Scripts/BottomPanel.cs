@@ -27,6 +27,7 @@ public class BottomPanel : MonoBehaviour
     }
     public void OnClickAddButton()
     {
+        //GameManager.instance.AddFireWorkLevel();
         GameManager.Instance.fireWorkManager.AddFireWork();
     }
     public void OnClickVisitorButton()

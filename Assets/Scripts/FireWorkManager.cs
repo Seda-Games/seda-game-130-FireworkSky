@@ -785,10 +785,10 @@ public class FireWorkManager : MonoBehaviour
                 }
                 else
                 {
-                    item1 = 3;
+                    item1 = 5;
                 }
             }
-            if (item1 < 3)
+            if (item1 < 5)
             {
                 fireWorkLevel += 1;
                 PlayerPrefs.SetInt(G.FIREWORKLEVEL, fireWorkLevel);
@@ -807,6 +807,10 @@ public class FireWorkManager : MonoBehaviour
             {
                 Debug.LogError("准备台已满，无法继续添加");
             }
+        }
+        else
+        {
+            Debug.LogError("钱不够，无法继续添加");
         }
                    
                 

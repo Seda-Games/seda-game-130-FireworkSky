@@ -52,6 +52,10 @@ public class DataCenter
         return GetItemAmount(G.MONEY);
     }
 
+    public int GetNextCost()
+    {
+        return GetItemAmount(G.FIREWORKLEVEL);
+    }
     public void AddMoney(int amount)
     {
         AddItem(G.MONEY, amount);

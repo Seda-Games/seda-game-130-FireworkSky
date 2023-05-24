@@ -14,15 +14,24 @@ public class PlayUI : MonoBehaviour
     [SerializeField]
     Animator coinTextAnim;
 
+    public Text AddFireWorkText;
+    public Text AddHumanText;
+
     public void UpdateUI(int curLevel = 1)
     {
         coinText.text = G.FormatNum(G.dc.GetMoney());
+        //AddFireWorkText.text = G.FormatNum(G.dc.GetNextCost());
+        //AddFireWorkText.text = "$"+G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, GameManager.instance.fireWorkManager.fireWorkLevel)].cost;
+        //AddHumanText.text = "$" + G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, GameManager.instance.humanManager.visitorLevel)].cost;
         levelText.text = "Level " + curLevel;
         //Debug.Log(coinText.text);
     }
     public void UpdateLevelUI(int curLevel = 1)
     {
         coinText.text = G.FormatNum(G.dc.GetMoney());
+        //AddFireWorkText.text = G.FormatNum(G.dc.GetNextCost());
+        //G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, GameManager.instance.fireWorkManager.fireWorkLevel)].cost;
+        AddHumanText.text = "$" + G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, GameManager.instance.humanManager.visitorLevel)].cost;
         //levelText.text = "Level " + curLevel;
         //Debug.Log(coinText.text);
     }

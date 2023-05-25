@@ -19,6 +19,7 @@ public static class G
     public const string LOGIN_TIME = "login_time";
     public const string PLAYER = "Player";
     public const string VISITOR = "visitor";
+    public const string INCOME = "income";
 
     public static string FormatNum(int num)
     {

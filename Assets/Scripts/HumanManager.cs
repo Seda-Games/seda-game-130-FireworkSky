@@ -26,6 +26,7 @@ public class HumanManager : MonoBehaviour
     {
         timeLine += Time.deltaTime;
         //Debug.Log("hhahahahah" + PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
+        //fireWorkLevel = Mathf.Clamp(fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
         if (timeLine > G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, visitorLevel)].second)
         {
             Debug.Log(PlayerPrefs.GetInt(G.VISITOR,1));
@@ -64,6 +65,7 @@ public class HumanManager : MonoBehaviour
                 characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     Debug.Log("dwqdqwdqwdqwdqwdqd");
+                    GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position+new Vector3(0,0.2f,0));
                     // 让人物在目标点停留10秒
                     DOVirtual.DelayedCall(10f, () =>
                     {
@@ -95,6 +97,8 @@ public class HumanManager : MonoBehaviour
     {
         Debug.Log(visitorLevel);
         Debug.Log(G.dc.gd.humanDataDataDict[visitorLevel].cost);
+        visitorLevel=PlayerPrefs.GetInt(G.VISITOR, 1);
+        visitorLevel = Mathf.Clamp(visitorLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.humanDataDataDict[visitorLevel].cost)
         {
             visitorLevel += 1;

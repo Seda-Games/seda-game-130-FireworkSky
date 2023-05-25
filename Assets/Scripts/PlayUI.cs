@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayUI : MonoBehaviour
 {
     [SerializeField]
-    Text tipText, coinText, levelText;
+    Text tipText, coinText, levelText,humanText;
     [SerializeField]
     Image moneyIcon;
     [SerializeField]
@@ -16,24 +16,45 @@ public class PlayUI : MonoBehaviour
 
     public Text AddFireWorkText;
     public Text AddHumanText;
+    public Text AddIncomeText;
 
     public void UpdateUI(int curLevel = 1)
     {
-        coinText.text = G.FormatNum(G.dc.GetMoney());
-        //AddFireWorkText.text = G.FormatNum(G.dc.GetNextCost());
-        //AddFireWorkText.text = "$"+G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, GameManager.instance.fireWorkManager.fireWorkLevel)].cost;
-        //AddHumanText.text = "$" + G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, GameManager.instance.humanManager.visitorLevel)].cost;
+        coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
         levelText.text = "Level " + curLevel;
-        //Debug.Log(coinText.text);
+       
+
+
     }
-    public void UpdateLevelUI(int curLevel = 1)
+    public void InitText()
     {
-        coinText.text = G.FormatNum(G.dc.GetMoney());
-        //AddFireWorkText.text = G.FormatNum(G.dc.GetNextCost());
-        //G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, GameManager.instance.fireWorkManager.fireWorkLevel)].cost;
-        AddHumanText.text = "$" + G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, GameManager.instance.humanManager.visitorLevel)].cost;
-        //levelText.text = "Level " + curLevel;
-        //Debug.Log(coinText.text);
+        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[G.dc.GetNextCost() + 1].cost);
+        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[G.dc.GetNextHumanCost() + 1].cost);
+        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[G.dc.GetNextIncomeCost() + 1].cost);
+    }
+    public void UpdateLevelUI(int level)
+    {
+        coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
+        level = Mathf.Clamp(GameManager.instance.fireWorkManager.fireWorkLevel + 1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length - 1].level);
+        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[level].cost);
+    }
+    public void UpdateLevelHumanUI(int level)
+    {
+        coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
+        humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
+        Debug.Log("客流量" + G.FormatNum(G.dc.gd.humanDataDataDict[level].flow));
+        level = Mathf.Clamp(GameManager.instance.humanManager.visitorLevel + 1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
+        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].cost);
+        
+       
+    }
+    public void UpdateLevelIncomeUI(int level)
+    {
+        
+        coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
+        level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
+        AddIncomeText.text= G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost);
+        //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
     }
     public void MoneyUI(int curLevel)
     {

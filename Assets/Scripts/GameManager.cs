@@ -68,8 +68,13 @@ public class GameManager : SingleInstance<GameManager>
         }
         
         playUI.UpdateUI(curLevel);
-        
-       
+        //playUI.UpdateLevelUI(curLevel);
+        playUI.InitText();
+        playUI.UpdateLevelUI(PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1));
+        playUI.UpdateLevelHumanUI(PlayerPrefs.GetInt(G.VISITOR, 1));
+        playUI.UpdateLevelIncomeUI(PlayerPrefs.GetInt(G.INCOME, 1));
+
+
         playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
@@ -198,7 +203,7 @@ public class GameManager : SingleInstance<GameManager>
 
     public void UseFireWorkMoney(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length-1].level);
+        level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length-1].level);
         Debug.Log(level);
         G.dc.UseMoney(G.dc.gd.addFireWorkDataDict[level].cost);
         G.dc.Save();
@@ -206,11 +211,19 @@ public class GameManager : SingleInstance<GameManager>
     }
     public void UseHumanMoney(int level)
     {
+        level = Mathf.Clamp(level, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.humanDataDataDict[level].cost);
         G.dc.Save();
-        playUI.UpdateLevelUI(level);
-    }
+        playUI.UpdateLevelHumanUI(level);
 
+    }
+    public void UseIncomeMoney(int level)
+    {
+        level = Mathf.Clamp(level, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
+        G.dc.UseMoney(G.dc.gd.AddIncomeDataDict[level].cost);
+        G.dc.Save();
+        playUI.UpdateLevelIncomeUI(level);
+    }
     void AddLevel()
     {
         PlayerPrefs.SetInt(G.LEVEL, curLevel + 1);

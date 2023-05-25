@@ -7,7 +7,8 @@ public class BottomPanel : MonoBehaviour
 {
     public Button addButton;
     public Button visitorButton;
-   
+    public Button IncomeButton;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class BottomPanel : MonoBehaviour
     {
         addButton.onClick.AddListener(OnClickAddButton);
         visitorButton.onClick.AddListener(OnClickVisitorButton);
+        IncomeButton.onClick.AddListener(OnClickIncomButton);
         PlayerPrefs.GetInt(G.VISITOR, 1);
     }
 
@@ -35,5 +37,8 @@ public class BottomPanel : MonoBehaviour
     {
         GameManager.Instance.humanManager.AddVisitor();
     }
-
+    public void OnClickIncomButton()
+    {
+        GameManager.Instance.fireWorkManager.AddIncome();
+    }
 }

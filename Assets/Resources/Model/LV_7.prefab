@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6681219335123934326}
+  - {fileID: 7505685099421440288}
   - {fileID: 2665416413754455804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -153,7 +153,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3858173590584809670}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6571540117288516509
+--- !u!1001 &8044332362538450635
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -234,17 +234,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3fd391aecad3bd04b8e723c31c945b43, type: 2}
+      objectReference: {fileID: 2100000, guid: a73e9fa5bda2cdf4894be1f48f923796, type: 2}
     - target: {fileID: 919132149155446097, guid: f57fcccd0c02b5b43b65dfca96a5aae0,
         type: 3}
       propertyPath: m_Name
-      value: F_P_Fireworks_1 (6)
+      value: F_P_Fireworks_1 (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57fcccd0c02b5b43b65dfca96a5aae0, type: 3}
---- !u!4 &6681219335123934326 stripped
+--- !u!4 &7505685099421440288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f57fcccd0c02b5b43b65dfca96a5aae0,
     type: 3}
-  m_PrefabInstance: {fileID: 6571540117288516509}
+  m_PrefabInstance: {fileID: 8044332362538450635}
   m_PrefabAsset: {fileID: 0}

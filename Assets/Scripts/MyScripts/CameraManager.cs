@@ -18,7 +18,7 @@ public class CameraManager : SingleInstance<CameraManager>
     void Start()
     {
         //target = GameManager.Instance.player.transform;
-        distancePlayer = self.position - target.position;
+        //distancePlayer = self.position - target.position;
     }
 
     // Update is called once per frame
@@ -28,6 +28,6 @@ public class CameraManager : SingleInstance<CameraManager>
     }
     private void LateUpdate()
     {
-        cameraRoot.position = Vector3.SmoothDamp(cameraRoot.position, target.position, ref smooth, speed ); ;
+        //cameraRoot.position = Vector3.SmoothDamp(cameraRoot.position, target.position, ref smooth, speed ); ;
     }
 }

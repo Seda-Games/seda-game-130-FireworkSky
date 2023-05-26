@@ -12,16 +12,14 @@ public class SceneCanvas : MonoBehaviour
     public GameObject[] emojiObj;
     GameObjectPool moneyTextObjPool;
     GameObjectPool UpgradeFxPool;
-    GameObjectPool EmojiPool;
+    public GameObjectPool EmojiPool;
     public int number;
     private void Awake()
     {
         moneyTextObjPool = new GameObjectPool(moneyTextObj);
         moneyTextObj.transform.forward = CameraManager.Instance.transform.forward;
         UpgradeFxPool = new GameObjectPool(upgradeFxObj);
-        number = Random.Range(0, emojiObj.Length);
-        EmojiPool = new GameObjectPool(emojiObj[number]);
-        emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -64,13 +62,13 @@ public class SceneCanvas : MonoBehaviour
     public void ShowEmoji(Vector3 pos)
     {
         GameObject emoji = EmojiPool.GetGameObject(emojiObj[number].transform.parent);
-        emoji.transform.position = pos;
+        emoji.transform.position = pos+new Vector3(0,2,0);
         StartCoroutine(ShowEmo(EmojiPool, emoji, 1.6f));
     }
     IEnumerator ShowEmo(GameObjectPool objPool, GameObject obj, float time)
     {
         obj.transform.localScale = Vector3.one * 1f;
-        obj.transform.DOMove(obj.transform.position + Vector3.up * 2.5f, time * 0.7f);
+        obj.transform.DOMove(obj.transform.position + Vector3.up * 0.5f, time * 0.7f);
         //obj.transform.DOScale(Vector3.one * 0.014f, time * 0.5f);
         yield return new WaitForSeconds(time);
         objPool.RemoveGameObject(obj);

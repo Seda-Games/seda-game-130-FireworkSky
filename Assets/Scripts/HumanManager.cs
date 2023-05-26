@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class HumanManager : MonoBehaviour
 {
-    public GameObject characterPrefab; // 人物预制体
+    public GameObject[] characterPrefab; // 人物预制体
     public Vector3 spawnPoint; // 出生点
     public Vector3 areaCenter; // 区域中心点
     public Vector3 areaSize; // 区域大小
@@ -43,8 +43,9 @@ public class HumanManager : MonoBehaviour
     {
         for (int i = 0; i < G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow; i++)
         {
+            int number = Random.Range(0, characterPrefab.Length);
             // 在出生点生成一个人物
-            GameObject characterObj = Instantiate(characterPrefab, spawnPoint, Quaternion.identity);
+            GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint, Quaternion.identity);
             Animator animator = characterObj.GetComponent<Animator>();
             characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, visitorLevel)].level;
             characterObj.GetComponent<Human>().curIncome= G.dc.gd.humanDataDataDict[characterObj.GetComponent<Human>().curLevel].income;
@@ -65,6 +66,9 @@ public class HumanManager : MonoBehaviour
                 characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     Debug.Log("dwqdqwdqwdqwdqwdqd");
+                    number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
+                    GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
+                    GameSceneManager.Instance.sceneCanvas.emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
                     GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position+new Vector3(0,0.2f,0));
                     // 让人物在目标点停留10秒
                     DOVirtual.DelayedCall(10f, () =>

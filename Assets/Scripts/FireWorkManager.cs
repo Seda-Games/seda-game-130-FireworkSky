@@ -30,6 +30,7 @@ public class FireWorkManager : MonoBehaviour
     public int fireWorkLevel;
     public int addIncomelevel;
     public GameObject particlesystem;
+    public GameObject[] slide;
     void Awake()
     {
         //InitFireWork();
@@ -218,6 +219,25 @@ public class FireWorkManager : MonoBehaviour
                                         newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        {
+                                            if (item.fireWork != null)
+                                            {
+                                                Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 2);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                                else if (item.fireWork.curFireworkLevel > 8)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 3);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                            }
+                                        }
                                         element2.GetComponent<FirePlane>().fireWork = null;
                                     }
                                     else
@@ -280,6 +300,25 @@ public class FireWorkManager : MonoBehaviour
                                         newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        {
+                                            if (item.fireWork != null)
+                                            {
+                                                Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 2);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                                else if (item.fireWork.curFireworkLevel > 8)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 3);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                            }
+                                        }
                                         element2.GetComponent<PreparePlane>().fireWork = null;
                                     }
                                     else
@@ -305,6 +344,26 @@ public class FireWorkManager : MonoBehaviour
 
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+
+                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        {
+                                            if (item.fireWork != null)
+                                            {
+                                                Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 2);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                                else if (item.fireWork.curFireworkLevel > 8)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 3);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                            }
+                                        }
                                     }
                                 }
 
@@ -377,6 +436,26 @@ public class FireWorkManager : MonoBehaviour
                                         newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+
+                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        {
+                                            if (item.fireWork != null)
+                                            {
+                                                Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 2);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                                else if (item.fireWork.curFireworkLevel > 8)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 3);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                            }
+                                        }
                                         element2.GetComponent<FirePlane>().fireWork = null;
                                     }
                                     else
@@ -403,6 +482,26 @@ public class FireWorkManager : MonoBehaviour
 
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+
+                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        {
+                                            if (item.fireWork != null)
+                                            {
+                                                Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 2);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                                else if (item.fireWork.curFireworkLevel > 8)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 3);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                }
+                                            }
+                                        }
                                     }
                                 }
 
@@ -649,5 +748,26 @@ public class FireWorkManager : MonoBehaviour
             Debug.LogError("钱不够，无法继续升级");
         }
     }
-    
+    public void ShowOrHideSlide()
+    {
+
+        if (PlayerPrefs.GetInt(G.STAGE, 1) == 1)
+        {
+            slide[0].SetActive(true);
+            slide[1].SetActive(false);
+            slide[2].SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 2)
+        {
+            slide[0].SetActive(false);
+            slide[1].SetActive(true);
+            slide[2].SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 3)
+        {
+            slide[0].SetActive(false);
+            slide[1].SetActive(false);
+            slide[2].SetActive(true);
+        }
+    }
 }

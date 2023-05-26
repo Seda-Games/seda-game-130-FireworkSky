@@ -81,6 +81,7 @@ public class GameManager : SingleInstance<GameManager>
         target = player.transform.position;
         preparePlaneManager.InitPrepareFirePlane();
         firePlaneManager.InitFirePlane();
+        fireWorkManager.ShowOrHideSlide();
     }
 
     public void InitGameData()

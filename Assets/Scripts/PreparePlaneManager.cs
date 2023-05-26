@@ -15,19 +15,6 @@ public class PreparePlaneManager : MonoBehaviour
     {
         foreach (var item in preparePlanes)
         {
-            //int id=item.PreparePlaneID;
-            /*if (item.fireWork.curFireworkLevel <= 0)
-            {
-                item.fireWork = null;
-            }
-            else
-            if (item.fireWork.curFireworkLevel > 0)
-            {
-                int level = item.fireWork.curFireworkLevel;
-                int income = item.fireWork.CurFireworkIcome;
-                item.fireWork.transform.position = item.transform.position;
-               
-            }*/
             int level=PlayerPrefs.GetInt("FireWorkLevel" + item.PreparePlaneID, 0);
             if (level > 0)
             {
@@ -37,16 +24,22 @@ public class PreparePlaneManager : MonoBehaviour
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
             }
-           
-            //PlayerPrefs.SetInt("FireWorkLevel" + item.PreparePlaneID, level);
-            Debug.Log("多少"+ level);
         }
         for (int i = 0; i < preparePlanes.Count; i++)
         {
-            //Debug.Log("输出对应的id"+preparePlanes[i].PreparePlaneID);
+
         }
     }
-
+    public void ResetFireWorkPosition()
+    {
+        foreach (var item in preparePlanes)
+        {
+            if (item.fireWork != null)
+            {
+                item.fireWork.transform.position = item.transform.position;
+            }
+        }
+    }
     public void GetPreparePlaneID()
     {
         foreach (var item in preparePlanes)

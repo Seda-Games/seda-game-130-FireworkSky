@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "ccc/MatcapColor"
+Shader "ccc/Matcap"
 {
     Properties
     {
@@ -9,8 +9,6 @@ Shader "ccc/MatcapColor"
         _MainTex("MainTex", 2D) = "white" {}
         _MatcapIntensity ("MatcapIntensity",Float) = 1.29
         _MatcapAddIntensity("MatcapAddIntensity",Float) = 0.18
-        _FresnelPow("FresnelPow", Float) = 1
-        _FresnelIntesity ("FresnelIntesity", Float) = 1
         _TopColor("TopColor", Color) = (1, 1, 1, 1)
         _TopColorConcrol ("TopColorConcrol", Range(0.0, 1.0)) = 0.0
         _TopMatcapAddIntensity("TopMatcapIntensity",Float) = 1
@@ -56,8 +54,6 @@ Shader "ccc/MatcapColor"
             float _TopColorConcrol;
             float4 _TopColor;
             float _TopMatcapAddIntensity;
-            float _FresnelIntesity;
-            float _FresnelPow;
             float4 _LightColor0;
 
             v2f vert (appdata v)
@@ -76,20 +72,15 @@ Shader "ccc/MatcapColor"
             {
                 half3 normal_world = normalize(i.normal_world);
                 half3 vDir = normalize(UnityWorldSpaceViewDir(i.pos_world));
-                half fresnel = saturate(pow(1 - dot(normal_world, vDir), _FresnelPow) * _FresnelIntesity);
-
-
                 // sample the texture
                 half4 MatcapColor = tex2D(_Matcap, i.uv_matcap)* _MatcapIntensity;
                 half4 MatcapAddColor = tex2D(_MatcapAdd, i.uv_matcap) * _MatcapAddIntensity;
                 half4 MainTexColor = tex2D(_MainTex, i.uv) ;
-                half4 dColor = (MatcapColor * MainTexColor)+ fresnel;
-                half4 topColor = (MatcapAddColor * _TopMatcapAddIntensity * _TopColor ) + fresnel;
-                half4 topColor0 = (MatcapAddColor * MainTexColor) + fresnel;
+                half4 dColor = (MatcapColor * MainTexColor);
+                half4 topColor = (MatcapAddColor * _TopMatcapAddIntensity * _TopColor );
+                half4 topColor0 = (MatcapAddColor * MainTexColor);
                  topColor = lerp(topColor0, topColor, _TopColorConcrol+0.001);
                 half4 finalColor = lerp(topColor, dColor, i.color.r+0.001);
-                finalColor =  sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
-
 
                 return finalColor;
                 

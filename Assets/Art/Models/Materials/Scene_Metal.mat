@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Scene_Metal
-  m_Shader: {fileID: 4800000, guid: 0a6546038b0c05a4d952ef21baf57ad9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 135c363ca6191f84c801f1c62dbe8273, type: 3}
   m_ShaderKeywords: _ACES_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1

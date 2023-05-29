@@ -58,7 +58,6 @@ Shader "ccc/MatcapColor"
             float _TopMatcapAddIntensity;
             float _FresnelIntesity;
             float _FresnelPow;
-            float4 _LightColor0;
 
             v2f vert (appdata v)
             {
@@ -86,13 +85,11 @@ Shader "ccc/MatcapColor"
                 half4 dColor = (MatcapColor * MainTexColor)+ fresnel;
                 half4 topColor = (MatcapAddColor * _TopMatcapAddIntensity * _TopColor ) + fresnel;
                 half4 topColor0 = (MatcapAddColor * MainTexColor) + fresnel;
-                 topColor = lerp(topColor0, topColor, _TopColorConcrol+0.001);
-                half4 finalColor = lerp(topColor, dColor, i.color.r+0.001);
+                half4 topColor1 = lerp(topColor0, topColor, _TopColorConcrol+0.001);
+                half4 finalColor = lerp(topColor1, dColor, i.color.r+0.001);
                 finalColor =  sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
-
-
                 return finalColor;
-                
+               
             }
             ENDCG
         }

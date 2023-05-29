@@ -5,13 +5,8 @@ Shader "ccc/Matcap"
     Properties
     {
         _Matcap     ("Matcap", 2D) = "white" {}
-        _MatcapAdd  ("MatcapAdd", 2D) = "white" {}
         _MainTex("MainTex", 2D) = "white" {}
         _MatcapIntensity ("MatcapIntensity",Float) = 1.29
-        _MatcapAddIntensity("MatcapAddIntensity",Float) = 0.18
-        _TopColor("TopColor", Color) = (1, 1, 1, 1)
-        _TopColorConcrol ("TopColorConcrol", Range(0.0, 1.0)) = 0.0
-        _TopMatcapAddIntensity("TopMatcapIntensity",Float) = 1
 
     }
     SubShader
@@ -47,14 +42,9 @@ Shader "ccc/Matcap"
             };
 
             sampler2D _Matcap;
-            sampler2D _MatcapAdd;
             sampler2D _MainTex;
             float _MatcapIntensity;
             float _MatcapAddIntensity;
-            float _TopColorConcrol;
-            float4 _TopColor;
-            float _TopMatcapAddIntensity;
-            float4 _LightColor0;
 
             v2f vert (appdata v)
             {
@@ -74,14 +64,9 @@ Shader "ccc/Matcap"
                 half3 vDir = normalize(UnityWorldSpaceViewDir(i.pos_world));
                 // sample the texture
                 half4 MatcapColor = tex2D(_Matcap, i.uv_matcap)* _MatcapIntensity;
-                half4 MatcapAddColor = tex2D(_MatcapAdd, i.uv_matcap) * _MatcapAddIntensity;
                 half4 MainTexColor = tex2D(_MainTex, i.uv) ;
-                half4 dColor = (MatcapColor * MainTexColor);
-                half4 topColor = (MatcapAddColor * _TopMatcapAddIntensity * _TopColor );
-                half4 topColor0 = (MatcapAddColor * MainTexColor);
-                 topColor = lerp(topColor0, topColor, _TopColorConcrol+0.001);
-                half4 finalColor = lerp(topColor, dColor, i.color.r+0.001);
-
+                half4 finalColor = (MatcapColor * MainTexColor);
+                finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
                 return finalColor;
                 
             }

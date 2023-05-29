@@ -76,7 +76,7 @@ Shader "ccc/MatcapColor"
             {
                 half3 normal_world = normalize(i.normal_world);
                 half3 vDir = normalize(UnityWorldSpaceViewDir(i.pos_world));
-                half fresnel = pow(1 - dot(normal_world, vDir), _FresnelPow) * _FresnelIntesity;
+                half fresnel = saturate(pow(1 - dot(normal_world, vDir), _FresnelPow) * _FresnelIntesity);
 
 
                 // sample the texture

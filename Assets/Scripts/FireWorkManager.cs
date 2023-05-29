@@ -276,6 +276,25 @@ public class FireWorkManager : MonoBehaviour
                                     element3.GetComponent<FirePlane>().fireWork = element2.GetComponent<PreparePlane>().fireWork;
                                     PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                     PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, element3.GetComponent<FirePlane>().fireWork.curFireworkLevel);
+                                    foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                    {
+                                        if (item.fireWork != null)
+                                        {
+                                            Debug.Log("到底是多少级");
+                                            if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+                                            }
+                                            else if (item.fireWork.curFireworkLevel > 8)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+                                            }
+                                        }
+                                    }
                                     element2.GetComponent<PreparePlane>().fireWork = null;
                                 }
                                 else

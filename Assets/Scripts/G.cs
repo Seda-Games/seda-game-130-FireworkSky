@@ -38,6 +38,22 @@ public static class G
         }
         return num.ToString();
     }
+    public static string FormatNum1(float num)
+    {
+        if (num > 1000000000)
+        {
+            return string.Format("{0:0.0}B", num / 1000000000.0f);
+        }
+        else if (num > 1000000)
+        {
+            return string.Format("{0:0.0}M", num / 1000000.0f);
+        }
+        else if (num > 1000)
+        {
+            return string.Format("{0:0.0}K", num / 1000.0f);
+        }
+        return num.ToString();
+    }
 
     public static string FormatTime(int num)
     {

@@ -734,7 +734,7 @@ public class FireWorkManager : MonoBehaviour
     }
     public void AddIncome()
     {
-        addIncomelevel = PlayerPrefs.GetInt(G.INCOME, 1);
+        addIncomelevel = PlayerPrefs.GetInt(G.INCOME, 2);
         addIncomelevel = Mathf.Clamp(addIncomelevel, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.addIncomeDatas[G.dc.gd.addIncomeDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.AddIncomeDataDict[addIncomelevel].cost)
         {

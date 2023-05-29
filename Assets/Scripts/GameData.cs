@@ -163,8 +163,8 @@ public class FireWorkData
 public class HumanData
 {
     public int level;
-    public int flow;
-    public int second;
+    public float flow;
+    public float second;
     public int cost;
     public int income;
 }
@@ -180,4 +180,12 @@ public class AddFireWorkData
 {
     public int level;
     public int cost;
+}
+
+[System.Serializable]
+public class UnlockFirePlaneData
+{
+    public int level;
+    public int[] unlockid;
+    public int unlockcost;
 }

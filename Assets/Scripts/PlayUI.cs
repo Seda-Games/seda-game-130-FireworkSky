@@ -28,9 +28,10 @@ public class PlayUI : MonoBehaviour
     }
     public void InitText()
     {
-        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[G.dc.GetNextCost() + 1].cost);
-        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[G.dc.GetNextHumanCost() + 1].cost);
-        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[G.dc.GetNextIncomeCost() + 1].cost);
+        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1) + 1].cost);
+        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1) + 1].cost);
+        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[PlayerPrefs.GetInt(G.INCOME, 1) + 1].cost);
+        humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
     }
     public void UpdateLevelUI(int level)
     {
@@ -41,8 +42,9 @@ public class PlayUI : MonoBehaviour
     public void UpdateLevelHumanUI(int level)
     {
         coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
-        humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
-        Debug.Log("客流量" + G.FormatNum(G.dc.gd.humanDataDataDict[level].flow));
+        humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[level].flow / G.dc.gd.humanDataDataDict[level].second)*60)+"/min";
+        //humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
+        //Debug.Log("客流量" + G.FormatNum1(G.dc.gd.humanDataDataDict[level].flow));
         level = Mathf.Clamp(GameManager.instance.humanManager.visitorLevel + 1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
         AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].cost);
         

@@ -69,11 +69,12 @@ public class GameManager : SingleInstance<GameManager>
         
         playUI.UpdateUI(curLevel);
         //playUI.UpdateLevelUI(curLevel);
+        
         playUI.InitText();
-        playUI.UpdateLevelUI(PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1));
-        playUI.UpdateLevelHumanUI(PlayerPrefs.GetInt(G.VISITOR, 1));
-        playUI.UpdateLevelIncomeUI(PlayerPrefs.GetInt(G.INCOME, 1));
-
+        //playUI.UpdateLevelUI(PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1));
+        //playUI.UpdateLevelHumanUI(PlayerPrefs.GetInt(G.VISITOR, 1));
+        //playUI.UpdateLevelIncomeUI(PlayerPrefs.GetInt(G.INCOME, 1));
+        
 
         playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);

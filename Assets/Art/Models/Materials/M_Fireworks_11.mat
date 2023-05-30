@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Fireworks_11
   m_Shader: {fileID: 4800000, guid: 0a6546038b0c05a4d952ef21baf57ad9, type: 3}
-  m_ShaderKeywords: _ACES_ON
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ACES_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -56,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8dd66b20289a7e942b4e27a06a6b856c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3df16617b607a5e45add04a9e360bc89, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Matcap:
@@ -91,6 +93,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _ACES: 1
     - _ASEOutlineWidth: 0.06

@@ -57,14 +57,36 @@ public class FireWorkManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.Plane))
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(ray);
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.transform.CompareTag(Tag.PreparePlane))
+                {
+                    element2 = hit.collider.gameObject;
+                    Debug.Log(hit.transform.tag);
+
+                }
+                else
+                if(hit.transform.CompareTag(Tag.FirePlane))
+                {
+                    element2 = hit.collider.gameObject;
+                    Debug.Log(hit.transform.tag);
+
+                }
+                if (hit.transform.CompareTag(Tag.FireWork))
+                {
+                    element = hit.collider.gameObject;
+                }
+            }
+            /*if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.Plane << Layer.FireWork))
             {
                 Debug.Log("dasdasda");
                 if (hit.transform.CompareTag(Tag.PreparePlane))
                 {
                     element2 = hit.collider.gameObject;
                     Debug.Log(hit.transform.tag);
+                    
                 }
                 else
                 if (hit.transform.CompareTag(Tag.FirePlane))
@@ -73,62 +95,70 @@ public class FireWorkManager : MonoBehaviour
                     Debug.Log(hit.transform.tag);
                 }
             }
-            else
+            
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.FireWork))
             {
                 if (hit.transform.CompareTag(Tag.FireWork))
                 {
                     element = hit.collider.gameObject;
+                    Debug.Log("射线检测到了烟花");
                 }
-            }
+            }*/
             isGet = true;
         }
 
         if (Input.GetMouseButton(0))//开始移动
         {
-            
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].GetComponent<BoxCollider>().enabled = false;
             }
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit,Mathf.Infinity, 1 << Layer.Fire))
+            if (element != null)
             {
-                Debug.Log("ddddddddddddddddddddddddddddddddddddddd");
-                if (hit.transform.CompareTag(Tag.FireWork))
+                if (element2 != null)
                 {
-                    element = hit.collider.gameObject;
-                    
-                    if (isGet == true)
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Layer.Fire))
                     {
-                        foreach (var item in FindObjectsOfType<FireWork>())
+                        Debug.Log("ddddddddddddddddddddddddddddddddddddddd");
+                        if (hit.transform.CompareTag(Tag.FireWork))
                         {
-                            fireworkNum.Add(item.gameObject);
-                        }
-                        foreach (var item in fireworkNum)
-                        {
-                            if (item != element)
+                            element = hit.collider.gameObject;
+
+                            if (isGet == true)
                             {
-                                if (item.GetComponent<BoxCollider>() != null)
+                                foreach (var item in FindObjectsOfType<FireWork>())
                                 {
-                                    item.GetComponent<BoxCollider>().enabled = false;
+                                    fireworkNum.Add(item.gameObject);
                                 }
+                                foreach (var item in fireworkNum)
+                                {
+                                    if (item != element)
+                                    {
+                                        if (item.GetComponent<BoxCollider>() != null)
+                                        {
+                                            item.GetComponent<BoxCollider>().enabled = false;
+                                        }
+                                    }
+
+                                }
+                                isGet = false;
                             }
 
+
+                            element.layer = LayerMask.NameToLayer("Ignore Raycast");//物体不检测射线，避免挡住鼠标检测移动层
+                            StartCoroutine(ItemMove(element));
+                            Debug.Log("移动了物体");
+
                         }
-                        isGet = false;
+                        Debug.Log("1");
+                        //Debug.Log(hit.transform.gameObject);
                     }
-                    
-                    
-                    element.layer = LayerMask.NameToLayer("Ignore Raycast");//物体不检测射线，避免挡住鼠标检测移动层
-                    StartCoroutine(ItemMove(element));
-                    Debug.Log("移动了物体");
-                    
                 }
-                Debug.Log("1");
-                //Debug.Log(hit.transform.gameObject);
             }
+           
+            
 
         }
         if (Input.GetMouseButtonUp(0))//停止移动
@@ -186,7 +216,7 @@ public class FireWorkManager : MonoBehaviour
                             element.transform.position = element3.transform.position;
                         }
                         
-                        if (element2.tag == Tag.FirePlane)
+                        if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
                         {
                             if (element3)
                             {
@@ -267,7 +297,7 @@ public class FireWorkManager : MonoBehaviour
                             
                         }
                         else
-                        if (element2.tag == Tag.PreparePlane)
+                        if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork != null)
                         {
                             if(element3)
                             {
@@ -425,7 +455,7 @@ public class FireWorkManager : MonoBehaviour
                             element.transform.position = element3.transform.position;
                         }
                         
-                        if (element2.tag == Tag.FirePlane)
+                        if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
                         {//elemen3是PreparePlane,element2是FirePlane
                             if (element3)
                             {
@@ -529,7 +559,7 @@ public class FireWorkManager : MonoBehaviour
                             
                         }
                         else
-                        if (element2.tag == Tag.PreparePlane)
+                        if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork!=null)
                         {//elemen3是PreparePlane,element2是PreparePlane
                             if (element3)
                             {

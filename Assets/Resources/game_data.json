@@ -59,7 +59,7 @@
         {"level":17,"flow":17,"second":15,"cost":2700,"income":30},
         {"level":18,"flow":18,"second":15,"cost":3900,"income":30},
         {"level":19,"flow":19,"second":15,"cost":5500,"income":30},
-        {"level":19,"flow":20,"second":15,"cost":8000,"income":30}
+        {"level":20,"flow":20,"second":15,"cost":8000,"income":30}
     ],
     "addIncomeDatas":[
         {"level":1,"income":0,"cost":50},

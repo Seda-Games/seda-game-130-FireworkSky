@@ -205,15 +205,16 @@ public class GameManager : SingleInstance<GameManager>
 
     public void UseFireWorkMoney(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length-1].level);
-        Debug.Log(level);
+        Debug.Log("更新后的等级"+level);
+        level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length-1].level);
+        
         G.dc.UseMoney(G.dc.gd.addFireWorkDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelUI(level);
     }
     public void UseHumanMoney(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
+        level = Mathf.Clamp(level, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.humanDataDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelHumanUI(level);
@@ -221,7 +222,7 @@ public class GameManager : SingleInstance<GameManager>
     }
     public void UseIncomeMoney(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
+        level = Mathf.Clamp(level, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.addIncomeDatas[G.dc.gd.addIncomeDatas.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.AddIncomeDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelIncomeUI(level);

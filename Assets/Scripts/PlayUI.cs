@@ -18,6 +18,10 @@ public class PlayUI : MonoBehaviour
     public Text AddHumanText;
     public Text AddIncomeText;
 
+    public int fireworkLevel;
+    public int addhumanLevel;
+    public int addincomeLevel;
+
     public void UpdateUI(int curLevel = 1)
     {
         coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
@@ -28,15 +32,24 @@ public class PlayUI : MonoBehaviour
     }
     public void InitText()
     {
-        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1) + 1].cost);
-        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1) + 1].cost);
-        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[PlayerPrefs.GetInt(G.INCOME, 1) + 1].cost);
+        fireworkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 2);
+        fireworkLevel = Mathf.Clamp(fireworkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
+        AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[fireworkLevel].cost);
+        
+        addhumanLevel= PlayerPrefs.GetInt(G.VISITOR, 2);
+        addhumanLevel = Mathf.Clamp(addhumanLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
+        AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[addhumanLevel].cost);
+
+        addincomeLevel= PlayerPrefs.GetInt(G.INCOME, 2);
+        addincomeLevel = Mathf.Clamp(addincomeLevel, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.addIncomeDatas[G.dc.gd.addIncomeDatas.Length - 1].level);
+        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[addincomeLevel].cost);
+        
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
     }
     public void UpdateLevelUI(int level)
     {
         coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
-        level = Mathf.Clamp(GameManager.instance.fireWorkManager.fireWorkLevel + 1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length - 1].level);
+        //level = Mathf.Clamp(GameManager.instance.fireWorkManager.fireWorkLevel + 1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length - 1].level);
         AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[level].cost);
     }
     public void UpdateLevelHumanUI(int level)
@@ -45,7 +58,7 @@ public class PlayUI : MonoBehaviour
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[level].flow / G.dc.gd.humanDataDataDict[level].second)*60)+"/min";
         //humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
         //Debug.Log("客流量" + G.FormatNum1(G.dc.gd.humanDataDataDict[level].flow));
-        level = Mathf.Clamp(GameManager.instance.humanManager.visitorLevel + 1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
+        //level = Mathf.Clamp(GameManager.instance.humanManager.visitorLevel + 1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
         AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].cost);
         
        
@@ -54,7 +67,7 @@ public class PlayUI : MonoBehaviour
     {
         
         coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
-        level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
+        //level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
         AddIncomeText.text= G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost);
         //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
     }

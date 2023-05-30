@@ -113,8 +113,8 @@ public class PlayUI : MonoBehaviour
     public  void TestFlyMoney()
     {
         AudioManager.instance?.Tap();
-        int amount = Random.Range(50, 200);
-        GameManager.instance.FlyCoins(amount, amount / 10, transform.position);
+        int amount = Random.Range(50000, 100000);
+        GameManager.instance.FlyCoins(amount, amount / 10000, transform.position);
     }
 
     public void TestToast()

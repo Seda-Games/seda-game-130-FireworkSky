@@ -76,7 +76,7 @@ public class GameManager : SingleInstance<GameManager>
         //playUI.UpdateLevelIncomeUI(PlayerPrefs.GetInt(G.INCOME, 1));
         
 
-        playUI.GameStartUI();
+        //playUI.GameStartUI();
         userInput = new UserInput(ControlStart, ControlMove, ControlStationary, ControlEnd);
         gp = GamePhase.Prepare;
         target = player.transform.position;

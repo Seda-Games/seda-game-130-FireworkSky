@@ -21,6 +21,7 @@ public static class G
     public const string VISITOR = "visitor";
     public const string INCOME = "income";
     public const string STAGE = "stage";
+    public const string NEWBIEGUIDE = "newbieguide";
 
     public static string FormatNum(int num)
     {

@@ -22,6 +22,7 @@ public static class G
     public const string INCOME = "income";
     public const string STAGE = "stage";
     public const string NEWBIEGUIDE = "newbieguide";
+    public const string UNLOCK = "unlocl";
 
     public static string FormatNum(int num)
     {

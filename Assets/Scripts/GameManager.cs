@@ -37,6 +37,7 @@ public class GameManager : SingleInstance<GameManager>
     public HumanManager humanManager;
     public FireWork fireWork;
     public PlayGame playGame;
+    public BottomPanel bottomPanel;
     Vector2 mouseOriginalPoint, mouseLastPoint;
     private Vector3 target;
     public Player player;
@@ -225,7 +226,14 @@ public class GameManager : SingleInstance<GameManager>
         level = Mathf.Clamp(level, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.addIncomeDatas[G.dc.gd.addIncomeDatas.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.AddIncomeDataDict[level].cost);
         G.dc.Save();
-        playUI.UpdateLevelIncomeUI(level);
+        playUI.UpdateLevelIncomeUI(level+1);
+    }
+    public void UnlockFirePlaneMoney(int level)
+    {
+        level = Mathf.Clamp(level, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
+        G.dc.UseMoney(G.dc.gd.firworkPlaneTableDict[level].unlockcost);
+        G.dc.Save();
+        playUI.UpdateLevelUnlockFirePlaneUI(level);
     }
     void AddLevel()
     {

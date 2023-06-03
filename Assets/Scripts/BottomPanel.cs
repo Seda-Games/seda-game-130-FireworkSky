@@ -39,6 +39,11 @@ public class BottomPanel : MonoBehaviour
     }
     public void OnClickIncomButton()
     {
-        GameManager.Instance.fireWorkManager.AddIncome();
+        //GameManager.Instance.fireWorkManager.AddIncome();
+        GameManager.instance.firePlaneManager.UnlockFirePlane();
+    }
+    public void UnlockFirePlaneButton()
+    {
+        GameManager.instance.firePlaneManager.UnlockFirePlane();
     }
 }

@@ -739,7 +739,7 @@ public class FireWorkManager : MonoBehaviour
     public void AddFireWork()
     {
         AudioManager.instance?.Tap();
-        fireWorkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 1);
+        fireWorkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 2);
         fireWorkLevel = Mathf.Clamp(fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.addFireWorkDataDict[fireWorkLevel].cost)
         {
@@ -758,6 +758,7 @@ public class FireWorkManager : MonoBehaviour
             }
             if (item1 < 5)
             {
+                GameManager.instance.UseFireWorkMoney(fireWorkLevel);
                 fireWorkLevel += 1;
                 PlayerPrefs.SetInt(G.FIREWORKLEVEL, fireWorkLevel);
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
@@ -768,8 +769,6 @@ public class FireWorkManager : MonoBehaviour
                 PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
-                GameManager.instance.UseFireWorkMoney(fireWorkLevel);
-
             }
             else
             {

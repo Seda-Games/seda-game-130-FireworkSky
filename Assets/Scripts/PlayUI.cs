@@ -40,16 +40,24 @@ public class PlayUI : MonoBehaviour
         addhumanLevel = Mathf.Clamp(addhumanLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
         AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[addhumanLevel].cost);
 
-        addincomeLevel= PlayerPrefs.GetInt(G.INCOME, 2);
-        addincomeLevel = Mathf.Clamp(addincomeLevel, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.addIncomeDatas[G.dc.gd.addIncomeDatas.Length - 1].level);
-        AddIncomeText.text = G.FormatNum(G.dc.gd.AddIncomeDataDict[addincomeLevel].cost);
+        addincomeLevel= PlayerPrefs.GetInt(G.UNLOCK, 2);
+        addincomeLevel = Mathf.Clamp(addincomeLevel, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
+        AddIncomeText.text = G.FormatNum(G.dc.gd.firworkPlaneTableDict[addincomeLevel].unlockcost);
+        if (PlayerPrefs.GetInt(G.UNLOCK, 2) == G.dc.gd.firworkPlaneTables.Length+1)
+        {
+            GameManager.instance.bottomPanel.IncomeButton.interactable = false;
+            ColorBlock colors = GameManager.instance.bottomPanel.IncomeButton.colors;
+            colors.disabledColor = Color.gray;
+            GameManager.instance.bottomPanel.IncomeButton.colors = colors;
+        }
         
+
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
     }
     public void UpdateLevelUI(int level)
     {
         coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
-        //level = Mathf.Clamp(GameManager.instance.fireWorkManager.fireWorkLevel + 1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length - 1].level);
+        level = Mathf.Clamp(level+1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length].level);
         AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[level].cost);
     }
     public void UpdateLevelHumanUI(int level)
@@ -58,7 +66,7 @@ public class PlayUI : MonoBehaviour
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[level].flow / G.dc.gd.humanDataDataDict[level].second)*60)+"/min";
         //humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
         //Debug.Log("客流量" + G.FormatNum1(G.dc.gd.humanDataDataDict[level].flow));
-        //level = Mathf.Clamp(GameManager.instance.humanManager.visitorLevel + 1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
+        level = Mathf.Clamp(level+1, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length].level);
         AddHumanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].cost);
         
        
@@ -69,6 +77,16 @@ public class PlayUI : MonoBehaviour
         coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
         //level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
         AddIncomeText.text= G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost);
+        //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
+    }
+
+    public void UpdateLevelUnlockFirePlaneUI(int level)
+    {
+
+        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+        level = Mathf.Clamp(level + 1, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTableDict[G.dc.gd.firworkPlaneTables.Length].level);
+        //level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
+        AddIncomeText.text = G.FormatNum(G.dc.gd.firworkPlaneTableDict[level].unlockcost);
         //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
     }
     public void MoneyUI(int curLevel)

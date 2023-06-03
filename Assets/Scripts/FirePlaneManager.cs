@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FirePlaneManager : MonoBehaviour
 {
     public List<FirePlane> firePlanes;
     // Start is called before the first frame update
-
-    
+    private int nextObjectToUnlock = 1004;
+    int item1;
+    int unlockLevel;
     void Start()
     {
         
     }
     public void InitFirePlane()
     {
+        
         foreach (var item in firePlanes)
         {
             int level = PlayerPrefs.GetInt("FireWorkLevel" + item.FirePlaneID, 0);
@@ -26,34 +29,77 @@ public class FirePlaneManager : MonoBehaviour
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
                 item.fireWork.PlayFx(cub,FireWorkPhase.Fire);
             }
-            /*int level = PlayerPrefs.GetInt("FireWorkLevel" + item.FirePlaneID, 0);
-            GameObject cub = Instantiate(GameManager.instance.fireWorkManager.firework, item.transform.position, Quaternion.identity);
-            item.fireWork = cub.GetComponent<FireWork>();
-            GameManager.instance.fireWork.ShowModel(level);
-            PlayerPrefs.SetInt("FireWorkLevel" + item.FirePlaneID, level);
-            Debug.Log("多少" + level);
-
-            if (item.fireWork.curFireworkLevel <= 0)
-             {
-                 item.fireWork = null;
-             }
-             else
-            if (item.fireWork.curFireworkLevel > 0)
-             {
-                 int level = item.fireWork.curFireworkLevel;
-                 int income = item.fireWork.CurFireworkIcome;
-                 item.fireWork.transform.position = item.transform.position;
-             }*/
-            //int level = PlayerPrefs.GetInt("FireWorkLevel" + item.FirePlaneID,GameManager.instance.fireWorkManager.fireWork.curFireworkLevel);
+            if (item.FirePlaneID < 1004)
+            {
+                PlayerPrefs.SetInt("FirePlane" + item.FirePlaneID, 1);
+            }
+            bool isUnlocked = PlayerPrefs.GetInt("FirePlane" + item.FirePlaneID, 0) == 1;
+            if (!isUnlocked)
+            {
+                item.Lock.SetActive(true);
+                item.Unlock.SetActive(false);
+            }
+            else
+            if(isUnlocked)
+            {
+                item.Lock.SetActive(false);
+                item.Unlock.SetActive(true);
+            }
         }
-        for (int i = 0; i < firePlanes.Count; i++)
+    }
+    public void UnlockFirePlane()
+    {
+        AudioManager.instance?.Tap();
+        unlockLevel = PlayerPrefs.GetInt(G.UNLOCK, 2);
+        unlockLevel = Mathf.Clamp(unlockLevel, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
+        if (G.dc.GetMoney() >= G.dc.gd.firworkPlaneTableDict[unlockLevel].unlockcost)
         {
-            //int id =firePlanes[i].FirePlaneID;
+            for (int i = 0; i < firePlanes.Count; i++)
+            {
+                int unlock = PlayerPrefs.GetInt("FirePlane" + firePlanes[i].FirePlaneID, 0);
+                if (unlock == 0)
+                {
+                    item1 = i;
+                    break;
+                }
+                else
+                {
+                    item1 = 7;
+                }
+            }
+            if (item1 < 7 && unlockLevel < 6)
+            {
+                GameManager.instance.UnlockFirePlaneMoney(unlockLevel);
+                unlockLevel += 1;
+                PlayerPrefs.SetInt(G.UNLOCK, unlockLevel);
+                firePlanes[item1].Unlock.SetActive(true);
+                firePlanes[item1].Lock.SetActive(false);
+                PlayerPrefs.SetInt("FirePlane" + firePlanes[item1].FirePlaneID, 1);
+                if (unlockLevel == 6)
+                {
+                    GameManager.instance.bottomPanel.IncomeButton.interactable = false;
+                    ColorBlock colors = GameManager.instance.bottomPanel.IncomeButton.colors;
+                    colors.disabledColor = Color.gray;
+                    GameManager.instance.bottomPanel.IncomeButton.colors = colors;
+                }
+               
+            }
+            else
+            {
+
+            }
         }
+        else
+        {
+            Debug.LogError("钱不够，无法解锁");
+        }
+       
+
     }
     // Update is called once per frame
     void Update()
     {
         
     }
+   
 }

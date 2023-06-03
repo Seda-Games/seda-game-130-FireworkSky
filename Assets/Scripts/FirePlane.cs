@@ -8,6 +8,7 @@ public class FirePlane : MonoBehaviour
     public FireWork fireWork;
     public bool isexist;
     public int FirePlaneID;
+    public GameObject Lock, Unlock;
     // Start is called before the first frame update
 
 
@@ -20,5 +21,10 @@ public class FirePlane : MonoBehaviour
     void Update()
     {
         
+    }
+    public void ShowOrHideLock(bool isunlock)
+    {
+        Lock.SetActive(isunlock);
+        Unlock.SetActive(!isunlock);
     }
 }

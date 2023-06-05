@@ -235,6 +235,14 @@ public class GameManager : SingleInstance<GameManager>
         G.dc.Save();
         playUI.UpdateLevelUnlockFirePlaneUI(level);
     }
+
+    public void UnlockPreparePlaneMoney(int id)
+    {
+        
+        G.dc.UseMoney(G.dc.gd.preparePlaneTableDict[id].unlockcost);
+        G.dc.Save();
+        playUI.UpdateUnlockPreparePlaneUI();
+    }
     void AddLevel()
     {
         PlayerPrefs.SetInt(G.LEVEL, curLevel + 1);

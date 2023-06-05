@@ -24,6 +24,17 @@ public class PreparePlaneManager : MonoBehaviour
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
             }
+            //item.prepareLock.SetActive(false);
+            if (PlayerPrefs.GetInt("PrepareUnlock" + item.PreparePlaneID, G.dc.gd.preparePlaneTableDict[item.PreparePlaneID].isunlock) == 1)
+            {
+                item.prepareLock.SetActive(false);
+            }
+            else
+            {
+                item.prepareLock.SetActive(true);
+            }
+            item.unlockcost.text = "$" + G.FormatNum(G.dc.gd.preparePlaneTableDict[item.PreparePlaneID].unlockcost);
+
         }
         for (int i = 0; i < preparePlanes.Count; i++)
         {
@@ -46,6 +57,10 @@ public class PreparePlaneManager : MonoBehaviour
         {
            int index= preparePlanes.IndexOf(item);
         }
+    }
+    public void UnlockPreparePlane()
+    {
+        
     }
     
     // Update is called once per frame

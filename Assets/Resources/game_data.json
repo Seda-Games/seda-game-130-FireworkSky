@@ -117,6 +117,13 @@
         {"level":3,"unlockcost":2},
         {"level":4,"unlockcost":3},
         {"level":5,"unlockcost":4}
+    ],
+    "preparePlaneTables":[
+        {"prepareid":1,"unlockcost":0,"isunlock":1},
+        {"prepareid":2,"unlockcost":0,"isunlock":1},
+        {"prepareid":3,"unlockcost":0,"isunlock":1},
+        {"prepareid":4,"unlockcost":500,"isunlock":0},
+        {"prepareid":5,"unlockcost":5000,"isunlock":0}
     ]
     
     

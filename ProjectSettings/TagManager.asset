@@ -9,6 +9,7 @@ TagManager:
   - lv1
   - prepareplane
   - fireplane
+  - prepareunlock
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - floor
   - Fire
   - EXHIBITION
-  - 
+  - UNLOCK
   - 
   - 
   - 

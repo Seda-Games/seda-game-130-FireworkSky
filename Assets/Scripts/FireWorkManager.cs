@@ -18,6 +18,7 @@ public class FireWorkManager : MonoBehaviour
     public GameObject element;
     public GameObject element2;
     public GameObject element3;
+    public GameObject element4;
     public FireWork fireWork;
     public List<GameObject> fireworkNum;
     int item1;
@@ -68,11 +69,17 @@ public class FireWorkManager : MonoBehaviour
 
                 }
                 else
-                if(hit.transform.CompareTag(Tag.FirePlane))
+                if (hit.transform.CompareTag(Tag.FirePlane))
                 {
                     element2 = hit.collider.gameObject;
                     Debug.Log(hit.transform.tag);
 
+                }
+                else
+                if (hit.transform.CompareTag(Tag.PrepareUnlock))
+                {
+                    element4 = hit.collider.gameObject;
+                    Debug.Log(hit.transform.tag);
                 }
                 if (hit.transform.CompareTag(Tag.FireWork))
                 {
@@ -184,171 +191,161 @@ public class FireWorkManager : MonoBehaviour
             }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.UNLOCK))
+            {
+                if (hit.transform.CompareTag(Tag.PrepareUnlock))
+                {
+                    element3 = hit.collider.gameObject;
+                    if (element)
+                    {
+                        element.transform.position = element2.transform.position;
+                        element = null;
+                        element2 = null;
+                        element3 = null;
+                        element4 = null;
+                    }
+                    else
+                    if (G.dc.GetMoney() >= G.dc.gd.preparePlaneTableDict[element3.transform.parent.GetComponent<PreparePlane>().PreparePlaneID].unlockcost && element4 == element3)
+                    {
+                        element3.SetActive(false);
+                        element3.transform.parent.GetComponent<PreparePlane>().isUnlock = true;
+                        PlayerPrefs.SetInt("PrepareUnlock" + element3.transform.parent.GetComponent<PreparePlane>().PreparePlaneID, 1);
+                        GameManager.instance.UnlockPreparePlaneMoney(element3.transform.parent.GetComponent<PreparePlane>().PreparePlaneID);
+                    }
+                    else
+                    if (element4 == element3)
+                    {
+                        Debug.LogError("钱不够，无法继续解锁");
+                    }
+                    element4 = null;
+                    element3 = null;
+                }
+            }
+            else
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.Plane))
             {
                 Debug.DrawLine(ray.origin, ray.origin + ray.direction * 10000, Color.red);
                 Debug.Log("????????" + hit.transform.name);
                 //element.layer = LayerMask.NameToLayer("Ignore Raycast");//物体不检测射线，避免挡住鼠标检测移动层
                 //Debug.Log(element.layer);
-                if (hit.transform.CompareTag(Tag.FirePlane))
+                if (element)
                 {
-                    element3 = hit.collider.gameObject;
-                    if (element2.transform.position == element3.transform.position)
+                    if (hit.transform.CompareTag(Tag.FirePlane))
                     {
-                        if (element)
+                        element3 = hit.collider.gameObject;
+                        if (element2.transform.position == element3.transform.position)
                         {
-                            element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
-                            element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
-                            element.transform.position = element2.transform.position;
-                        }
-                        
-                        element = null;
-                        element2 = null;
-                        element3 = null;
-                    }
-                    else
-                    if (element2.transform.position != element3.transform.position)
-                    {
-                        if (element)
-                        {
-                            element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
-                            element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
-                            element.transform.position = element3.transform.position;
-                        }
-                        
-                        if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
-                        {
-                            if (element3)
+                            if (element)
                             {
-                                if (element3.GetComponent<FirePlane>().fireWork == null)
-                                {
-                                    element3.GetComponent<FirePlane>().fireWork = element2.GetComponent<FirePlane>().fireWork;
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, element3.GetComponent<FirePlane>().fireWork.curFireworkLevel);
-                                    element2.GetComponent<FirePlane>().fireWork = null;
-                                }
-                                else
-                                if (element3.GetComponent<FirePlane>().fireWork != null && element2.GetComponent<FirePlane>().fireWork != null)
-                                {
-                                    if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel == element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
-                                    {
-                                        //生成新烟花
-                                        newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
-                                        newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].level;
-                                        newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].income;
-                                        GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
-                                        //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
-                                        //销毁原来的对象
-                                        Destroy(element3.GetComponent<FirePlane>().fireWork.gameObject);
-                                        Destroy(element2.GetComponent<FirePlane>().fireWork.gameObject);
+                                element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
+                                element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
+                                element.transform.position = element2.transform.position;
+                            }
 
-                                        //保存新烟花
-                                        element3.GetComponent<FirePlane>().fireWork = newfirework.GetComponent<FireWork>();
-                                        newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
-                                        newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
-                                        newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+                            element = null;
+                            element2 = null;
+                            element3 = null;
+                        }
+                        else
+                        if (element2.transform.position != element3.transform.position)
+                        {
+                            if (element)
+                            {
+                                element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
+                                element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
+                                element.transform.position = element3.transform.position;
+                            }
+
+                            if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
+                            {
+                                if (element3)
+                                {
+                                    if (element3.GetComponent<FirePlane>().fireWork == null)
+                                    {
+                                        element3.GetComponent<FirePlane>().fireWork = element2.GetComponent<FirePlane>().fireWork;
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
-                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
-                                        {
-                                            if (item.fireWork != null)
-                                            {
-                                                Debug.Log("到底是多少级");
-                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 2);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                                else if (item.fireWork.curFireworkLevel > 8)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 3);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                            }
-                                        }
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, element3.GetComponent<FirePlane>().fireWork.curFireworkLevel);
                                         element2.GetComponent<FirePlane>().fireWork = null;
                                     }
                                     else
-                                    if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
+                                    if (element3.GetComponent<FirePlane>().fireWork != null && element2.GetComponent<FirePlane>().fireWork != null)
                                     {
-                                        //交换位置 
-                                        element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
-                                        element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
-
-                                        FireWork temp;
-                                        temp = element2.GetComponent<FirePlane>().fireWork;
-                                        element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
-                                        element3.GetComponent<FirePlane>().fireWork = temp;
-
-
-                                        
-
-
-
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
-                                    }
-                                }
-
-
-                            }
-                            
-                        }
-                        else
-                        if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork != null)
-                        {
-                            if(element3)
-                            {
-                                if (element3.GetComponent<FirePlane>().fireWork == null)
-                                {
-                                    element3.GetComponent<FirePlane>().fireWork = element2.GetComponent<PreparePlane>().fireWork;
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, element3.GetComponent<FirePlane>().fireWork.curFireworkLevel);
-                                    foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
-                                    {
-                                        if (item.fireWork != null)
+                                        if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel == element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
                                         {
-                                            Debug.Log("到底是多少级");
-                                            if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                            //生成新烟花
+                                            newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
+                                            newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].level;
+                                            newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].income;
+                                            GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
+                                            //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
+                                            //销毁原来的对象
+                                            Destroy(element3.GetComponent<FirePlane>().fireWork.gameObject);
+                                            Destroy(element2.GetComponent<FirePlane>().fireWork.gameObject);
+
+                                            //保存新烟花
+                                            element3.GetComponent<FirePlane>().fireWork = newfirework.GetComponent<FireWork>();
+                                            newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
+                                            newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                             {
-                                                PlayerPrefs.SetInt(G.STAGE, 2);
-                                                CameraManager.Instance.MoveToTarget();
-                                                ShowOrHideSlide();
+                                                if (item.fireWork != null)
+                                                {
+                                                    Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 2);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                    else if (item.fireWork.curFireworkLevel > 8)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 3);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                }
                                             }
-                                            else if (item.fireWork.curFireworkLevel > 8)
-                                            {
-                                                PlayerPrefs.SetInt(G.STAGE, 3);
-                                                CameraManager.Instance.MoveToTarget();
-                                                ShowOrHideSlide();
-                                            }
+                                            element2.GetComponent<FirePlane>().fireWork = null;
+                                        }
+                                        else
+                                        if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
+                                        {
+                                            //交换位置 
+                                            element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                            element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+                                            FireWork temp;
+                                            temp = element2.GetComponent<FirePlane>().fireWork;
+                                            element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
+                                            element3.GetComponent<FirePlane>().fireWork = temp;
+
+
+
+
+
+
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
                                         }
                                     }
-                                    element2.GetComponent<PreparePlane>().fireWork = null;
-                                }
-                                else
-                                if (element3.GetComponent<FirePlane>().fireWork != null && element2.GetComponent<PreparePlane>().fireWork != null)
-                                {
-                                    if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel == element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
-                                    {
-                                        //生成新烟花
-                                        newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
-                                        newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].level;
-                                        newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].income;
-                                        GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
-                                        //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
-                                        //销毁原来的对象
-                                        Destroy(element3.GetComponent<FirePlane>().fireWork.gameObject);
-                                        Destroy(element2.GetComponent<PreparePlane>().fireWork.gameObject);
 
-                                        //保存新烟花
-                                        element3.GetComponent<FirePlane>().fireWork = newfirework.GetComponent<FireWork>();
-                                        newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
-                                        newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
-                                        newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+
+                                }
+
+                            }
+                            else
+                            if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork != null)
+                            {
+                                if (element3)
+                                {
+                                    if (element3.GetComponent<FirePlane>().fireWork == null)
+                                    {
+                                        element3.GetComponent<FirePlane>().fireWork = element2.GetComponent<PreparePlane>().fireWork;
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, element3.GetComponent<FirePlane>().fireWork.curFireworkLevel);
                                         foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                         {
                                             if (item.fireWork != null)
@@ -371,273 +368,315 @@ public class FireWorkManager : MonoBehaviour
                                         element2.GetComponent<PreparePlane>().fireWork = null;
                                     }
                                     else
-                                    if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
+                                    if (element3.GetComponent<FirePlane>().fireWork != null && element2.GetComponent<PreparePlane>().fireWork != null)
                                     {
-                                        //交换位置
-                                        element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
-                                        element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
-
-                                        FireWork temp;
-                                        temp = element2.GetComponent<PreparePlane>().fireWork;
-                                        element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
-                                        element3.GetComponent<FirePlane>().fireWork = temp;
-
-
-                                        element2.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
-                                        element2.GetComponent<PreparePlane>().fireWork.PlayFx(element2.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
-
-                                        element3.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
-                                        element3.GetComponent<FirePlane>().fireWork.PlayFx(element3.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
-
-
-
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
-
-                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                        if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel == element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
                                         {
-                                            if (item.fireWork != null)
+                                            //生成新烟花
+                                            newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
+                                            newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].level;
+                                            newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel + 1].income;
+                                            GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
+                                            //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
+                                            //销毁原来的对象
+                                            Destroy(element3.GetComponent<FirePlane>().fireWork.gameObject);
+                                            Destroy(element2.GetComponent<PreparePlane>().fireWork.gameObject);
+
+                                            //保存新烟花
+                                            element3.GetComponent<FirePlane>().fireWork = newfirework.GetComponent<FireWork>();
+                                            newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
+                                            newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                             {
-                                                Debug.Log("到底是多少级");
-                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                if (item.fireWork != null)
                                                 {
-                                                    PlayerPrefs.SetInt(G.STAGE, 2);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
+                                                    Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 2);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                    else if (item.fireWork.curFireworkLevel > 8)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 3);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
                                                 }
-                                                else if (item.fireWork.curFireworkLevel > 8)
+                                            }
+                                            element2.GetComponent<PreparePlane>().fireWork = null;
+                                        }
+                                        else
+                                        if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
+                                        {
+                                            //交换位置
+                                            element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                            element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+                                            FireWork temp;
+                                            temp = element2.GetComponent<PreparePlane>().fireWork;
+                                            element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<FirePlane>().fireWork;
+                                            element3.GetComponent<FirePlane>().fireWork = temp;
+
+
+                                            element2.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
+                                            element2.GetComponent<PreparePlane>().fireWork.PlayFx(element2.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
+
+                                            element3.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
+                                            element3.GetComponent<FirePlane>().fireWork.PlayFx(element3.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
+
+
+
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+
+                                            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                            {
+                                                if (item.fireWork != null)
                                                 {
-                                                    PlayerPrefs.SetInt(G.STAGE, 3);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
+                                                    Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 2);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                    else if (item.fireWork.curFireworkLevel > 8)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 3);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+
                                 }
 
                             }
-                           
-                        }
 
-                        element = null;
-                        element2 = null;
-                        element3 = null;
-                    }
-                    Debug.Log("检测到在发射台");
-                }
-                else
-                if (hit.transform.CompareTag(Tag.PreparePlane))
-                {
-                    element3 = hit.collider.gameObject;
-                    
-                    Debug.Log("这个物体是什么" + element3);
-                    if (element2.transform.position == element3.transform.position)
-                    {
-                        if (element)
-                        {
-                            element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
-                            element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
-                            element.transform.position = element2.transform.position;
+                            element = null;
+                            element2 = null;
+                            element3 = null;
                         }
-                        
-                        element = null;
-                        element2 = null;
-                        element3 = null;
+                        Debug.Log("检测到在发射台");
                     }
                     else
-                    if (element2.transform.position != element3.transform.position)
+                    if (hit.transform.CompareTag(Tag.PreparePlane))
+                    {
+                        element3 = hit.collider.gameObject;
+
+                        Debug.Log("这个物体是什么" + element3);
+                        if (element2.transform.position == element3.transform.position)
+                        {
+                            if (element)
+                            {
+                                element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
+                                element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
+                                element.transform.position = element2.transform.position;
+                            }
+
+                            element = null;
+                            element2 = null;
+                            element3 = null;
+                        }
+                        else
+                        if (element2.transform.position != element3.transform.position)
+                        {
+                            if (element)
+                            {
+                                element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
+                                element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
+                                element.transform.position = element3.transform.position;
+                            }
+                            if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
+                            {//elemen3是PreparePlane,element2是FirePlane
+                                if (element3)
+                                {
+                                    if (element3.GetComponent<PreparePlane>().fireWork == null)
+                                    {
+                                        element3.GetComponent<PreparePlane>().fireWork = element2.GetComponent<FirePlane>().fireWork;
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
+                                        element2.GetComponent<FirePlane>().fireWork = null;
+                                    }
+                                    if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<FirePlane>().fireWork != null)
+                                    {
+                                        if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
+                                        {
+                                            //生成新烟花
+                                            newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
+                                            newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].level;
+                                            newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].income;
+                                            GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
+                                            //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
+                                            //销毁原来的对象
+                                            Destroy(element3.GetComponent<PreparePlane>().fireWork.gameObject);
+                                            Destroy(element2.GetComponent<FirePlane>().fireWork.gameObject);
+
+                                            //保存新烟花
+                                            element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
+                                            newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+
+                                            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                            {
+                                                if (item.fireWork != null)
+                                                {
+                                                    Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 2);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                    else if (item.fireWork.curFireworkLevel > 8)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 3);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                }
+                                            }
+                                            element2.GetComponent<FirePlane>().fireWork = null;
+                                        }
+                                        else
+                                        if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
+                                        {
+                                            //交换位置
+                                            element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                            element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+
+                                            FireWork temp;
+                                            temp = element2.GetComponent<FirePlane>().fireWork;
+                                            element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
+                                            element3.GetComponent<PreparePlane>().fireWork = temp;
+
+                                            element2.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
+                                            element2.GetComponent<FirePlane>().fireWork.PlayFx(element2.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
+
+                                            element3.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
+                                            element3.GetComponent<PreparePlane>().fireWork.PlayFx(element3.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
+
+
+
+
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+
+                                            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                                            {
+                                                if (item.fireWork != null)
+                                                {
+                                                    Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 2);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                    else if (item.fireWork.curFireworkLevel > 8)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 3);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+
+                                }
+
+                            }
+                            else
+                            if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork != null)
+                            {//elemen3是PreparePlane,element2是PreparePlane
+                                if (element3)
+                                {
+                                    if (element3.GetComponent<PreparePlane>().fireWork == null)
+                                    {
+                                        element3.GetComponent<PreparePlane>().fireWork = element2.GetComponent<PreparePlane>().fireWork;
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
+                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
+                                        element2.GetComponent<PreparePlane>().fireWork = null;
+                                    }
+                                    if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<PreparePlane>().fireWork != null)
+                                    {
+                                        if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
+                                        {
+                                            //生成新烟花
+                                            newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
+                                            newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].level;
+                                            newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].income;
+                                            GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
+                                            //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
+                                            //销毁原来的对象
+                                            Destroy(element3.GetComponent<PreparePlane>().fireWork.gameObject);
+                                            Destroy(element2.GetComponent<PreparePlane>().fireWork.gameObject);
+
+                                            //保存新烟花
+                                            element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
+                                            newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            element2.GetComponent<PreparePlane>().fireWork = null;
+
+
+                                        }
+                                        else
+                                        if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
+                                        {//交换位置
+                                            element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
+                                            element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+                                            FireWork temp;
+                                            temp = element2.GetComponent<PreparePlane>().fireWork;
+                                            element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
+                                            element3.GetComponent<PreparePlane>().fireWork = temp;
+
+
+
+
+
+
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
+                                        }
+                                    }
+
+                                }
+
+                            }
+                            element = null;
+                            element2 = null;
+                            element3 = null;
+                        }
+                        Debug.Log("检测到在准备台");
+                    }
+                    else
+                    if (!hit.transform.CompareTag(Tag.FirePlane) && !hit.transform.CompareTag(Tag.PreparePlane) && !hit.transform.CompareTag(Tag.PrepareUnlock))
                     {
                         if (element)
                         {
-                            element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
-                            element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
-                            element.transform.position = element3.transform.position;
+                            element.transform.position = element2.transform.position;
+                            element = null;
+                            element2 = null;
+                            element3 = null;
                         }
-                        
-                        if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
-                        {//elemen3是PreparePlane,element2是FirePlane
-                            if (element3)
-                            {
-                                if (element3.GetComponent<PreparePlane>().fireWork == null) 
-                                {
-                                    element3.GetComponent<PreparePlane>().fireWork = element2.GetComponent<FirePlane>().fireWork;
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
-                                    element2.GetComponent<FirePlane>().fireWork = null;
-                                }
-                                if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<FirePlane>().fireWork != null)
-                                {
-                                    if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
-                                    {
-                                        //生成新烟花
-                                        newfirework = Instantiate(firework, element3.transform.position, Quaternion.identity);
-                                        newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].level;
-                                        newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].income;
-                                        GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
-                                        //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
-                                        //销毁原来的对象
-                                        Destroy(element3.GetComponent<PreparePlane>().fireWork.gameObject);
-                                        Destroy(element2.GetComponent<FirePlane>().fireWork.gameObject);
-
-                                        //保存新烟花
-                                        element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
-                                        newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
-
-                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
-                                        {
-                                            if (item.fireWork != null)
-                                            {
-                                                Debug.Log("到底是多少级");
-                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 2);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                                else if (item.fireWork.curFireworkLevel > 8)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 3);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                            }
-                                        }
-                                        element2.GetComponent<FirePlane>().fireWork = null;
-                                    }
-                                    else
-                                    if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<FirePlane>().fireWork.curFireworkLevel)
-                                    {
-                                        //交换位置
-                                        element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
-                                        element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
-                                        
-
-                                        FireWork temp;
-                                        temp = element2.GetComponent<FirePlane>().fireWork;
-                                        element2.GetComponent<FirePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
-                                        element3.GetComponent<PreparePlane>().fireWork = temp;
-
-                                        element2.GetComponent<FirePlane>().fireWork.fwp = FireWorkPhase.Fire;
-                                        element2.GetComponent<FirePlane>().fireWork.PlayFx(element2.GetComponent<FirePlane>().fireWork.gameObject, FireWorkPhase.Fire);
-
-                                        element3.GetComponent<PreparePlane>().fireWork.fwp = FireWorkPhase.Prepare;
-                                        element3.GetComponent<PreparePlane>().fireWork.PlayFx(element3.GetComponent<PreparePlane>().fireWork.gameObject, FireWorkPhase.Prepare);
-
-
-
-
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<FirePlane>().fireWork.curFireworkLevel].level);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
-
-                                        foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
-                                        {
-                                            if (item.fireWork != null)
-                                            {
-                                                Debug.Log("到底是多少级");
-                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 2);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                                else if (item.fireWork.curFireworkLevel > 8)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 3);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                            }
-                            
-                        }
-                        else
-                        if (element2.tag == Tag.PreparePlane && element2.GetComponent<PreparePlane>().fireWork!=null)
-                        {//elemen3是PreparePlane,element2是PreparePlane
-                            if (element3)
-                            {
-                                if (element3.GetComponent<PreparePlane>().fireWork== null)
-                                {
-                                    element3.GetComponent<PreparePlane>().fireWork = element2.GetComponent<PreparePlane>().fireWork;
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
-                                    PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
-                                    element2.GetComponent<PreparePlane>().fireWork = null;
-                                }
-                                if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<PreparePlane>().fireWork!=null)
-                                {
-                                    if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
-                                    {
-                                        //生成新烟花
-                                        newfirework =Instantiate(firework, element3.transform.position, Quaternion.identity);
-                                        newfirework.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].level;
-                                        newfirework.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel + 1].income;
-                                        GameSceneManager.Instance.sceneCanvas.ShowUpgradeFx(element3.transform.position);
-                                        //Instantiate(particlesystem, element3.transform.position, Quaternion.identity);
-                                        //销毁原来的对象
-                                        Destroy(element3.GetComponent<PreparePlane>().fireWork.gameObject);
-                                        Destroy(element2.GetComponent<PreparePlane>().fireWork.gameObject);
-                                        
-                                        //保存新烟花
-                                        element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
-                                        newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
-                                        element2.GetComponent<PreparePlane>().fireWork = null;
-
-                                        
-                                    }
-                                    else
-                                    if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
-                                    {//交换位置
-                                        element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
-                                        element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
-
-                                        FireWork temp;
-                                        temp = element2.GetComponent<PreparePlane>().fireWork;
-                                        element2.GetComponent<PreparePlane>().fireWork = element3.GetComponent<PreparePlane>().fireWork;
-                                        element3.GetComponent<PreparePlane>().fireWork = temp;
-                                        
-                                        
-                                        
-                                        
-                                        
-
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
-                                        PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel].level);
-                                    }
-                                }
-                               
-                            }
-                            
-                        }
-                        element = null;
-                        element2 = null;
-                        element3 = null;
                     }
-                    Debug.Log("检测到在准备台");
                 }
-                else
-                if (!hit.transform.CompareTag(Tag.FirePlane) && !hit.transform.CompareTag(Tag.PreparePlane))
-                {
-                    //Debug.Log(hit.transform.gameObject.layer);
-                    //Debug.Log(hit.transform.tag);
-                    Debug.Log(element.layer);
-                    Debug.Log(element.tag);
-                    element.transform.position = element2.transform.position;
-                    element = null;
-                    element2 = null;
-                    element3 = null;
 
-                }
             }
-            else 
+            else
             {
                 if (element)
                 {
@@ -645,9 +684,12 @@ public class FireWorkManager : MonoBehaviour
                     element = null;
                     element2 = null;
                 }
-                
+
             }
-            
+           
+            element = null;
+            element2 = null;
+            element3 = null;
         }
         if (element)
         {
@@ -746,7 +788,7 @@ public class FireWorkManager : MonoBehaviour
             for (int i = 0; i < GameManager.instance.preparePlaneManager.preparePlanes.Count; i++)
             {
                 int level = PlayerPrefs.GetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[i].PreparePlaneID, 0);
-                if (level == 0)
+                if (level == 0 && PlayerPrefs.GetInt("PrepareUnlock" + GameManager.instance.preparePlaneManager.preparePlanes[i].PreparePlaneID, G.dc.gd.preparePlaneTableDict[GameManager.instance.preparePlaneManager.preparePlanes[i].PreparePlaneID].isunlock) == 1)
                 {
                     item1 = i;
                     break;
@@ -772,7 +814,7 @@ public class FireWorkManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("准备台已满，无法继续添加");
+                Debug.LogError("准备台已满或者有准备台未解锁，无法继续添加");
             }
         }
         else

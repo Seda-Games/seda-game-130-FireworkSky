@@ -89,6 +89,10 @@ public class PlayUI : MonoBehaviour
         AddIncomeText.text = G.FormatNum(G.dc.gd.firworkPlaneTableDict[level].unlockcost);
         //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
     }
+    public void UpdateUnlockPreparePlaneUI()
+    {
+        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+    }
     public void MoneyUI(int curLevel)
     {
         coinText.text = G.FormatNum(PlayerPrefs.GetInt(G.MONEY, G.dc.gd.levelDict[curLevel].money));

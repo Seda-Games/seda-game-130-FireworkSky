@@ -106,6 +106,7 @@ public static class Tag
     public const string FireWork = "firework";
     public const string FirePlane = "fireplane";
     public const string PreparePlane = "prepareplane";
+    public const string PrepareUnlock = "prepareunlock";
 
 }
 public static class Layer
@@ -115,4 +116,5 @@ public static class Layer
     public const int floor = 8;
     public const int Fire = 9;
     public const int EXHIBITION = 10;
+    public const int UNLOCK = 11;
 }

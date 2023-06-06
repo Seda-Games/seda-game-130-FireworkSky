@@ -124,6 +124,13 @@
         {"prepareid":3,"unlockcost":0,"isunlock":1},
         {"prepareid":4,"unlockcost":500,"isunlock":0},
         {"prepareid":5,"unlockcost":5000,"isunlock":0}
+    ],
+    "achievementTables":[
+        {"level":1,"accumulatelauncher":50,"accumulatehuman":50,"duration":30},
+        {"level":2,"accumulatelauncher":500,"accumulatehuman":120,"duration":30},
+        {"level":3,"accumulatelauncher":800,"accumulatehuman":220,"duration":30},
+        {"level":4,"accumulatelauncher":1200,"accumulatehuman":350,"duration":30},
+        {"level":5,"accumulatelauncher":1700,"accumulatehuman":510,"duration":30}
     ]
     
     

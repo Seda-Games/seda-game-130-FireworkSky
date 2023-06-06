@@ -32,6 +32,10 @@ public class FireWorkManager : MonoBehaviour
     public int addIncomelevel;
     public GameObject particlesystem;
     public GameObject[] slide;
+    private int launcher = 0;
+    private int stage;
+    private bool isachieve;
+    private float duration=0;
     void Awake()
     {
         //InitFireWork();
@@ -42,7 +46,8 @@ public class FireWorkManager : MonoBehaviour
 
     void Start()
     {
-        
+        launcher = PlayerPrefs.GetInt(G.ACHIEVEMENT, 0);
+        stage = PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1);
     }
     // Update is called once per frame
     void Update()
@@ -778,9 +783,35 @@ public class FireWorkManager : MonoBehaviour
                 particleSystem = item.fireWork.GetComponentInChildren<ParticleSystem>();
                 if (particleSystem.time > particleSystem.main.duration - 0.5f)
                 {
-                    GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome + G.dc.gd.AddIncomeDataDict[PlayerPrefs.GetInt(G.INCOME,1)].income);
-                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome + G.dc.gd.AddIncomeDataDict[PlayerPrefs.GetInt(G.INCOME,1)].income);
+                    launcher += 1;
+                    PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                    if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
+                    {
+                        stage += 1;
+                        PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
+                        isachieve = true;
+                    }
+                    if (isachieve == true)
+                    {
+                        duration += Time.deltaTime * 100;
+                        Debug.Log("现在是多少秒" + duration);
+                        GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
+                        if (duration > G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage)].duration)
+                        {
+                            isachieve = false;
+                            duration = 0;
+                        }
+                    }
+                    else
+                    if (isachieve == false)
+                    {
+                        GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome);
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome);
+                    }
+                    
                     particleSystem.time = 0;
+                    GameManager.instance.playUI.UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage));
                 }
             }
         }

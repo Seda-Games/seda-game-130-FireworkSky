@@ -31,7 +31,8 @@ public class GameData
     public Dictionary<int, FirworkPlaneTable> firworkPlaneTableDict = new Dictionary<int, FirworkPlaneTable>();
     public PreparePlaneTable[] preparePlaneTables;
     public Dictionary<int, PreparePlaneTable> preparePlaneTableDict = new Dictionary<int, PreparePlaneTable>();
-
+    public AchievementTable[] achievementTables;
+    public Dictionary<int, AchievementTable> achievementTableDict = new Dictionary<int, AchievementTable>();
     public void Init()
     {
         foreach(var v in levels)
@@ -61,6 +62,10 @@ public class GameData
         foreach (var v in preparePlaneTables)
         {
             preparePlaneTableDict[v.prepareid] = v;
+        }
+        foreach (var v in achievementTables)
+        {
+            achievementTableDict[v.level] = v;
         }
         /*foreach (var v in unlockDatas)
         {
@@ -215,4 +220,13 @@ public class PreparePlaneTable
     public int prepareid;
     public int unlockcost;
     public int isunlock;
+}
+
+[System.Serializable]
+public class AchievementTable
+{
+    public int level;
+    public int accumulatelauncher;
+    public int accumulatehuman;
+    public float duration;
 }

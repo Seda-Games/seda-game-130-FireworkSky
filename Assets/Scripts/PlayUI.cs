@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayUI : MonoBehaviour
 {
     [SerializeField]
-    Text tipText, coinText, levelText,humanText;
+    Text tipText, coinText, levelText,humanText,numberText;
     [SerializeField]
     Image moneyIcon;
     [SerializeField]
@@ -50,8 +50,8 @@ public class PlayUI : MonoBehaviour
             colors.disabledColor = Color.gray;
             GameManager.instance.bottomPanel.IncomeButton.colors = colors;
         }
-        
 
+        UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
     }
     public void UpdateLevelUI(int level)
@@ -92,6 +92,10 @@ public class PlayUI : MonoBehaviour
     public void UpdateUnlockPreparePlaneUI()
     {
         coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+    }
+    public void UpdateLauncherNumber(int level)
+    {
+        numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
     }
     public void MoneyUI(int curLevel)
     {

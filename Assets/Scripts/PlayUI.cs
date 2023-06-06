@@ -95,6 +95,7 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateLauncherNumber(int level)
     {
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
         numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
     }
     public void MoneyUI(int curLevel)

@@ -785,11 +785,14 @@ public class FireWorkManager : MonoBehaviour
                 {
                     launcher += 1;
                     PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                    stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                     if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
                     {
                         stage += 1;
                         PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
                         isachieve = true;
+                        launcher = 0;
+                        PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
                     }
                     if (isachieve == true)
                     {
@@ -797,10 +800,12 @@ public class FireWorkManager : MonoBehaviour
                         Debug.Log("现在是多少秒" + duration);
                         GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
                         GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
-                        if (duration > G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage)].duration)
+                        int num= Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                        if (duration > G.dc.gd.achievementTableDict[num].duration)
                         {
                             isachieve = false;
                             duration = 0;
+                           
                         }
                     }
                     else

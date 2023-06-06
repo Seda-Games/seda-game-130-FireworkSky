@@ -299,6 +299,7 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
+                                                        break;
                                                     }
                                                     else
                                                     if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
@@ -358,6 +359,7 @@ public class FireWorkManager : MonoBehaviour
                                                     PlayerPrefs.SetInt(G.STAGE, 3);
                                                     CameraManager.Instance.MoveToTarget();
                                                     ShowOrHideSlide();
+                                                    break;
                                                 }
                                                 else
                                                 if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
@@ -403,6 +405,7 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
+                                                        break;
                                                     }
                                                     else
                                                     if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
@@ -450,6 +453,7 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
+                                                        break;
                                                     }
                                                     else
                                                     if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
@@ -543,6 +547,7 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
+                                                        break;
                                                     }
                                                     else
                                                     if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
@@ -591,6 +596,7 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
+                                                        break;
                                                     }
                                                     else
                                                     if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)

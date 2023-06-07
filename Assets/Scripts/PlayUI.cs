@@ -13,6 +13,8 @@ public class PlayUI : MonoBehaviour
     Button nextButton, startButton;
     [SerializeField]
     Animator coinTextAnim;
+    [SerializeField]
+    Image launch, human;
 
     public Text AddFireWorkText;
     public Text AddHumanText;
@@ -99,11 +101,17 @@ public class PlayUI : MonoBehaviour
     {
         level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
         numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
+        Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
+        launch.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher;
+
+        Debug.Log("现在是多少火箭" + launch.fillAmount);
     }
     public void UpdateHumanNumber(int level)
     {
         level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
         humanNumberText.text= G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
+        human.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman;
+        Debug.Log("现在是多少" + human.fillAmount);
     }
     public void MoneyUI(int curLevel)
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayUI : MonoBehaviour
 {
     [SerializeField]
-    Text tipText, coinText, levelText,humanText,numberText;
+    Text tipText, coinText, levelText,humanText,numberText, humanNumberText;
     [SerializeField]
     Image moneyIcon;
     [SerializeField]
@@ -52,6 +52,8 @@ public class PlayUI : MonoBehaviour
         }
 
         UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
+        UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
+
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
     }
     public void UpdateLevelUI(int level)
@@ -97,6 +99,11 @@ public class PlayUI : MonoBehaviour
     {
         level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
         numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
+    }
+    public void UpdateHumanNumber(int level)
+    {
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+        humanNumberText.text= G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
     }
     public void MoneyUI(int curLevel)
     {

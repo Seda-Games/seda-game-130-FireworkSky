@@ -55,6 +55,18 @@ public class FireWorkManager : MonoBehaviour
         ResetLastPos();
         ItemMove();
         GetFireWorkIncome();
+        if (isachieve == true)
+        {
+            duration += Time.deltaTime;
+            Debug.Log("现在是多少秒" + duration);
+            int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+            if (duration > G.dc.gd.achievementTableDict[num].duration)
+            {
+                isachieve = false;
+                duration = 0;
+
+            }
+        }
     }
 
 
@@ -796,17 +808,8 @@ public class FireWorkManager : MonoBehaviour
                     }
                     if (isachieve == true)
                     {
-                        duration += Time.deltaTime * 100;
-                        Debug.Log("现在是多少秒" + duration);
                         GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
                         GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
-                        int num= Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
-                        if (duration > G.dc.gd.achievementTableDict[num].duration)
-                        {
-                            isachieve = false;
-                            duration = 0;
-                           
-                        }
                     }
                     else
                     if (isachieve == false)
@@ -815,8 +818,9 @@ public class FireWorkManager : MonoBehaviour
                         GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome);
                     }
                     
-                    particleSystem.time = 0;
+                   
                     GameManager.instance.playUI.UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage));
+                    particleSystem.time = 0;
                 }
             }
         }

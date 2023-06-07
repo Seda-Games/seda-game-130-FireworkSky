@@ -25,6 +25,8 @@ public static class G
     public const string UNLOCK = "unlock";
     public const string ACHIEVEMENT = "achievement";
     public const string ACHIEVEMENTSTAGE = "achievementstage";
+    public const string ACHIEVEMENTHUMAN = "achievementhuman";
+    public const string ACHIEVEMENTHUMANSTAGE = "achievementhumanstage";
 
     public static string FormatNum(int num)
     {

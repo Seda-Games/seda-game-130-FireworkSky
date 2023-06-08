@@ -71,7 +71,9 @@ public class DataCenter
 
     public void UseMoney(int amount)
     {
+        
         UseItem(G.MONEY, amount);
+        GameManager.instance.IsEnoughMoney();
     }
 
     public void Save()

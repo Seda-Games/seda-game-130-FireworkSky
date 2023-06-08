@@ -33,9 +33,11 @@ public class HumanManager : MonoBehaviour
         timeLine += Time.deltaTime;
         //Debug.Log("hhahahahah" + PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
         //fireWorkLevel = Mathf.Clamp(fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
-        if (timeLine > G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, visitorLevel)].second)
+        visitorLevel = PlayerPrefs.GetInt(G.VISITOR, 2);
+        visitorLevel = Mathf.Clamp(visitorLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
+        if (timeLine > G.dc.gd.humanDataDataDict[visitorLevel].second)
         {
-            Debug.Log(PlayerPrefs.GetInt(G.VISITOR,1));
+            
             int stage = PlayerPrefs.GetInt(G.STAGE, 1)-1;
             StartCoroutine(Visitor(stage));
             timeLine = 0;
@@ -63,13 +65,13 @@ public class HumanManager : MonoBehaviour
     IEnumerator Visitor(int stage)
     {
         
-        for (int i = 0; i < G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow; i++)
+        for (int i = 0; i < G.dc.gd.humanDataDataDict[visitorLevel-1].flow; i++)
         {
             int number = Random.Range(0, characterPrefab.Length);
             // 在出生点生成一个人物
             GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint[stage], Quaternion.identity);
             Animator animator = characterObj.GetComponent<Animator>();
-            characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, visitorLevel)].level;
+            characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
             characterObj.GetComponent<Human>().curIncome= G.dc.gd.humanDataDataDict[characterObj.GetComponent<Human>().curLevel].income;
             // 随机生成一个区域内的点
             Vector3 targetPoint = new Vector3(
@@ -152,11 +154,19 @@ public class HumanManager : MonoBehaviour
         visitorLevel = Mathf.Clamp(visitorLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.humanDataDataDict[visitorLevel].cost)
         {
-            GameManager.instance.UseHumanMoney(PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
+            GameManager.instance.UseHumanMoney(visitorLevel);
             visitorLevel += 1;
             PlayerPrefs.SetInt(G.VISITOR, visitorLevel);
-            
+            if (visitorLevel == G.dc.gd.humanDatas.Length + 1)
+            {
+                GameManager.instance.bottomPanel.maxaddcrowd.SetActive(true);
+                GameManager.instance.bottomPanel.visitorButton.interactable = false;
+                GameManager.instance.bottomPanel.addCrowdText.SetActive(false);
+                GameManager.instance.ismax1 = true;
+            }
+            GameManager.instance.IsEnoughMoney();
             Debug.Log(PlayerPrefs.GetInt(G.VISITOR, visitorLevel));
+            
         }
         else
         {

@@ -8,6 +8,15 @@ public class BottomPanel : MonoBehaviour
     public Button addButton;
     public Button visitorButton;
     public Button IncomeButton;
+    public GameObject addfirework;
+    public GameObject addcrowd;
+    public GameObject addplatform;
+
+    public GameObject maxaddcrowd;
+    public GameObject addCrowdText;
+
+    public GameObject maxaddplatform;
+    public GameObject addFirePlaneText;
 
 
     // Start is called before the first frame update

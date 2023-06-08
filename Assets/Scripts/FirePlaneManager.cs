@@ -9,7 +9,7 @@ public class FirePlaneManager : MonoBehaviour
     // Start is called before the first frame update
     private int nextObjectToUnlock = 1004;
     int item1;
-    int unlockLevel;
+    public int unlockLevel;
     void Start()
     {
         
@@ -72,17 +72,19 @@ public class FirePlaneManager : MonoBehaviour
                 GameManager.instance.UnlockFirePlaneMoney(unlockLevel);
                 unlockLevel += 1;
                 PlayerPrefs.SetInt(G.UNLOCK, unlockLevel);
+                if (unlockLevel == G.dc.gd.firworkPlaneTables.Length+1)
+                {
+                    GameManager.instance.bottomPanel.maxaddplatform.SetActive(true);
+                    GameManager.instance.bottomPanel.IncomeButton.interactable = false;
+                    GameManager.instance.bottomPanel.addFirePlaneText.SetActive(false);
+                    GameManager.instance.ismax = true;
+                }
+                GameManager.instance.IsEnoughMoney();
                 firePlanes[item1].Unlock.SetActive(true);
                 firePlanes[item1].Lock.SetActive(false);
                 PlayerPrefs.SetInt("FirePlane" + firePlanes[item1].FirePlaneID, 1);
-                if (unlockLevel == 6)
-                {
-                    GameManager.instance.bottomPanel.IncomeButton.interactable = false;
-                    ColorBlock colors = GameManager.instance.bottomPanel.IncomeButton.colors;
-                    colors.disabledColor = Color.gray;
-                    GameManager.instance.bottomPanel.IncomeButton.colors = colors;
-                }
-               
+                
+
             }
             else
             {

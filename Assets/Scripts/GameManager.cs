@@ -45,6 +45,8 @@ public class GameManager : SingleInstance<GameManager>
     bool is_element=false;
     public GameObject element;
     public GameObject element2;
+    public bool ismax=false;
+    public bool ismax1=false;
     private void Awake()
     {
         if (instance == null)
@@ -84,6 +86,7 @@ public class GameManager : SingleInstance<GameManager>
         preparePlaneManager.InitPrepareFirePlane();
         firePlaneManager.InitFirePlane();
         fireWorkManager.ShowOrHideSlide();
+        IsEnoughMoney();
     }
 
     public void InitGameData()
@@ -202,24 +205,27 @@ public class GameManager : SingleInstance<GameManager>
         G.dc.AddMoney(amount);
         G.dc.Save();
         playUI.UpdateUI(curLevel);
+        IsEnoughMoney();
     }
 
     public void UseFireWorkMoney(int level)
     {
+        
         Debug.Log("更新后的等级"+level);
         level = Mathf.Clamp(level, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length-1].level);
-        
         G.dc.UseMoney(G.dc.gd.addFireWorkDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelUI(level);
+        
     }
     public void UseHumanMoney(int level)
     {
+        
         level = Mathf.Clamp(level, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.humanDataDataDict[level].cost);
         G.dc.Save();
         playUI.UpdateLevelHumanUI(level);
-
+        
     }
     public void UseIncomeMoney(int level)
     {
@@ -230,10 +236,12 @@ public class GameManager : SingleInstance<GameManager>
     }
     public void UnlockFirePlaneMoney(int level)
     {
+        
         level = Mathf.Clamp(level, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
         G.dc.UseMoney(G.dc.gd.firworkPlaneTableDict[level].unlockcost);
         G.dc.Save();
         playUI.UpdateLevelUnlockFirePlaneUI(level);
+       
     }
 
     public void UnlockPreparePlaneMoney(int id)
@@ -333,5 +341,62 @@ public class GameManager : SingleInstance<GameManager>
             Haptics.Feedback();
             Destroy(fd.gameObject);
         }
+    }
+    public void IsEnoughMoney()
+    {
+        fireWorkManager.fireWorkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 2);
+        fireWorkManager.fireWorkLevel = Mathf.Clamp(fireWorkManager.fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
+        if (G.dc.GetMoney() >= G.dc.gd.addFireWorkDataDict[fireWorkManager.fireWorkLevel].cost)
+        {
+            bottomPanel.addfirework.SetActive(false);
+            bottomPanel.addButton.interactable = true;
+        }
+        else
+        {
+            bottomPanel.addfirework.SetActive(true);
+            bottomPanel.addButton.interactable = false;
+        }
+
+        humanManager.visitorLevel = PlayerPrefs.GetInt(G.VISITOR, 2);
+        humanManager.visitorLevel = Mathf.Clamp(humanManager.visitorLevel, G.dc.gd.humanDatas[0].level, G.dc.gd.humanDatas[G.dc.gd.humanDatas.Length - 1].level);
+        if (ismax1 == false)
+        {
+            if (G.dc.GetMoney() >= G.dc.gd.humanDataDataDict[humanManager.visitorLevel].cost)
+            {
+
+                bottomPanel.addcrowd.SetActive(false);
+                bottomPanel.visitorButton.interactable = true;
+            }
+            else
+        if (G.dc.GetMoney() < G.dc.gd.humanDataDataDict[humanManager.visitorLevel].cost)
+            {
+
+                bottomPanel.addcrowd.SetActive(true);
+                bottomPanel.visitorButton.interactable = false;
+            }
+        }
+        
+        
+
+        firePlaneManager.unlockLevel = PlayerPrefs.GetInt(G.UNLOCK, 2);
+        firePlaneManager.unlockLevel = Mathf.Clamp(firePlaneManager.unlockLevel, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
+
+        if (ismax == false)
+        {
+            if (G.dc.GetMoney() >= G.dc.gd.firworkPlaneTableDict[firePlaneManager.unlockLevel].unlockcost)
+            {
+                bottomPanel.addplatform.SetActive(false);
+                bottomPanel.IncomeButton.interactable = true;
+
+            }
+            else
+       if (G.dc.GetMoney() < G.dc.gd.firworkPlaneTableDict[firePlaneManager.unlockLevel].unlockcost)
+            {
+                bottomPanel.addplatform.SetActive(true);
+                bottomPanel.IncomeButton.interactable = false;
+            }
+        }
+       
+
     }
 }

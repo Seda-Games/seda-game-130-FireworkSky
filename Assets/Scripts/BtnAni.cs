@@ -17,7 +17,7 @@ public class BtnAni : MonoBehaviour
     public void AnitoButton()
     {
         // this.transform.DOKill();
-        if (!BTN.interactable) return;
+        //if (!BTN.interactable) return;
         if (isOnBtn) return;
         isOnBtn = true;
         this.transform.DOScale(0.9f, time).SetEase(Ease.Linear).OnComplete(() =>

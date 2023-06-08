@@ -67,6 +67,8 @@ public class FireWorkManager : MonoBehaviour
 
             }
         }
+        
+
     }
 
 
@@ -861,6 +863,7 @@ public class FireWorkManager : MonoBehaviour
                 GameManager.instance.UseFireWorkMoney(fireWorkLevel);
                 fireWorkLevel += 1;
                 PlayerPrefs.SetInt(G.FIREWORKLEVEL, fireWorkLevel);
+                GameManager.instance.IsEnoughMoney();
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
                 GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;

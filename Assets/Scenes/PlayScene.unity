@@ -8394,7 +8394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &435248106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60081,6 +60081,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5679410508025600842, guid: da68aa8cf0dba4693bbdb7c4ca7012ab,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 6740040235966215377, guid: da68aa8cf0dba4693bbdb7c4ca7012ab,
         type: 3}
       propertyPath: m_Name
@@ -62054,6 +62059,7 @@ GameObject:
   - component: {fileID: 1941538668}
   - component: {fileID: 1941538670}
   - component: {fileID: 1941538669}
+  - component: {fileID: 1941538671}
   m_Layer: 5
   m_Name: Mask
   m_TagString: Untagged
@@ -62119,6 +62125,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941538667}
   m_CullTransparentMesh: 1
+--- !u!225 &1941538671
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941538667}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1955238543
 GameObject:
   m_ObjectHideFlags: 0

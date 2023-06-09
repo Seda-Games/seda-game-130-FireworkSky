@@ -234,7 +234,8 @@ public class FireWorkManager : MonoBehaviour
                     else
                     if (element4 == element3)
                     {
-                        Debug.LogError("钱不够，无法继续解锁");
+                        ToastManager.Show("Not enough money to unlock");
+                        //Debug.LogError("钱不够，无法继续解锁");
                     }
                     element4 = null;
                     element3 = null;

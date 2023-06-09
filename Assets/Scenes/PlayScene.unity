@@ -6944,6 +6944,7 @@ GameObject:
   - component: {fileID: 266068505}
   - component: {fileID: 266068507}
   - component: {fileID: 266068506}
+  - component: {fileID: 266068508}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
@@ -7013,6 +7014,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266068504}
   m_CullTransparentMesh: 1
+--- !u!114 &266068508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266068504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.7882353, g: 0.49411765, b: 0.14509805, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &269480361
 GameObject:
   m_ObjectHideFlags: 0
@@ -34742,6 +34758,7 @@ GameObject:
   - component: {fileID: 1136898547}
   - component: {fileID: 1136898549}
   - component: {fileID: 1136898548}
+  - component: {fileID: 1136898550}
   m_Layer: 5
   m_Name: AddCrowdText
   m_TagString: Untagged
@@ -34811,6 +34828,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136898546}
   m_CullTransparentMesh: 1
+--- !u!114 &1136898550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136898546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.36078432, g: 0.36078432, b: 0.36078432, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1140576671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34928,6 +34960,7 @@ GameObject:
   - component: {fileID: 1143639644}
   - component: {fileID: 1143639646}
   - component: {fileID: 1143639645}
+  - component: {fileID: 1143639647}
   m_Layer: 5
   m_Name: AddFireWorkText
   m_TagString: Untagged
@@ -34997,6 +35030,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143639643}
   m_CullTransparentMesh: 1
+--- !u!114 &1143639647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143639643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.36078432, g: 0.36078432, b: 0.36078432, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1151201659
 GameObject:
   m_ObjectHideFlags: 0
@@ -59553,6 +59601,7 @@ GameObject:
   - component: {fileID: 1635661641}
   - component: {fileID: 1635661643}
   - component: {fileID: 1635661642}
+  - component: {fileID: 1635661644}
   m_Layer: 5
   m_Name: AddFirePlaneText
   m_TagString: Untagged
@@ -59622,6 +59671,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635661640}
   m_CullTransparentMesh: 1
+--- !u!114 &1635661644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635661640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.36078432, g: 0.36078432, b: 0.36078432, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1645808940
 GameObject:
   m_ObjectHideFlags: 0
@@ -61828,6 +61892,7 @@ GameObject:
   - component: {fileID: 1904061413}
   - component: {fileID: 1904061415}
   - component: {fileID: 1904061414}
+  - component: {fileID: 1904061416}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
@@ -61897,6 +61962,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904061412}
   m_CullTransparentMesh: 1
+--- !u!114 &1904061416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904061412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.0627451, g: 0.15686275, b: 0.35686275, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1926154308
 GameObject:
   m_ObjectHideFlags: 0
@@ -68821,6 +68901,8 @@ MonoBehaviour:
   fireworkLevel: 0
   addhumanLevel: 0
   addincomeLevel: 0
+  isreward: 0
+  isrewardhuman: 0
 --- !u!114 &2124726786
 MonoBehaviour:
   m_ObjectHideFlags: 0

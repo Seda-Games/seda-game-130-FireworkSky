@@ -9,10 +9,15 @@ public class BtnAni : MonoBehaviour
     Button BTN;
     const float time = 0.08f;
     bool isOnBtn = false;
+    public Text text;
+    Vector2 originpos;
     private void Start()
     {
         BTN = GetComponent<Button>();
         BTN.onClick.AddListener(AnitoButton);
+        originpos = text.rectTransform.anchoredPosition;
+
+
     }
     public void AnitoButton()
     {
@@ -41,5 +46,13 @@ public class BtnAni : MonoBehaviour
     public void Reduce()
     {
         this.transform.DOScale(1f, time).SetEase(Ease.Linear);
+    }
+    public void OnMouseDown()
+    {
+        text.rectTransform.anchoredPosition = new Vector2(0, 9f);
+    }
+    public void OnMouseUp()
+    {
+        text.rectTransform.anchoredPosition = originpos;
     }
 }

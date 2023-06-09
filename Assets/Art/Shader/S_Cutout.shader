@@ -46,6 +46,7 @@ Shader "ccc/HalfLambert Ground Common Cutout"
 
             };
             sampler2D _Gradient;
+            float4 _Gradient_ST;
             float4 _BaseColor;
             float4 _ShadowColor;
             float _BaseShadowPower;
@@ -58,7 +59,7 @@ Shader "ccc/HalfLambert Ground Common Cutout"
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord;
+                o.uv = TRANSFORM_TEX(v.texcoord, _Gradient);
                 o.pos_world = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.normal_world = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject));
                 return o;

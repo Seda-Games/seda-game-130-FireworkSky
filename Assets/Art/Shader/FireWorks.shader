@@ -88,10 +88,10 @@ Shader "ccc/FireWorks"
                     float drop = saturate(smoothstep(maxRound, minRound, 1-pattern));
 
                     col += drop;
-                    fixed4 tex = tex2D(_MainTex, i.uv.zw);
+                    fixed4 tex = tex2D(_MainTex, float2(-i.uv.z, i.uv.w));
                     float mask = step(length(i.uv.zw - 0.5),0.5);
                     col.rgb *= tex.rgb * _Power;
-                    col.a *= mask * tex.a * _Transparent * i.roundClamp.w * (1- i.custom.x -(1-i.uv.wwww));
+                    col.a *= mask * tex.a * _Transparent * i.roundClamp.w * (1- i.custom.x -(1-i.uv.wwww)+0.1);
                     col.a = saturate(col.a);
                     //return fixed4(i.roundClamp.zz,0,1);
                     return col;

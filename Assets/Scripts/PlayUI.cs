@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayUI : MonoBehaviour
 {
     [SerializeField]
-    Text tipText, coinText, levelText,humanText,numberText, humanNumberText;
+    Text tipText, coinText, levelText,humanText,numberText, humanNumberText,ratenumberText,ratehumanText;
     [SerializeField]
     Image moneyIcon;
     [SerializeField]
@@ -15,6 +15,11 @@ public class PlayUI : MonoBehaviour
     Animator coinTextAnim;
     [SerializeField]
     Image launch, human;
+    [SerializeField]
+    Button launchButton, humanButton;
+    [SerializeField]
+    GameObject launchUI, humanUI;
+    public Button launchRewardButton, huamanRewardButton, UnRewardLaunch, UnRewardHuman;
 
     public Text AddFireWorkText;
     public Text AddHumanText;
@@ -24,6 +29,19 @@ public class PlayUI : MonoBehaviour
     public int addhumanLevel;
     public int addincomeLevel;
 
+    public bool isreward = false;
+    public bool isrewardhuman = false;
+    private void Start()
+    {
+        launchButton.onClick.AddListener(ShowLaunchUI);
+        humanButton.onClick.AddListener(ShowHumanUI);
+
+        UnRewardLaunch.onClick.AddListener(HideLaunchUI);
+        UnRewardHuman.onClick.AddListener(HideHumanUI);
+
+        launchRewardButton.onClick.AddListener(RewardLaunchUI);
+        huamanRewardButton.onClick.AddListener(RewardHumanUI);
+    }
     public void UpdateUI(int curLevel = 1)
     {
         coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
@@ -103,7 +121,7 @@ public class PlayUI : MonoBehaviour
         numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
         Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
         launch.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher;
-
+        ratenumberText.text = G.FormatNum1(((float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher) * 100) + "%";
         Debug.Log("现在是多少火箭" + launch.fillAmount);
     }
     public void UpdateHumanNumber(int level)
@@ -111,6 +129,7 @@ public class PlayUI : MonoBehaviour
         level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
         humanNumberText.text= G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
         human.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman;
+        ratehumanText.text = G.FormatNum1(((float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman) * 100) + "%";
         Debug.Log("现在是多少" + human.fillAmount);
     }
     public void MoneyUI(int curLevel)
@@ -181,5 +200,31 @@ public class PlayUI : MonoBehaviour
     public void TestHapticsFeedback(float intensity)
     {
         Haptics.Feedback(intensity);
+    }
+    public void ShowLaunchUI()
+    {
+        launchUI.SetActive(true);
+    }
+    public void ShowHumanUI()
+    {
+        humanUI.SetActive(true);
+    }
+    public void HideLaunchUI()
+    {
+        launchUI.SetActive(false);
+    }
+    public void HideHumanUI()
+    {
+        humanUI.SetActive(false);
+    }
+    public void RewardLaunchUI()
+    {
+        launchUI.SetActive(false);
+        isreward = true;
+    }
+    public void RewardHumanUI()
+    {
+        humanUI.SetActive(false);
+        isrewardhuman = true;
     }
 }

@@ -86,11 +86,24 @@ public class HumanManager : MonoBehaviour
             stage1 = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, stage1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
             if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, human) >= G.dc.gd.achievementTableDict[stage1].accumulatehuman)
             {
-                stage1 += 1;
-                PlayerPrefs.SetInt(G.ACHIEVEMENTHUMANSTAGE, stage1);
-                isachieve = true;
-                human = 0;
-                PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
+                GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(true);
+                GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(false);
+                
+                if (GameManager.instance.playUI.isrewardhuman == true)
+                {
+                    stage1 += 1;
+                    PlayerPrefs.SetInt(G.ACHIEVEMENTHUMANSTAGE, stage1);
+                    isachieve = true;
+                    human = 0;
+                    PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
+                }
+
+            }
+            else
+            {
+                GameManager.instance.playUI.isrewardhuman = false;
+                GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(false);
+                GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(true);
             }
             
             GameManager.instance.playUI.UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, stage1));

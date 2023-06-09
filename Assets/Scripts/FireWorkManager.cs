@@ -802,11 +802,23 @@ public class FireWorkManager : MonoBehaviour
                     stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                     if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
                     {
-                        stage += 1;
-                        PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
-                        isachieve = true;
-                        launcher = 0;
-                        PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                        GameManager.instance.playUI.launchRewardButton.gameObject.SetActive(true);
+                        GameManager.instance.playUI.UnRewardLaunch.gameObject.SetActive(false);
+                        if (GameManager.instance.playUI.isreward == true)
+                        {
+                            stage += 1;
+                            PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
+                            isachieve = true;
+                            launcher = 0;
+                            PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                        }
+
+                    }
+                    else
+                    {
+                        GameManager.instance.playUI.isreward = false;
+                        GameManager.instance.playUI.launchRewardButton.gameObject.SetActive(false);
+                        GameManager.instance.playUI.UnRewardLaunch.gameObject.SetActive(true);
                     }
                     if (isachieve == true)
                     {

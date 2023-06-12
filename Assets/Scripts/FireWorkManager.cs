@@ -36,6 +36,7 @@ public class FireWorkManager : MonoBehaviour
     private int stage;
     private bool isachieve;
     private float duration=0;
+    public bool isfinish = false;
     void Awake()
     {
         //InitFireWork();
@@ -803,6 +804,7 @@ public class FireWorkManager : MonoBehaviour
                     stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                     if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
                     {
+                        isfinish = true;
                         GameManager.instance.playUI.launchRewardButton.gameObject.SetActive(true);
                         GameManager.instance.playUI.UnRewardLaunch.gameObject.SetActive(false);
                         if (GameManager.instance.playUI.isreward == true)
@@ -812,6 +814,7 @@ public class FireWorkManager : MonoBehaviour
                             isachieve = true;
                             launcher = 0;
                             PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                            isfinish = false;
                         }
 
                     }

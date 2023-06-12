@@ -54,7 +54,7 @@ public class NewbieGuide : MonoBehaviour
             {
                 if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork != null)
                 {
-                    if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork.curFireworkLevel == 2)
+                    if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork.curFireworkLevel == 2 )
                     {
                         newbie[2].SetActive(false);
                         newbie[3].SetActive(true);
@@ -67,7 +67,7 @@ public class NewbieGuide : MonoBehaviour
             {
                 if (GameManager.instance.firePlaneManager.firePlanes[1].fireWork != null)
                 {
-                    if (GameManager.instance.firePlaneManager.firePlanes[1].fireWork.curFireworkLevel == 2)
+                    if (GameManager.instance.firePlaneManager.firePlanes[1].fireWork.curFireworkLevel == 2 || GameManager.instance.firePlaneManager.firePlanes[1].fireWork.curFireworkLevel == 1)
                     {
                         newbie[3].SetActive(false);
                         isfinish = true;

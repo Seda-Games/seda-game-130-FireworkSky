@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "ccc/HalfLambert Ground Common"
+Shader "ccc/HalfLambert Ground Common Flash"
 {
     Properties
     {
@@ -9,7 +9,11 @@ Shader "ccc/HalfLambert Ground Common"
         _ShadowColor ("Shadow Color", Color) = (1, 1, 1, 1)
         _BaseShadowPower ("Power", Float) = 1
         _BaseShadowMul ("Mul", Float) = 1
-
+        _vlightTex ("vlightTex",2D) = "black"{}
+        _vlightcol ("vlight col", COLOR) = (1, 1, 1, 1)
+        _VirtualLight ("Virtual Light", vector) = (0, 0, 0, 0)
+        _VirtualLightRange ("Virtual Light Range", Float) = 1
+        _VirtualLightPower("Virtual Light Power", Float) = 1
     }
 
     SubShader
@@ -42,6 +46,7 @@ Shader "ccc/HalfLambert Ground Common"
                 float4 pos : SV_POSITION;
                 float3 normal_world : TEXCOORD1;
                 float3 pos_world : TEXCOORD2;
+                float3 pos_wObj : TEXCOORD3;
 
             };
             sampler2D _DiffuseTex;
@@ -50,6 +55,11 @@ Shader "ccc/HalfLambert Ground Common"
             float _BaseShadowPower;
             float _BaseShadowMul;
             float4 _LightColor0;
+            sampler2D _vlightTex;
+            float4 _vlightcol;
+            float3 _VirtualLight;
+            float _VirtualLightRange;
+            float _VirtualLightPower;
 
 
             v2f vert (a2v v)
@@ -58,6 +68,7 @@ Shader "ccc/HalfLambert Ground Common"
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = v.texcoord;
                 o.pos_world = mul(unity_ObjectToWorld, v.vertex).xyz;
+                o.pos_wObj = mul(unity_ObjectToWorld, float4(0, 0, 0, 0)).xyz - o.pos_world;
                 o.normal_world = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject));
                 return o;
             }
@@ -84,16 +95,21 @@ Shader "ccc/HalfLambert Ground Common"
                 half3 lightColor =  _LightColor0.rgb;
                 half lightAtten = max(max(lightColor.x, lightColor.y), lightColor.z);
 
+                //Flash
+                float3 vlitDir = _VirtualLight.xyz - i.pos_world.xyz;
+                half flashRange = pow(saturate((length(vlitDir)) / _VirtualLightRange), _VirtualLightPower);
+                half3 vlightcol = tex2D(_vlightTex,float2(flashRange,0.0)).rgb * _vlightcol.rgb;
+
                 //Direct Diffuse直接光漫反射
                 half diff_term = max(0.0, dot(normal_world, light_world));
                 half halfLambert = diff_term * 0.5 + 0.5;
                 half diffVal = saturate(pow(halfLambert * lightAtten, _BaseShadowPower) * _BaseShadowMul);
 
 
-                half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor );
+                half3 finalColor = max(0, lerp(shadowColor, baseColor+ vlightcol, diffVal) * lightColor);
                 finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
-
                 return half4(finalColor, 1.0);
+                //return flashRange.xxxx;
             }
             ENDCG
         }

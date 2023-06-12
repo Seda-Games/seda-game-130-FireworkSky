@@ -1,4 +1,4 @@
-Shader "ccc/FireWorks"
+Shader "ccc/FireWorksCircle"
 {
     Properties
     {
@@ -81,19 +81,18 @@ Shader "ccc/FireWorks"
                     {
                     fixed4 col = fixed4(0,0,0,1);
                     float2 dropPos = i.uv.xy - 0.5;
-                    float2 heartUv = (i.uv.xy * 2 - 1)+0.5;
-                    float pattern = 1 - step(_Transparent, heart(heartUv));
-                    float maxRound = clamp(i.roundClamp.z * (_Round_Anim.x + i.roundClamp.x), 0.2, 0.7);
+                    //float2 heartUv = (i.uv.xy * 2 - 1)+0.5;
+                    float pattern =   length(dropPos);
+                    float maxRound = clamp(i.roundClamp.z * (_Round_Anim.x + i.roundClamp.x), 0.2, 0.5);
                     float minRound = clamp(i.roundClamp.z * (_Round_Anim.y - i.roundClamp.y), 0, 0.199);
-                    float drop = saturate(smoothstep(maxRound, minRound, 1-pattern));
-
+                    float drop = saturate(smoothstep(maxRound, minRound, pattern));
                     col += drop;
                     fixed4 tex = tex2D(_MainTex, float2(-i.uv.z, i.uv.w));
                     float mask = step(length(i.uv.zw - 0.5),0.5);
                     col.rgb *= tex.rgb * _Power;
-                    col.a *= mask * tex.a * _Transparent * i.roundClamp.w * (1- i.custom.x -(1-i.uv.wwww)+0.1);
-                    col.a = saturate(col.a);
-                    //return fixed4(i.roundClamp.zz,0,1);
+                    col.a *=  tex.a * _Transparent * i.roundClamp.w * clamp(1- i.custom.x -(1-i.uv.wwww)+0.1,0.0, 1.0);
+                    col.a = saturate(col.a * 3);
+                    //return fixed4(float2(i.uv.zw),0,1);
                     return col;
                     }
                     ENDCG

@@ -315,7 +315,7 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-                                                    if (item.fireWork.curFireworkLevel > 8)
+                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
@@ -323,7 +323,7 @@ public class FireWorkManager : MonoBehaviour
                                                         break;
                                                     }
                                                     else
-                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
                                                         CameraManager.Instance.MoveToTarget();
@@ -375,7 +375,7 @@ public class FireWorkManager : MonoBehaviour
                                             if (item.fireWork != null)
                                             {
                                                 Debug.Log("到底是多少级");
-                                                if (item.fireWork.curFireworkLevel > 8)
+                                                if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                 {
                                                     PlayerPrefs.SetInt(G.STAGE, 3);
                                                     CameraManager.Instance.MoveToTarget();
@@ -383,7 +383,7 @@ public class FireWorkManager : MonoBehaviour
                                                     break;
                                                 }
                                                 else
-                                                if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                 {
                                                     PlayerPrefs.SetInt(G.STAGE, 2);
                                                     CameraManager.Instance.MoveToTarget();
@@ -421,7 +421,7 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-                                                    if (item.fireWork.curFireworkLevel > 8)
+                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
@@ -429,7 +429,7 @@ public class FireWorkManager : MonoBehaviour
                                                         break;
                                                     }
                                                     else
-                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
                                                         CameraManager.Instance.MoveToTarget();
@@ -469,7 +469,7 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-                                                    if (item.fireWork.curFireworkLevel > 8)
+                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
@@ -477,7 +477,7 @@ public class FireWorkManager : MonoBehaviour
                                                         break;
                                                     }
                                                     else
-                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
                                                         CameraManager.Instance.MoveToTarget();
@@ -563,7 +563,7 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-                                                    if (item.fireWork.curFireworkLevel > 8)
+                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
@@ -571,13 +571,13 @@ public class FireWorkManager : MonoBehaviour
                                                         break;
                                                     }
                                                     else
-                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
                                                     }
-                                                     
+
                                                 }
                                             }
                                             element2.GetComponent<FirePlane>().fireWork = null;
@@ -612,7 +612,7 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-                                                    if (item.fireWork.curFireworkLevel > 8)
+                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
@@ -620,7 +620,7 @@ public class FireWorkManager : MonoBehaviour
                                                         break;
                                                     }
                                                     else
-                                                    if (item.fireWork.curFireworkLevel > 3 && item.fireWork.curFireworkLevel < 7)
+                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
                                                         CameraManager.Instance.MoveToTarget();
@@ -934,18 +934,28 @@ public class FireWorkManager : MonoBehaviour
             slide[0].SetActive(true);
             slide[1].SetActive(false);
             slide[2].SetActive(false);
+            slide[3].SetActive(false);
         }
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 2)
         {
             slide[0].SetActive(false);
             slide[1].SetActive(true);
             slide[2].SetActive(false);
+            slide[3].SetActive(false);
         }
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 3)
         {
             slide[0].SetActive(false);
             slide[1].SetActive(false);
             slide[2].SetActive(true);
+            slide[3].SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 4)
+        {
+            slide[0].SetActive(false);
+            slide[1].SetActive(false);
+            slide[2].SetActive(false);
+            slide[3].SetActive(true);
         }
     }
 }

@@ -6,13 +6,7 @@ using DG.Tweening;
 public class CameraManager : SingleInstance<CameraManager>
 {
     Transform cameraRoot, cameraParent, self;
-    public Transform prepareRoot;
-    public Transform target;
-    public Transform target1;
-    public Transform target2;
-    public Transform preparetar1;
-    public Transform preparetar2;
-    public Transform preparetar3;
+    public Transform[] target;
     public float speed = 1;
     Vector3 distancePlayer;
     public Vector3 smooth;
@@ -42,30 +36,27 @@ public class CameraManager : SingleInstance<CameraManager>
     public void Stage1()
     {
 
-        cameraRoot.DOMove(target.position, 1.5f);
-        cameraRoot.DORotate(target.eulerAngles,0.1f);
-        prepareRoot.DOMove(preparetar1.position,1.5f).OnUpdate(()=> {
-            prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
-        });
-        prepareRoot.eulerAngles = preparetar1.eulerAngles;
+        cameraRoot.DOMove(target[0].position, 1.5f);
+        cameraRoot.DORotate(target[0].eulerAngles,0.1f);
+        
     }
     public void Stage2()
     {
-        cameraRoot.DOMove(target1.position, 1.5f);
-        cameraRoot.DORotate(target1.eulerAngles, 0.1f);
-        prepareRoot.DOMove(preparetar2.position, 1.5f).OnUpdate(() => {
-            prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
-        });
-        prepareRoot.eulerAngles = preparetar2.eulerAngles;
+        cameraRoot.DOMove(target[1].position, 1.5f);
+        cameraRoot.DORotate(target[1].eulerAngles, 0.1f);
+       
     }
     public void Stage3()
     {
-        cameraRoot.DOMove(target2.position, 1.5f);
-        cameraRoot.DORotate(target2.eulerAngles, 0.1f);
-        prepareRoot.DOMove(preparetar3.position, 1.5f).OnUpdate(() => {
-            prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
-        });
-        prepareRoot.eulerAngles = preparetar3.eulerAngles;
+        cameraRoot.DOMove(target[2].position, 1.5f);
+        cameraRoot.DORotate(target[2].eulerAngles, 0.1f);
+        
+    }
+    public void Stage4()
+    {
+        cameraRoot.DOMove(target[3].position, 1.5f);
+        cameraRoot.DORotate(target[3].eulerAngles, 0.1f);
+
     }
     public void MoveToTarget()
     {
@@ -80,6 +71,10 @@ public class CameraManager : SingleInstance<CameraManager>
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 3)
         {
             Stage3();
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 4)
+        {
+            Stage4();
         }
     }
 }

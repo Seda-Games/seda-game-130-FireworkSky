@@ -25,6 +25,10 @@ public class PlayUI : MonoBehaviour
     public Text AddHumanText;
     public Text AddIncomeText;
 
+    [SerializeField]
+    Text fireworkMultiple, humanMultiple, fireworkMultipleUI, humanMultipleUI;
+
+
     public int fireworkLevel;
     public int addhumanLevel;
     public int addincomeLevel;
@@ -117,10 +121,12 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateLauncherNumber(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length-1].level);
         numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
-        Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
+        //Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
         launch.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher;
+        fireworkMultiple.text = "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        fireworkMultipleUI.text= "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
         if (GameManager.instance.fireWorkManager.isfinish == true)
         {
             ratenumberText.text = G.FormatNum1(100) + "%";
@@ -134,9 +140,11 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateHumanNumber(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length-1].level);
         humanNumberText.text= G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
         human.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman;
+        humanMultiple.text = "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        humanMultipleUI.text= "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
         if (GameManager.instance.humanManager.isfinish == true)
         {
             ratehumanText.text = G.FormatNum1(100) + "%";

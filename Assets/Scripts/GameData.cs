@@ -229,4 +229,5 @@ public class AchievementTable
     public int accumulatelauncher;
     public int accumulatehuman;
     public float duration;
+    public int multiple;
 }

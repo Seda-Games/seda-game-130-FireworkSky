@@ -59,7 +59,7 @@ public class FireWorkManager : MonoBehaviour
         if (isachieve == true)
         {
             duration += Time.deltaTime;
-            Debug.Log("现在是多少秒" + duration);
+            //Debug.Log("现在是多少秒" + duration);
             int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
             if (duration > G.dc.gd.achievementTableDict[num].duration)
             {
@@ -801,7 +801,7 @@ public class FireWorkManager : MonoBehaviour
                 {
                     launcher += 1;
                     PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
-                    stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, stage), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                    stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                     if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
                     {
                         isfinish = true;
@@ -809,6 +809,7 @@ public class FireWorkManager : MonoBehaviour
                         GameManager.instance.playUI.UnRewardLaunch.gameObject.SetActive(false);
                         if (GameManager.instance.playUI.isreward == true)
                         {
+                            
                             stage += 1;
                             PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
                             isachieve = true;
@@ -826,8 +827,18 @@ public class FireWorkManager : MonoBehaviour
                     }
                     if (isachieve == true)
                     {
-                        GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
-                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * 2 );
+                        //Debug.Log("现在的等级是多少" + PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
+                        if (PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
+                        {
+                            GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1) - 1].multiple);
+                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1) - 1].multiple);
+                        }
+                        else
+                        {
+                            int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                            GameManager.instance.AddMoney(item.fireWork.GetComponent<FireWork>().curFireworkIcome * G.dc.gd.achievementTableDict[num-1].multiple);
+                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(item.fireWork.transform.position + Vector3.up, item.fireWork.GetComponent<FireWork>().curFireworkIcome * G.dc.gd.achievementTableDict[num-1].multiple);
+                        }
                     }
                     else
                     if (isachieve == false)

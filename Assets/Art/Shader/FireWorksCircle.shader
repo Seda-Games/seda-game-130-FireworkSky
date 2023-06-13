@@ -7,7 +7,8 @@ Shader "ccc/FireWorksCircle"
         _Transparent("_Transparent",range(0,1)) = 1
         _Round_Anim("Round&Anim",vector) = (0,0,0,0)
         _Offset ("Offset", float) = 0.0
-            _Dissolve("Dissolve",Range(0.0,1.0))= 1
+        _NoiseTex ("Noise Tex", 2D) = "white" {}
+        _Dissolve("Dissolve",Range(0.0,1.0))= 1
     }
         SubShader
     {
@@ -48,6 +49,7 @@ Shader "ccc/FireWorksCircle"
             float4 _Round_Anim;
             float _Offset;
             float _Dissolve;
+            sampler2D _NoiseTex;
 
              v2f vert(appdata v)
                     {
@@ -88,9 +90,10 @@ Shader "ccc/FireWorksCircle"
                     float drop = saturate(smoothstep(maxRound, minRound, pattern));
                     col += drop;
                     fixed4 tex = tex2D(_MainTex, float2(-i.uv.z, i.uv.w));
+                    fixed noiseTex = tex2D(_NoiseTex, float2(-i.uv.z, i.uv.w)).r;
                     float mask = step(length(i.uv.zw - 0.5),0.5);
                     col.rgb *= tex.rgb * _Power;
-                    col.a *=  tex.a * _Transparent * i.roundClamp.w * clamp(1- i.custom.x -(1-i.uv.wwww)+0.1,0.0, 1.0);
+                    col.a *=  tex.a * _Transparent * i.roundClamp.w * clamp(1- i.custom.x -(1-i.uv.wwww* noiseTex)+0.1,0.0, 1.0);
                     col.a = saturate(col.a * 3);
                     //return fixed4(float2(i.uv.zw),0,1);
                     return col;

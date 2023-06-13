@@ -9,11 +9,8 @@ Shader "ccc/HalfLambert Ground Common Flash"
         _ShadowColor ("Shadow Color", Color) = (1, 1, 1, 1)
         _BaseShadowPower ("Power", Float) = 1
         _BaseShadowMul ("Mul", Float) = 1
-        _vlightTex ("vlightTex",2D) = "black"{}
-        _vlightcol ("vlight col", COLOR) = (1, 1, 1, 1)
-        _VirtualLight ("Virtual Light", vector) = (0, 0, 0, 0)
-        _VirtualLightRange ("Virtual Light Range", Float) = 1
-        _VirtualLightPower("Virtual Light Power", Float) = 1
+        _RT ("RT",2D) = "black"{}
+
     }
 
     SubShader
@@ -55,11 +52,7 @@ Shader "ccc/HalfLambert Ground Common Flash"
             float _BaseShadowPower;
             float _BaseShadowMul;
             float4 _LightColor0;
-            sampler2D _vlightTex;
-            float4 _vlightcol;
-            float3 _VirtualLight;
-            float _VirtualLightRange;
-            float _VirtualLightPower;
+            sampler2D _RT;
 
 
             v2f vert (a2v v)
@@ -73,40 +66,29 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 return o;
             }
 
-
-
-
             half4 frag(v2f i) : SV_Target
             {
                 //dir
                 half3 normal_world = normalize(i.normal_world);
                 half3 view_world = normalize(_WorldSpaceCameraPos.xyz - i.pos_world);
                 half3 light_world = normalize(_WorldSpaceLightPos0.xyz);
-
                 //BaseColor
                 half3 diffuseCol = tex2D(_DiffuseTex, i.uv).rgb;
                 half3 baseColor = diffuseCol * _BaseColor.rgb;
                 half3 ambientColor = UNITY_LIGHTMODEL_AMBIENT.rgb;
-
                 //ShadowColor
                 half3 shadowColor = diffuseCol * _ShadowColor.rgb;
-
                 //LightAtten
                 half3 lightColor =  _LightColor0.rgb;
                 half lightAtten = max(max(lightColor.x, lightColor.y), lightColor.z);
-
-                //Flash
-                float3 vlitDir = _VirtualLight.xyz - i.pos_world.xyz;
-                half flashRange = pow(saturate((length(vlitDir)) / _VirtualLightRange), _VirtualLightPower);
-                half3 vlightcol = tex2D(_vlightTex,float2(flashRange,0.0)).rgb * _vlightcol.rgb;
-
+                //RT
+                half3 rtColor = tex2D(_RT, float2(1-i.uv.x, i.uv.y)).rgb;
                 //Direct Diffuse直接光漫反射
                 half diff_term = max(0.0, dot(normal_world, light_world));
                 half halfLambert = diff_term * 0.5 + 0.5;
                 half diffVal = saturate(pow(halfLambert * lightAtten, _BaseShadowPower) * _BaseShadowMul);
 
-
-                half3 finalColor = max(0, lerp(shadowColor, baseColor+ vlightcol, diffVal) * lightColor);
+                half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor)+ rtColor*0.2;
                 finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
                 return half4(finalColor, 1.0);
                 //return flashRange.xxxx;

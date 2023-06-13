@@ -39,8 +39,8 @@ public class HumanManager : MonoBehaviour
         if (timeLine > G.dc.gd.humanDataDataDict[visitorLevel].second)
         {
             
-            int stage = PlayerPrefs.GetInt(G.STAGE, 1)-1;
-            StartCoroutine(Visitor(stage));
+            //int stage = PlayerPrefs.GetInt(G.STAGE, 1)-1;
+            StartCoroutine(Visitor());
             timeLine = 0;
         }
         if (isachieve == true)
@@ -63,22 +63,22 @@ public class HumanManager : MonoBehaviour
         Gizmos.DrawWireCube(areaCenter[1], areaSize[1]);
         Gizmos.DrawWireCube(areaCenter[2], areaSize[2]);
     }
-    IEnumerator Visitor(int stage)
+    IEnumerator Visitor( )
     {
         
         for (int i = 0; i < G.dc.gd.humanDataDataDict[visitorLevel-1].flow; i++)
         {
             int number = Random.Range(0, characterPrefab.Length);
             // 在出生点生成一个人物
-            GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint[stage], Quaternion.identity);
+            GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint[0], Quaternion.identity);
             Animator animator = characterObj.GetComponent<Animator>();
             characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
             characterObj.GetComponent<Human>().curIncome= G.dc.gd.humanDataDataDict[characterObj.GetComponent<Human>().curLevel].income;
             // 随机生成一个区域内的点
             Vector3 targetPoint = new Vector3(
-                Random.Range(areaCenter[stage].x - areaSize[stage].x / 2, areaCenter[stage].x + areaSize[stage].x / 2),
-                Random.Range(areaCenter[stage].y - areaSize[stage].y / 2, areaCenter[stage].y + areaSize[stage].y / 2),
-                Random.Range(areaCenter[stage].z - areaSize[stage].z / 2, areaCenter[stage].z + areaSize[stage].z / 2)
+                Random.Range(areaCenter[0].x - areaSize[0].x / 2, areaCenter[0].x + areaSize[0].x / 2),
+                Random.Range(areaCenter[0].y - areaSize[0].y / 2, areaCenter[0].y + areaSize[0].y / 2),
+                Random.Range(areaCenter[0].z - areaSize[0].z / 2, areaCenter[0].z + areaSize[0].z / 2)
             );
             float duration = Vector3.Distance(characterObj.transform.position, targetPoint) / 2f;
 

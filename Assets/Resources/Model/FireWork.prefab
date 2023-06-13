@@ -4792,6 +4792,36 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
+    - target: {fileID: 7967278598136742637, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967278598170200341, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967278598406830688, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967278598505715636, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967278598566671792, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967278598801395590, guid: 9220189d45bdd7644b5708a9774d4425,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9220189d45bdd7644b5708a9774d4425, type: 3}
 --- !u!1 &8269319235672012424 stripped

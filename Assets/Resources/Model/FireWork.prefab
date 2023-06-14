@@ -3060,6 +3060,21 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2793764319564677482, guid: f7c62222d9fede343981a29cc72d6ae4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793764319564677482, guid: f7c62222d9fede343981a29cc72d6ae4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793764319564677482, guid: f7c62222d9fede343981a29cc72d6ae4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2958503527057515577, guid: f7c62222d9fede343981a29cc72d6ae4,
         type: 3}
       propertyPath: m_Layer

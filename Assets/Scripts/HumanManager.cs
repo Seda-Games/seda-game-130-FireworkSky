@@ -43,7 +43,7 @@ public class HumanManager : MonoBehaviour
             StartCoroutine(Visitor());
             timeLine = 0;
         }
-        if (isachieve == true)
+        /*if (isachieve == true)
         {
             duration1 += Time.deltaTime;
             Debug.Log("œ÷‘⁄ «" + duration1);
@@ -54,7 +54,7 @@ public class HumanManager : MonoBehaviour
                 isachieve = false;
                 duration1 = 0;
             }
-        }
+        }*/
     }
     void OnDrawGizmos()
     {

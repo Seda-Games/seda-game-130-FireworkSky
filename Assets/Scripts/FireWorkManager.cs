@@ -56,7 +56,7 @@ public class FireWorkManager : MonoBehaviour
         ResetLastPos();
         ItemMove();
         GetFireWorkIncome();
-        if (isachieve == true)
+       /* if (isachieve == true)
         {
             duration += Time.deltaTime;
             //Debug.Log("现在是多少秒" + duration);
@@ -67,7 +67,7 @@ public class FireWorkManager : MonoBehaviour
                 duration = 0;
 
             }
-        }
+        }*/
         
 
     }

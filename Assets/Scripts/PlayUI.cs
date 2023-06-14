@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -129,11 +130,12 @@ public class PlayUI : MonoBehaviour
         fireworkMultipleUI.text= "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
         if (GameManager.instance.fireWorkManager.isfinish == true)
         {
-            ratenumberText.text = G.FormatNum1(100) + "%";
+            ratenumberText.text = G.FormatNum(100) + "%";
         }
         else
         {
-            ratenumberText.text = G.FormatNum1(((float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher) * 100) + "%";
+            float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher) * 100);
+            ratenumberText.text = G.FormatNum1(num) + "%";
         }
         
         Debug.Log("现在是多少火箭" + launch.fillAmount);
@@ -147,11 +149,12 @@ public class PlayUI : MonoBehaviour
         humanMultipleUI.text= "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
         if (GameManager.instance.humanManager.isfinish == true)
         {
-            ratehumanText.text = G.FormatNum1(100) + "%";
+            ratehumanText.text = G.FormatNum(100) + "%";
         }
         else
         {
-            ratehumanText.text = G.FormatNum1(((float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman) * 100) + "%";
+            float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman) * 100);
+            ratehumanText.text = G.FormatNum1(num) + "%";
         }
             
         Debug.Log("现在是多少" + human.fillAmount);
@@ -211,7 +214,7 @@ public class PlayUI : MonoBehaviour
     public  void TestFlyMoney()
     {
         AudioManager.instance?.Tap();
-        int amount = Random.Range(50000, 100000);
+        int amount = UnityEngine.Random.Range(50000, 100000);
         GameManager.instance.FlyCoins(amount, amount / 10000, transform.position);
     }
 

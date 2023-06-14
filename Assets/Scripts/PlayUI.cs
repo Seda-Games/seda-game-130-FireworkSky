@@ -122,40 +122,73 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateLauncherNumber(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length-1].level);
-        numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
-        //Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
-        launch.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher;
-        fireworkMultiple.text = "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
-        fireworkMultipleUI.text= "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
-        if (GameManager.instance.fireWorkManager.isfinish == true)
+        if (level == G.dc.gd.achievementTables.Length + 1)
         {
-            ratenumberText.text = G.FormatNum(100) + "%";
+            numberText.text = "MAX";
+            launch.fillAmount = 1;
+            ratenumberText.text = "MAX";
+            launchRewardButton.gameObject.SetActive(false);
+            UnRewardLaunch.gameObject.SetActive(true);
         }
         else
         {
-            float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher) * 100);
-            ratenumberText.text = G.FormatNum1(num) + "%";
+
+            numberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENT, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatelauncher);
+            launch.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher;
+
+
+            if (GameManager.instance.fireWorkManager.isfinish == true)
+            {
+                ratenumberText.text = G.FormatNum(100) + "%";
+            }
+            else
+            {
+                float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENT, 0) / G.dc.gd.achievementTableDict[level].accumulatelauncher) * 100);
+                ratenumberText.text = G.FormatNum1(num) + "%";
+            }
         }
+        
+       
+
+        //Debug.Log("现" + PlayerPrefs.GetInt(G.ACHIEVEMENT, 0));
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length - 1].level);
+        fireworkMultiple.text = "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        fireworkMultipleUI.text= "X" + G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        
+        
         
         Debug.Log("现在是多少火箭" + launch.fillAmount);
     }
     public void UpdateHumanNumber(int level)
     {
-        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length-1].level);
-        humanNumberText.text= G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
-        human.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman;
-        humanMultiple.text = "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
-        humanMultipleUI.text= "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
-        if (GameManager.instance.humanManager.isfinish == true)
+        
+        if (level == G.dc.gd.achievementTables.Length + 1)
         {
-            ratehumanText.text = G.FormatNum(100) + "%";
+            humanNumberText.text = "MAX";
+            human.fillAmount = 1;
+            ratehumanText.text = "MAX";
+            huamanRewardButton.gameObject.SetActive(false);
+            UnRewardHuman.gameObject.SetActive(true);
         }
         else
         {
-            float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman) * 100);
-            ratehumanText.text = G.FormatNum1(num) + "%";
+            humanNumberText.text = G.FormatNum(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0)) + "/" + G.FormatNum(G.dc.gd.achievementTableDict[level].accumulatehuman);
+            human.fillAmount = (float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman;
+            if (GameManager.instance.humanManager.isfinish == true)
+            {
+                ratehumanText.text = G.FormatNum(100) + "%";
+            }
+            else
+            {
+                float num = Mathf.Round(((float)PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, 0) / G.dc.gd.achievementTableDict[level].accumulatehuman) * 100);
+                ratehumanText.text = G.FormatNum1(num) + "%";
+            }
         }
+
+        level = Mathf.Clamp(level, G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTables[G.dc.gd.achievementTables.Length - 1].level);
+        humanMultiple.text = "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        humanMultipleUI.text= "X"+G.FormatNum(G.dc.gd.achievementTableDict[level].multiple);
+        
             
         Debug.Log("现在是多少" + human.fillAmount);
     }
@@ -248,10 +281,16 @@ public class PlayUI : MonoBehaviour
     {
         launchUI.SetActive(false);
         isreward = true;
+        //GameManager.instance.fireWorkManager.isfinish = false;
+        UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
+        
+        
     }
     public void RewardHumanUI()
     {
         humanUI.SetActive(false);
         isrewardhuman = true;
+        //GameManager.instance.humanManager.isfinish = false;
+        UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
     }
 }

@@ -81,33 +81,40 @@ public class HumanManager : MonoBehaviour
                 Random.Range(areaCenter[0].z - areaSize[0].z / 2, areaCenter[0].z + areaSize[0].z / 2)
             );
             float duration = Vector3.Distance(characterObj.transform.position, targetPoint) / 2f;
-
-            human += 1;
-            PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
-            stage1 = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
-            if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, human) >= G.dc.gd.achievementTableDict[stage1].accumulatehuman)
+            if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
             {
-                isfinish = true;
-                GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(true);
-                GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(false);
-                
-                if (GameManager.instance.playUI.isrewardhuman == true)
-                {
-                    stage1 += 1;
-                    PlayerPrefs.SetInt(G.ACHIEVEMENTHUMANSTAGE, stage1);
-                    isachieve = true;
-                    human = 0;
-                    PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
-                    isfinish = false;
-                }
-
+                isachieve = true;
             }
             else
             {
-                GameManager.instance.playUI.isrewardhuman = false;
-                GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(false);
-                GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(true);
+                human += 1;
+                PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
+                stage1 = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMAN, human) >= G.dc.gd.achievementTableDict[stage1].accumulatehuman)
+                {
+                    isfinish = true;
+                    GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(true);
+                    GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(false);
+
+                    if (GameManager.instance.playUI.isrewardhuman == true)
+                    {
+                        stage1 += 1;
+                        PlayerPrefs.SetInt(G.ACHIEVEMENTHUMANSTAGE, stage1);
+                        isachieve = true;
+                        human = 0;
+                        PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, human);
+                        isfinish = false;
+                    }
+
+                }
+                else
+                {
+                    GameManager.instance.playUI.isrewardhuman = false;
+                    GameManager.instance.playUI.huamanRewardButton.gameObject.SetActive(false);
+                    GameManager.instance.playUI.UnRewardHuman.gameObject.SetActive(true);
+                }
             }
+            
             
             GameManager.instance.playUI.UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, stage1));
 

@@ -20626,7 +20626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CLAM
+  m_Text: CLAIM
 --- !u!222 &617200912
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20841,7 +20841,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CLAM
+  m_Text: CLAIM
 --- !u!222 &651845995
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -47834,7 +47834,7 @@ GameObject:
   - component: {fileID: 1429485932}
   - component: {fileID: 1429485931}
   m_Layer: 5
-  m_Name: CLAM
+  m_Name: CLAIM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59706,7 +59706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CLAM
+  m_Text: CLAIM
 --- !u!222 &1601665570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60873,7 +60873,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CLAM
+  m_Text: CLAIM
 --- !u!222 &1749856469
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -68270,7 +68270,7 @@ GameObject:
   - component: {fileID: 2020240242}
   - component: {fileID: 2020240241}
   m_Layer: 5
-  m_Name: CLAM
+  m_Name: CLAIM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

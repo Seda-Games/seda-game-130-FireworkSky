@@ -36,6 +36,12 @@ public class PlayUI : MonoBehaviour
 
     public bool isreward = false;
     public bool isrewardhuman = false;
+
+    [SerializeField]
+    Button newfireworkUI;
+
+    public GameObject fireworkUI;
+
     private void Start()
     {
         launchButton.onClick.AddListener(ShowLaunchUI);
@@ -46,6 +52,8 @@ public class PlayUI : MonoBehaviour
 
         launchRewardButton.onClick.AddListener(RewardLaunchUI);
         huamanRewardButton.onClick.AddListener(RewardHumanUI);
+
+        newfireworkUI.onClick.AddListener(HideFireworkUI);
     }
     public void UpdateUI(int curLevel = 1)
     {
@@ -293,4 +301,9 @@ public class PlayUI : MonoBehaviour
         //GameManager.instance.humanManager.isfinish = false;
         UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
     }
+    public void HideFireworkUI()
+    {
+        fireworkUI.SetActive(false);
+    }
+
 }

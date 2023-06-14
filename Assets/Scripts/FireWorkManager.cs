@@ -310,6 +310,10 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+
+                                            
+                                            GameManager.instance.fireworkUI.ShowUI(G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("Rocket" + G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level, 1);
                                             foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                             {
                                                 if (item.fireWork != null)
@@ -430,6 +434,9 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            
+                                            GameManager.instance.fireworkUI.ShowUI(G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("Rocket" + G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level, 1);
                                             foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                             {
                                                 if (item.fireWork != null)
@@ -585,7 +592,9 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
-
+                                            
+                                            GameManager.instance.fireworkUI.ShowUI(G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("Rocket" + G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level, 1);
                                             foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                                             {
                                                 if (item.fireWork != null)
@@ -709,6 +718,9 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            
+                                            GameManager.instance.fireworkUI.ShowUI(G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
+                                            PlayerPrefs.SetInt("Rocket" + G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level, 1);
                                             element2.GetComponent<PreparePlane>().fireWork = null;
 
 
@@ -946,6 +958,9 @@ public class FireWorkManager : MonoBehaviour
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
                 cub.GetComponent<FireWork>().ShowModel(1);
+               
+                GameManager.instance.fireworkUI.ShowUI(1);
+                PlayerPrefs.SetInt("Rocket" + 1,1);
                 PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);

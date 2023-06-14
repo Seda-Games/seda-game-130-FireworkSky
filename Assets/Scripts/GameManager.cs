@@ -38,6 +38,7 @@ public class GameManager : SingleInstance<GameManager>
     public FireWork fireWork;
     public PlayGame playGame;
     public BottomPanel bottomPanel;
+    public FireWorkUI fireworkUI;
     Vector2 mouseOriginalPoint, mouseLastPoint;
     private Vector3 target;
     public Player player;

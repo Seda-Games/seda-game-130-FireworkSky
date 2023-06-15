@@ -1018,13 +1018,13 @@ public class FireWorkManager : MonoBehaviour
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
                 cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
-                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[5].level;
-                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[5].income;
-                cub.GetComponent<FireWork>().ShowModel(5);
+                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
+                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
+                cub.GetComponent<FireWork>().ShowModel(1);
                
-                GameManager.instance.fireworkUI.ShowUI(5);
-                PlayerPrefs.SetInt("Rocket" + 5,1);
-                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[5].level);
+                GameManager.instance.fireworkUI.ShowUI(1);
+                PlayerPrefs.SetInt("Rocket" + 1,1);
+                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
             }

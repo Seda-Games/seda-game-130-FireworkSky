@@ -44,6 +44,7 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 float3 normal_world : TEXCOORD1;
                 float3 pos_world : TEXCOORD2;
                 float3 pos_wObj : TEXCOORD3;
+                SHADOW_COORDS(4)
 
             };
             sampler2D _DiffuseTex;
@@ -63,7 +64,13 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 o.pos_world = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.pos_wObj = mul(unity_ObjectToWorld, float4(0, 0, 0, 0)).xyz - o.pos_world;
                 o.normal_world = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject));
+                TRANSFER_SHADOW(o);
                 return o;
+            }
+
+            float3 BlendColor(float3 baseColor, float3 blendColor) {
+                float3 resultColor = min(1.0, baseColor / (1.0 - blendColor));
+                return resultColor;
             }
 
             half4 frag(v2f i) : SV_Target
@@ -83,15 +90,23 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 half lightAtten = max(max(lightColor.x, lightColor.y), lightColor.z);
                 //RT
                 half3 rtColor = tex2D(_RT, float2(1-i.uv.x, i.uv.y)).rgb;
+                
                 //Direct Diffuse直接光漫反射
                 half diff_term = max(0.0, dot(normal_world, light_world));
                 half halfLambert = diff_term * 0.5 + 0.5;
                 half diffVal = saturate(pow(halfLambert * lightAtten, _BaseShadowPower) * _BaseShadowMul);
 
-                half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor)+ rtColor*0.2;
+                UNITY_LIGHT_ATTENUATION(atten, i, i.pos_world);
+                half customShadow = saturate(1-atten )*0.5;
+                //fixed shadow = SHADOW_ATTENUATION(i);
+
+                half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor) ;
+                half rtGray  = 0.299 * rtColor.r + 0.578 * rtColor.g + 0.114 * rtColor.b;
+                half blendAtten = saturate(atten+ rtGray * customShadow*5);
+                finalColor = BlendColor(finalColor , rtColor * 0.3 );
                 finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
-                return half4(finalColor, 1.0);
-                //return flashRange.xxxx;
+                return half4(finalColor* blendAtten, 1.0);
+                //return blendAtten.xxxx;
             }
             ENDCG
         }

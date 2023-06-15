@@ -176,6 +176,7 @@ public class FireWorkData
 {
     public int level;
     public int income;
+    public int humanincome;
 }
 [System.Serializable]
 

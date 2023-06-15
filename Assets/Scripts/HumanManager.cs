@@ -68,12 +68,12 @@ public class HumanManager : MonoBehaviour
         
         for (int i = 0; i < G.dc.gd.humanDataDataDict[visitorLevel-1].flow; i++)
         {
+            
             int number = Random.Range(0, characterPrefab.Length);
             // 在出生点生成一个人物
             GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint[0], Quaternion.identity);
             Animator animator = characterObj.GetComponent<Animator>();
-            characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
-            characterObj.GetComponent<Human>().curIncome= G.dc.gd.humanDataDataDict[characterObj.GetComponent<Human>().curLevel].income;
+            
             // 随机生成一个区域内的点
             Vector3 targetPoint = new Vector3(
                 Random.Range(areaCenter[0].x - areaSize[0].x / 2, areaCenter[0].x + areaSize[0].x / 2),
@@ -118,14 +118,26 @@ public class HumanManager : MonoBehaviour
             
             GameManager.instance.playUI.UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, stage1));
 
-
+            
             // 使用 DOTween 让人物移动到目标点
             // 使用 DOTween 让人物始终面向移动方向
             characterObj.transform.DOLookAt(targetPoint, 0.1f);
             characterObj.transform.DOMove(targetPoint, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 animator.SetTrigger("WalkToIdle1");
-                
+                int maxlevel = 0;
+                foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+                {
+                    if (item.fireWork != null)
+                    {
+                        if (item.fireWork.curFireworkLevel > maxlevel)
+                        {
+                            maxlevel = item.fireWork.curFireworkLevel;
+                        }
+                    }
+                }
+                //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
+                characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
                 characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     Debug.Log("dwqdqwdqwdqwdqwdqd");

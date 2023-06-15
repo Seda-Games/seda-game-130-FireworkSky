@@ -48,6 +48,7 @@ public class GameManager : SingleInstance<GameManager>
     public GameObject element2;
     public bool ismax=false;
     public bool ismax1=false;
+    public Transform fireroot;
     private void Awake()
     {
         if (instance == null)

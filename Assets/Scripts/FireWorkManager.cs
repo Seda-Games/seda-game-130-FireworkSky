@@ -261,6 +261,7 @@ public class FireWorkManager : MonoBehaviour
                                 element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
                                 element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
                                 element.transform.position = element2.transform.position;
+                                element.transform.parent = GameManager.Instance.fireroot.transform;
                             }
 
                             element = null;
@@ -275,6 +276,7 @@ public class FireWorkManager : MonoBehaviour
                                 element.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
                                 element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Fire);
                                 element.transform.position = element3.transform.position;
+                                element.transform.parent = GameManager.Instance.fireroot.transform;
                             }
 
                             if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
@@ -308,6 +310,8 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
                                             newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
                                             newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+
+                                            newfirework.transform.parent =  GameManager.Instance.fireroot.transform;
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
 
@@ -432,6 +436,7 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
                                             newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
                                             newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
+                                            newfirework.transform.parent = GameManager.Instance.fireroot.transform;
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
                                             
@@ -472,8 +477,12 @@ public class FireWorkManager : MonoBehaviour
                                         if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
                                         {
                                             //交换位置
+                                           
                                             element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
                                             element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
+
+                                            element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.parent = GameManager.instance.fireroot.transform;
+                                            element3.GetComponent<FirePlane>().fireWork.gameObject.transform.parent = CameraManager.Instance.prepareRoot.transform;
 
                                             FireWork temp;
                                             temp = element2.GetComponent<PreparePlane>().fireWork;
@@ -527,7 +536,7 @@ public class FireWorkManager : MonoBehaviour
                                 }
 
                             }
-
+                            //element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                             element = null;
                             element2 = null;
                             element3 = null;
@@ -547,8 +556,9 @@ public class FireWorkManager : MonoBehaviour
                                 element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
                                 element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
                                 element.transform.position = element2.transform.position;
+                                element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                             }
-
+                            
                             element = null;
                             element2 = null;
                             element3 = null;
@@ -561,6 +571,7 @@ public class FireWorkManager : MonoBehaviour
                                 element.GetComponent<FireWork>().fwp = FireWorkPhase.Prepare;
                                 element.GetComponent<FireWork>().PlayFx(element, FireWorkPhase.Prepare);
                                 element.transform.position = element3.transform.position;
+                                element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                             }
                             if (element2.tag == Tag.FirePlane && element2.GetComponent<FirePlane>().fireWork != null)
                             {//elemen3是PreparePlane,element2是FirePlane
@@ -572,6 +583,7 @@ public class FireWorkManager : MonoBehaviour
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
                                         element2.GetComponent<FirePlane>().fireWork = null;
+                                        element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                                     }
                                     if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<FirePlane>().fireWork != null)
                                     {
@@ -590,6 +602,7 @@ public class FireWorkManager : MonoBehaviour
                                             //保存新烟花
                                             element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            newfirework.transform.parent = CameraManager.Instance.prepareRoot.transform;
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
                                             
@@ -633,6 +646,8 @@ public class FireWorkManager : MonoBehaviour
                                             element2.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element3.transform.position;
                                             element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element2.transform.position;
 
+                                            element2.GetComponent<FirePlane>().fireWork.gameObject.transform.parent = CameraManager.Instance.prepareRoot.transform;
+                                            element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.parent = GameManager.instance.fireroot.transform;
 
                                             FireWork temp;
                                             temp = element2.GetComponent<FirePlane>().fireWork;
@@ -698,6 +713,7 @@ public class FireWorkManager : MonoBehaviour
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
                                         element2.GetComponent<PreparePlane>().fireWork = null;
+                                        element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                                     }
                                     if (element3.GetComponent<PreparePlane>().fireWork != null && element2.GetComponent<PreparePlane>().fireWork != null)
                                     {
@@ -716,6 +732,7 @@ public class FireWorkManager : MonoBehaviour
                                             //保存新烟花
                                             element3.GetComponent<PreparePlane>().fireWork = newfirework.GetComponent<FireWork>();
                                             newfirework.GetComponent<FireWork>().ShowModel(newfirework.GetComponent<FireWork>().curFireworkLevel);
+                                            newfirework.transform.parent = CameraManager.Instance.prepareRoot.transform;
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<PreparePlane>().PreparePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
                                             
@@ -749,6 +766,7 @@ public class FireWorkManager : MonoBehaviour
                                 }
 
                             }
+                            element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                             element = null;
                             element2 = null;
                             element3 = null;
@@ -760,6 +778,7 @@ public class FireWorkManager : MonoBehaviour
                     {
                         if (element)
                         {
+                            
                             element.transform.position = element2.transform.position;
                             element = null;
                             element2 = null;
@@ -773,13 +792,14 @@ public class FireWorkManager : MonoBehaviour
             {
                 if (element)
                 {
+                    
                     element.transform.position = element2.transform.position;
                     element = null;
                     element2 = null;
                 }
 
             }
-           
+            //element.transform.parent = CameraManager.Instance.prepareRoot.transform;
             element = null;
             element2 = null;
             element3 = null;
@@ -954,6 +974,7 @@ public class FireWorkManager : MonoBehaviour
                 PlayerPrefs.SetInt(G.FIREWORKLEVEL, fireWorkLevel);
                 GameManager.instance.IsEnoughMoney();
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
+                cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;

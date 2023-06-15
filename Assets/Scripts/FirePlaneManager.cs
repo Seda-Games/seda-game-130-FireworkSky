@@ -27,6 +27,7 @@ public class FirePlaneManager : MonoBehaviour
                 item.fireWork.ShowModel(level);
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
+                //cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 item.fireWork.PlayFx(cub,FireWorkPhase.Fire);
             }
             if (item.FirePlaneID < 1004)

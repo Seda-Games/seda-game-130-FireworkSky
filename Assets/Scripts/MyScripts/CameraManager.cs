@@ -6,10 +6,12 @@ using DG.Tweening;
 public class CameraManager : SingleInstance<CameraManager>
 {
     Transform cameraRoot, cameraParent, self;
+    public Transform prepareRoot;
     public Transform[] target;
     public float speed = 1;
     Vector3 distancePlayer;
     public Vector3 smooth;
+    public Transform preparetar;
     private void Awake()
     {
         cameraRoot = transform.root;
@@ -36,24 +38,44 @@ public class CameraManager : SingleInstance<CameraManager>
     public void Stage1()
     {
 
+        /*prepareRoot.DOMove(target[0].position, 1.5f).OnUpdate(() => {
+            prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+        });*/
+        //prepareRoot.eulerAngles = target[0].eulerAngles;
+        //prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
         cameraRoot.DOMove(target[0].position, 1.5f);
         cameraRoot.DORotate(target[0].eulerAngles,0.1f);
         
     }
     public void Stage2()
     {
+        /*prepareRoot.DOMove(target[0].position, 1.5f).OnUpdate(() => {
+             prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+         });*/
+        //prepareRoot.eulerAngles = target[1].eulerAngles;
+
         cameraRoot.DOMove(target[1].position, 1.5f);
         cameraRoot.DORotate(target[1].eulerAngles, 0.1f);
        
     }
     public void Stage3()
     {
+        /*prepareRoot.DOMove(target[0].position, 1.5f).OnUpdate(() => {
+            prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+        });*/
+        //prepareRoot.eulerAngles = target[2].eulerAngles;
+        //prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
         cameraRoot.DOMove(target[2].position, 1.5f);
         cameraRoot.DORotate(target[2].eulerAngles, 0.1f);
         
     }
     public void Stage4()
     {
+        /*prepareRoot.DOMove(target[0].position, 1.5f).OnUpdate(() => {
+             prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+         });*/
+        //prepareRoot.eulerAngles = target[3].eulerAngles;
+        //prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
         cameraRoot.DOMove(target[3].position, 1.5f);
         cameraRoot.DORotate(target[3].eulerAngles, 0.1f);
 

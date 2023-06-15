@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Plane 1
+  m_Name: M_Plane 2
   m_Shader: {fileID: 4800000, guid: 1e608fd43b6f43a46a6c64974bb9a58a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -44,10 +44,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Gradient:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,22 +64,16 @@ Material:
         m_Texture: {fileID: 8400000, guid: 8f2d23fdc68bb8c46b95638eeb4fe2a0, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _vlightTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f15423b38ceeb53488acfb883ddfbbcd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ACES: 0
-    - _BaseShadowMul: 15.66
-    - _BaseShadowPower: 3.8
+    - _BaseShadowMul: 16.26
+    - _BaseShadowPower: 4.4
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Cutout: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -97,16 +87,14 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _VirtualLightPower: 1
-    - _VirtualLightRange: 1
+    - _VirtualLightPower: 0
+    - _VirtualLightRange: 21.07
     - _ZWrite: 1
-    - __dirty: 0
     m_Colors:
-    - _BaseColor: {r: 0.55633676, g: 0.8867924, b: 0.8730234, a: 1}
+    - _BaseColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
-    - _ShaowColor: {r: 0, g: 0, b: 0, a: 0}
-    - _VirtualLight: {r: 0, g: 0, b: 0, a: 0}
-    - _vlightcol: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0.43787825, g: 0.54128313, b: 0.754717, a: 1}
+    - _VirtualLight: {r: 0.14, g: 0, b: 30.6, a: 0}
+    - _vlightcol: {r: 0.37348703, g: 0.68128496, b: 0.7264151, a: 1}
   m_BuildTextureStacks: []

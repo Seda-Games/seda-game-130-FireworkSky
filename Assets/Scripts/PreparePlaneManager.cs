@@ -23,6 +23,7 @@ public class PreparePlaneManager : MonoBehaviour
                 item.fireWork.ShowModel(level);
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
+                cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
             }
             //item.prepareLock.SetActive(false);
             if (PlayerPrefs.GetInt("PrepareUnlock" + item.PreparePlaneID, G.dc.gd.preparePlaneTableDict[item.PreparePlaneID].isunlock) == 1)

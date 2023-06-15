@@ -102,7 +102,7 @@ Shader "ccc/HalfLambert Ground Common Flash"
 
                 half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor) ;
                 half rtGray  = 0.299 * rtColor.r + 0.578 * rtColor.g + 0.114 * rtColor.b;
-                half blendAtten = saturate(atten+ rtGray * customShadow*5);
+                half blendAtten = saturate(atten+ rtGray * customShadow);
                 finalColor = BlendColor(finalColor , rtColor * 0.3 );
                 finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
                 return half4(finalColor* blendAtten, 1.0);

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GM : MonoBehaviour
 {
     [SerializeField]
-    Button panel, showPanelButton,camerapositionButton1, camerapositionButton2,camerapositionButton3, camerapositionButton4;
+    Button panel, showPanelButton,camerapositionButton1, camerapositionButton2,camerapositionButton3, camerapositionButton4, camerapositionButton5;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +38,7 @@ public class GM : MonoBehaviour
         camerapositionButton2.onClick.AddListener(CameraToTarget1);
         camerapositionButton3.onClick.AddListener(CameraToTarget2);
         camerapositionButton4.onClick.AddListener(CameraToTarget3);
+        camerapositionButton5.onClick.AddListener(CameraToTarget4);
     }
     public void CameraToTarget()
     {
@@ -57,6 +58,11 @@ public class GM : MonoBehaviour
     public void CameraToTarget3()
     {
         PlayerPrefs.SetInt(G.STAGE, 4);
+        CameraManager.Instance.MoveToTarget();
+    }
+    public void CameraToTarget4()
+    {
+        PlayerPrefs.SetInt(G.STAGE, 5);
         CameraManager.Instance.MoveToTarget();
     }
 }

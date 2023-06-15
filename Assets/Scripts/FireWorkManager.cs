@@ -323,12 +323,20 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+
+                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 5);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                        break;
+                                                    }
                                                     if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        break;
+                                                        
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
@@ -337,7 +345,6 @@ public class FireWorkManager : MonoBehaviour
                                                         ShowOrHideSlide();
                                                         
                                                     }
-                                                    else
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
@@ -390,21 +397,28 @@ public class FireWorkManager : MonoBehaviour
                                             if (item.fireWork != null)
                                             {
                                                 Debug.Log("到底是多少级");
+
+                                                if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                {
+                                                    PlayerPrefs.SetInt(G.STAGE, 5);
+                                                    CameraManager.Instance.MoveToTarget();
+                                                    ShowOrHideSlide();
+                                                    break;
+                                                }
                                                 if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                 {
                                                     PlayerPrefs.SetInt(G.STAGE, 4);
                                                     CameraManager.Instance.MoveToTarget();
                                                     ShowOrHideSlide();
-                                                    break;
+
                                                 }
                                                 if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                 {
                                                     PlayerPrefs.SetInt(G.STAGE, 3);
                                                     CameraManager.Instance.MoveToTarget();
                                                     ShowOrHideSlide();
-                                                    
+
                                                 }
-                                                else
                                                 if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                 {
                                                     PlayerPrefs.SetInt(G.STAGE, 2);
@@ -447,21 +461,28 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+
+                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 5);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                        break;
+                                                    }
                                                     if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        break;
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
-                                                    else
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
@@ -506,21 +527,28 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+
+                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 5);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                        break;
+                                                    }
                                                     if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        break;
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
-                                                    else
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
@@ -613,21 +641,28 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+
+                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 5);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                        break;
+                                                    }
                                                     if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        break;
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
-                                                    else
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
@@ -671,21 +706,28 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+
+                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    {
+                                                        PlayerPrefs.SetInt(G.STAGE, 5);
+                                                        CameraManager.Instance.MoveToTarget();
+                                                        ShowOrHideSlide();
+                                                        break;
+                                                    }
                                                     if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        break;
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
-                                                    else
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 2);
@@ -976,13 +1018,13 @@ public class FireWorkManager : MonoBehaviour
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
                 cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
-                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
-                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
-                cub.GetComponent<FireWork>().ShowModel(1);
+                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[5].level;
+                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[5].income;
+                cub.GetComponent<FireWork>().ShowModel(5);
                
-                GameManager.instance.fireworkUI.ShowUI(1);
-                PlayerPrefs.SetInt("Rocket" + 1,1);
-                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
+                GameManager.instance.fireworkUI.ShowUI(5);
+                PlayerPrefs.SetInt("Rocket" + 5,1);
+                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[5].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
             }
@@ -1021,6 +1063,7 @@ public class FireWorkManager : MonoBehaviour
             slide[1].SetActive(false);
             slide[2].SetActive(false);
             slide[3].SetActive(false);
+            slide[4].SetActive(false);
         }
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 2)
         {
@@ -1028,6 +1071,7 @@ public class FireWorkManager : MonoBehaviour
             slide[1].SetActive(true);
             slide[2].SetActive(false);
             slide[3].SetActive(false);
+            slide[4].SetActive(false);
         }
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 3)
         {
@@ -1035,6 +1079,7 @@ public class FireWorkManager : MonoBehaviour
             slide[1].SetActive(false);
             slide[2].SetActive(true);
             slide[3].SetActive(false);
+            slide[4].SetActive(false);
         }
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 4)
         {
@@ -1042,6 +1087,15 @@ public class FireWorkManager : MonoBehaviour
             slide[1].SetActive(false);
             slide[2].SetActive(false);
             slide[3].SetActive(true);
+            slide[4].SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 5)
+        {
+            slide[0].SetActive(false);
+            slide[1].SetActive(false);
+            slide[2].SetActive(false);
+            slide[3].SetActive(false);
+            slide[4].SetActive(true);
         }
     }
 }

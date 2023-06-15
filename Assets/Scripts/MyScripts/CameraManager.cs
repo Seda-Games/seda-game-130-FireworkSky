@@ -11,7 +11,7 @@ public class CameraManager : SingleInstance<CameraManager>
     public float speed = 1;
     Vector3 distancePlayer;
     public Vector3 smooth;
-    public Transform preparetar;
+    
     private void Awake()
     {
         cameraRoot = transform.root;
@@ -80,6 +80,17 @@ public class CameraManager : SingleInstance<CameraManager>
         cameraRoot.DORotate(target[3].eulerAngles, 0.1f);
 
     }
+    public void Stage5()
+    {
+        /*prepareRoot.DOMove(target[0].position, 1.5f).OnUpdate(() => {
+             prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+         });*/
+        //prepareRoot.eulerAngles = target[3].eulerAngles;
+        //prepareRoot.GetComponent<PreparePlaneManager>().ResetFireWorkPosition();
+        cameraRoot.DOMove(target[4].position, 1.5f);
+        cameraRoot.DORotate(target[4].eulerAngles, 0.1f);
+
+    }
     public void MoveToTarget()
     {
         if (PlayerPrefs.GetInt(G.STAGE, 1) == 1)
@@ -97,6 +108,10 @@ public class CameraManager : SingleInstance<CameraManager>
         else if (PlayerPrefs.GetInt(G.STAGE, 1) == 4)
         {
             Stage4();
+        }
+        else if (PlayerPrefs.GetInt(G.STAGE, 1) == 5)
+        {
+            Stage5();
         }
     }
 }

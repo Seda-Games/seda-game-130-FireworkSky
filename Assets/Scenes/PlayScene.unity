@@ -72006,6 +72006,9 @@ MonoBehaviour:
   newfireworkUI: {fileID: 1874571393}
   fireworkUI: {fileID: 723489079}
   nextmapButton: {fileID: 1715189980}
+  nextmap: {fileID: 1715189978}
+  nextmapcost: {fileID: 2128351923}
+  unnextmapcost: {fileID: 207721138}
 --- !u!114 &2124726786
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -839,9 +839,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyboxModels:
-  - skyboxLevel: 0
-    skyboxObj: {fileID: 5059946593356434851}
   - skyboxLevel: 1
+    skyboxObj: {fileID: 5059946593356434851}
+  - skyboxLevel: 2
     skyboxObj: {fileID: 5059946593383457706}
 --- !u!1 &5059946592909088884
 GameObject:

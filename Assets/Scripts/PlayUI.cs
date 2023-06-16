@@ -44,7 +44,11 @@ public class PlayUI : MonoBehaviour
 
     public Button nextmapButton;
 
-    
+    public GameObject nextmap;
+
+    public Text nextmapcost;
+    public Text unnextmapcost;
+
 
     private void Start()
     {
@@ -94,6 +98,8 @@ public class PlayUI : MonoBehaviour
         UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
 
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].flow / G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].second) * 60) + "/min";
+
+        UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
     }
     public void UpdateLevelUI(int level)
     {
@@ -206,6 +212,20 @@ public class PlayUI : MonoBehaviour
             
         Debug.Log("现在是多少" + human.fillAmount);
     }
+    public void UpdateNextmap(int map)
+    {
+
+        if (G.dc.GetMoney() >= G.dc.gd.levelDict[map + 1].nextmapcost)
+        {
+            nextmap.SetActive(true);
+            nextmapcost.text = G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
+        }
+        else
+        {
+            unnextmapcost.text= G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
+            nextmap.SetActive(false);
+        }
+    }
     public void MoneyUI(int curLevel)
     {
         coinText.text = G.FormatNum(PlayerPrefs.GetInt(G.MONEY, G.dc.gd.levelDict[curLevel].money));
@@ -313,8 +333,9 @@ public class PlayUI : MonoBehaviour
     }
     public void NextMap()
     {
-        int map =PlayerPrefs.GetInt(G.MAP, 0);
-        GameManager.instance.map.ShowModel(map);
+        int map =PlayerPrefs.GetInt(G.MAP, 1);
+        GameManager.instance.map.ShowModel(map+1);
+        PlayerPrefs.SetInt(G.MAP, map + 1);
     }
 
 }

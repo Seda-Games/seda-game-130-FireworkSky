@@ -401,7 +401,7 @@ public class GameManager : SingleInstance<GameManager>
                 bottomPanel.IncomeButton.interactable = false;
             }
         }
-       
+        playUI.UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
 
     }
     /*

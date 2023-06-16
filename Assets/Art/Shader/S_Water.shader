@@ -14,8 +14,6 @@ Shader "ccc/S_Water"
         _SpecSmoothess("SpecSmoothess", Range(0.1,1.0)) = 0.1
         _SpecTint ("SpecTint", COLOR) = (1, 1, 1, 1)
         _SpecIntensity ("SpecIntensity", float) = 0.95
-        _SpecEnd ("SpecEnd", float) = 300
-        _SpecStart ("SpecStart", float) = 0
         _UnderfIntensity ("UnderfIntensity", float) = 1
         _RT("RT", 2D) = "black" {}
     }
@@ -52,8 +50,6 @@ Shader "ccc/S_Water"
     float _SpecSmoothess;
     float4 _SpecTint;
     float _SpecIntensity;
-    float _SpecEnd;
-    float _SpecStart;
     float _UnderfIntensity;
     sampler2D _RT;
             struct v2f
@@ -65,6 +61,7 @@ Shader "ccc/S_Water"
                 float3 tangentWS : TEXCOORD3;
                 float4 worldPos : TEXCOORD4;
                 float4 screenPos : TEXCOORD5;
+                SHADOW_COORDS(7)
             };
 
 
@@ -78,6 +75,7 @@ Shader "ccc/S_Water"
                 o.tangentWS = UnityObjectToWorldDir(v.tangent).xyz;
                 o.binormalWS = normalize(cross(o.normalWS, o.tangentWS.xyz)) * v.tangent.w;
                 o.screenPos = ComputeScreenPos(o.pos);
+                TRANSFER_SHADOW(o);
                 return o;
             }
 
@@ -102,7 +100,7 @@ Shader "ccc/S_Water"
                 //ReflectColor
                 half2 reflectionUV = normalWS.xz / (i.pos.w + 1) * _NormalIntensity +screenPosNorm.xy;
                 half3 reflectionCol = tex2D(_ReflectionTex, reflectionUV).rgb;
-                half3 rtCol = tex2D(_RT, half2(i.uv.x, 1- i.uv.y)).rgb*0.3;
+                half3 rtCol = tex2D(_RT, half2(i.uv.x, 1- i.uv.y)).rgb*0.1;
                 half3 reflectionColFilnal = reflectionCol + rtCol;
                 //SpecColor
                 half SpecValue = pow(max(0.0,dot(normalWS, normalize(viewDir + lightDir))), 256* _SpecSmoothess);
@@ -110,13 +108,22 @@ Shader "ccc/S_Water"
                 //UnderWaterColor
                 half2 underWaterUV = i.worldPos.xz / _UnderWaterTilling + normalWS.xy * 0.1;
                 half3 UnderWaterColor = tex2D(_ReflectionTex, underWaterUV);
+                //shadow
+                 UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+                 half rtGray = 0.299 * rtCol.r + 0.578 * rtCol.g + 0.114 * rtCol.b;
+                 half customShadow = saturate(1 - atten) * 0.5;
+                 half blendAtten = saturate(atten + rtGray * customShadow*10);
                 //combine
                 half fresnel = saturate(1 - dot(i.normalWS, viewDir));
-                half3 col = lerp(UnderWaterColor * _UnderfIntensity, reflectionColFilnal * _RefIntensity, fresnel);
-                half3 finalCol = col + SpecColor;
-                return half4(finalCol, 1.0);
+                half3 col = lerp(UnderWaterColor * _UnderfIntensity * blendAtten, reflectionColFilnal * _RefIntensity * blendAtten, fresnel);
+                half3 finalColor = col + SpecColor;
+                finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
+                return half4(finalColor, 1.0);
+
+                //return atten.xxxx;
             }
             ENDCG
         }
     }
+    FallBack"Diffuse"
 }

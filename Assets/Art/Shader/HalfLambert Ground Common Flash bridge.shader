@@ -1,12 +1,13 @@
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "ccc/HalfLambert Ground Common Flash"
+Shader "ccc/HalfLambert Ground Common Flash bridge"
 {
     Properties
     {
         _DiffuseTex ("Diffuse Tex", 2D) = "white" {}
         _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
         _ShadowColor ("Shadow Color", Color) = (1, 1, 1, 1)
+        _ShadowIntensity ("ShadowIntensity",float) = 1
         _BaseShadowPower ("Power", Float) = 1
         _BaseShadowMul ("Mul", Float) = 1
         _RT ("RT",2D) = "black"{}
@@ -33,13 +34,14 @@ Shader "ccc/HalfLambert Ground Common Flash"
             {
                 float4 vertex : POSITION;
                 float2 texcoord : TEXCOORD0;
+                float2 texcoord1 : TEXCOORD1;
                 float3 normal : NORMAL;
                 float4 color : COLOR0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
+                float4 uv : TEXCOORD0;
                 float4 pos : SV_POSITION;
                 float3 normal_world : TEXCOORD1;
                 float3 pos_world : TEXCOORD2;
@@ -52,6 +54,7 @@ Shader "ccc/HalfLambert Ground Common Flash"
             float4 _ShadowColor;
             float _BaseShadowPower;
             float _BaseShadowMul;
+            float _ShadowIntensity;
             float4 _LightColor0;
             sampler2D _RT;
 
@@ -60,7 +63,8 @@ Shader "ccc/HalfLambert Ground Common Flash"
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord;
+                o.uv.xy = v.texcoord;
+                o.uv.zw = v.texcoord1;
                 o.pos_world = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.pos_wObj = mul(unity_ObjectToWorld, float4(0, 0, 0, 0)).xyz - o.pos_world;
                 o.normal_world = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject));
@@ -80,16 +84,16 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 half3 view_world = normalize(_WorldSpaceCameraPos.xyz - i.pos_world);
                 half3 light_world = normalize(_WorldSpaceLightPos0.xyz);
                 //BaseColor
-                half3 diffuseCol = tex2D(_DiffuseTex, i.uv).rgb;
+                half3 diffuseCol = tex2D(_DiffuseTex, i.uv.xy).rgb;
                 half3 baseColor = diffuseCol * _BaseColor.rgb;
                 half3 ambientColor = UNITY_LIGHTMODEL_AMBIENT.rgb;
                 //ShadowColor
-                half3 shadowColor = diffuseCol * _ShadowColor.rgb;
+                half3 shadowColor = diffuseCol * _ShadowColor.rgb*_ShadowIntensity;
                 //LightAtten
                 half3 lightColor =  _LightColor0.rgb;
                 half lightAtten = max(max(lightColor.x, lightColor.y), lightColor.z);
                 //RT
-                half3 rtColor = tex2D(_RT, float2(1-i.uv.x, i.uv.y)).rgb;
+                half3 rtColor = tex2D(_RT, float2(1-i.uv.z, i.uv.w)).rgb;
                 
                 //Direct Diffuse直接光漫反射
                 half diff_term = max(0.0, dot(normal_world, light_world));
@@ -103,9 +107,10 @@ Shader "ccc/HalfLambert Ground Common Flash"
                 half3 finalColor = max(0, lerp(shadowColor, baseColor, diffVal) * lightColor) ;
                 half rtGray  = 0.299 * rtColor.r + 0.578 * rtColor.g + 0.114 * rtColor.b;
                 half blendAtten = saturate(atten+ rtGray * customShadow);
-                finalColor = BlendColor(finalColor , rtColor * 0.3 );
+                finalColor = BlendColor(finalColor , rtColor* 0.6 );
                 finalColor = sqrt(max(exp2(log2(max(finalColor, 0.0)) * 2.2), 0.0));
                 return half4(finalColor* blendAtten, 1.0);
+                //return half4(rtColor, 1.0);
             }
             ENDCG
         }

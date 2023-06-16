@@ -51,7 +51,7 @@ Material:
     - _UnderWaterTilling: 225
     - _UnderfIntensity: 1
     - _WaterDetph: -2
-    - _WaterSpeed: 1
+    - _WaterSpeed: -1
     - __dirty: 0
     m_Colors:
     - _SpecTint: {r: 0.17866677, g: 0.5188679, b: 0.29205552, a: 1}

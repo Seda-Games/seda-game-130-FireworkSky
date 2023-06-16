@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: M_Bridge
+    second: {fileID: 2100000, guid: 6966f39fe96aedb4fb271942119dc9ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Scene_Color
     second: {fileID: 2100000, guid: 6966f39fe96aedb4fb271942119dc9ca, type: 2}
   materials:

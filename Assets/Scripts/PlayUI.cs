@@ -335,7 +335,7 @@ public class PlayUI : MonoBehaviour
     {
         int map =PlayerPrefs.GetInt(G.MAP, 1);
         GameManager.instance.map.ShowModel(map+1);
-        PlayerPrefs.SetInt(G.MAP, map + 1);
+        //PlayerPrefs.SetInt(G.MAP, map + 1);
     }
 
 }

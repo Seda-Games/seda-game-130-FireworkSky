@@ -236,6 +236,14 @@ public class PlayUI : MonoBehaviour
                 nextmap.SetActive(false);
                 unnextmap.SetActive(false);
             }
+            if (PlayerPrefs.GetInt(G.FIREWORKTIMES, 0) >= G.dc.gd.levelDict[map].limitmaxlevel)
+            {
+                GameManager.instance.bottomPanel.needUnlockMap.SetActive(true);
+            }
+            else
+            {
+                GameManager.instance.bottomPanel.needUnlockMap.SetActive(false);
+            }
         }
         else
         {

@@ -18,6 +18,7 @@ public class BottomPanel : MonoBehaviour
     public GameObject maxaddplatform;
     public GameObject addFirePlaneText;
 
+    public GameObject needUnlockMap;
 
     // Start is called before the first frame update
     void Start()

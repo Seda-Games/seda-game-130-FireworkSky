@@ -39,6 +39,8 @@ public class GameManager : SingleInstance<GameManager>
     public PlayGame playGame;
     public BottomPanel bottomPanel;
     public FireWorkUI fireworkUI;
+
+    public Map map;
     Vector2 mouseOriginalPoint, mouseLastPoint;
     private Vector3 target;
     public Player player;
@@ -49,6 +51,7 @@ public class GameManager : SingleInstance<GameManager>
     public bool ismax=false;
     public bool ismax1=false;
     public Transform fireroot;
+    public GameObject[] skybox;
     private void Awake()
     {
         if (instance == null)
@@ -401,4 +404,12 @@ public class GameManager : SingleInstance<GameManager>
        
 
     }
+    /*
+    public void ShowOrHideMap(int map)
+    {
+        foreach (var item in skybox)
+        {
+            item.SetActive(item== map);
+        }
+    }*/
 }

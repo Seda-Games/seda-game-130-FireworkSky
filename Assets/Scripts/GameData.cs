@@ -33,6 +33,8 @@ public class GameData
     public Dictionary<int, PreparePlaneTable> preparePlaneTableDict = new Dictionary<int, PreparePlaneTable>();
     public AchievementTable[] achievementTables;
     public Dictionary<int, AchievementTable> achievementTableDict = new Dictionary<int, AchievementTable>();
+    public UnlockFirePlaneTable[] unlockFirePlaneTables;
+    public Dictionary<int, UnlockFirePlaneTable> unlockFirePlaneTableDict = new Dictionary<int, UnlockFirePlaneTable>();
     public void Init()
     {
         foreach(var v in levels)
@@ -126,11 +128,11 @@ public class GameData
 public class LevelData
 {
     public int id;
-    public int showAd = 0;
-    public int duration;
-    public int fireworkcost;
+    public int mapId;
     public int firelevel;
     public int money;
+    public int limitmaxlevel;
+    public int nextmapcost;
 }
 [System.Serializable]
 public class UserControl
@@ -231,4 +233,12 @@ public class AchievementTable
     public int accumulatehuman;
     public float duration;
     public int multiple;
+}
+
+[System.Serializable]
+public class UnlockFirePlaneTable
+{
+    public int fireplaneid;
+    public int unlockcost;
+    public int isunlock;
 }

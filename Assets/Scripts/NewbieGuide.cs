@@ -20,6 +20,9 @@ public class NewbieGuide : MonoBehaviour
     private bool isfinishStep = false;
     private bool isfinishStep1 = false;
     private bool isfinish = false;
+    public Button offNewFirework;
+    public Button offNewMask;
+    public bool isfinishlastStep = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,12 +57,20 @@ public class NewbieGuide : MonoBehaviour
             {
                 if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork != null)
                 {
-                    if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork.curFireworkLevel == 2 )
+                    if (GameManager.instance.preparePlaneManager.preparePlanes[1].fireWork.curFireworkLevel == 2)
                     {
                         newbie[2].SetActive(false);
-                        newbie[3].SetActive(true);
-                        currentState = State.Step5;
+                        newbie[4].SetActive(true);
+                        if (isfinishlastStep == true)
+                        {
+                            newbie[3].SetActive(true);
+                            currentState = State.Step5;
+                            newbie[4].SetActive(false);
+                        }
+                           
                     }
+                    
+                    
                 }
                 
             }else
@@ -105,6 +116,14 @@ public class NewbieGuide : MonoBehaviour
                     isfinishStep1 = true;
                 }
             }
+        });
+        offNewFirework.onClick.AddListener(() => {
+            newbie[4].SetActive(false);
+            isfinishlastStep = true;
+        });
+        offNewMask.onClick.AddListener(() => {
+            newbie[4].SetActive(false);
+            isfinishlastStep = true;
         });
     }
    

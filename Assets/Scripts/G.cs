@@ -28,6 +28,8 @@ public static class G
     public const string ACHIEVEMENTHUMAN = "achievementhuman";
     public const string ACHIEVEMENTHUMANSTAGE = "achievementhumanstage";
 
+    public const string MAP = "map";
+
     public static string FormatNum(int num)
     {
         if (num > 1000000000)
@@ -111,6 +113,7 @@ public static class Tag
     public const string FirePlane = "fireplane";
     public const string PreparePlane = "prepareplane";
     public const string PrepareUnlock = "prepareunlock";
+    public const string FireUnlock = "fireunlock";
 
 }
 public static class Layer

@@ -213,6 +213,7 @@ public class FireWorkManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.UNLOCK))
             {
+                //解锁准备台
                 if (hit.transform.CompareTag(Tag.PrepareUnlock))
                 {
                     element3 = hit.collider.gameObject;
@@ -241,6 +242,35 @@ public class FireWorkManager : MonoBehaviour
                     element4 = null;
                     element3 = null;
                 }
+                //解锁发射台
+                /*if (hit.transform.CompareTag(Tag.FireUnlock))
+                {
+                    element3 = hit.collider.gameObject;
+                    if (element)
+                    {
+                        element.transform.position = element2.transform.position;
+                        element = null;
+                        element2 = null;
+                        element3 = null;
+                        element4 = null;
+                    }
+                    else
+                    if (G.dc.GetMoney() >= G.dc.gd.unlockFirePlaneTables[element3.transform.parent.GetComponent<FirePlane>().FirePlaneID].unlockcost && element4 == element3)
+                    {
+                        element3.SetActive(false);
+                        element3.transform.parent.GetComponent<FirePlane>().isUnlock = true;
+                        PlayerPrefs.SetInt("FireUnlock" + element3.transform.parent.GetComponent<FirePlane>().FirePlaneID, 1);
+                        GameManager.instance.UnlockPreparePlaneMoney(element3.transform.parent.GetComponent<FirePlane>().FirePlaneID);
+                    }
+                    else
+                    if (element4 == element3)
+                    {
+                        ToastManager.Show("Not enough money to unlock");
+                        //Debug.LogError("钱不够，无法继续解锁");
+                    }
+                    element4 = null;
+                    element3 = null;
+                }*/
             }
             else
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.Plane))
@@ -1022,8 +1052,8 @@ public class FireWorkManager : MonoBehaviour
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
                 cub.GetComponent<FireWork>().ShowModel(1);
                
-                GameManager.instance.fireworkUI.ShowUI(1);
-                PlayerPrefs.SetInt("Rocket" + 1,1);
+               // GameManager.instance.fireworkUI.ShowUI(1);
+                //PlayerPrefs.SetInt("Rocket" + 1,1);
                 PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
@@ -1098,4 +1128,5 @@ public class FireWorkManager : MonoBehaviour
             slide[4].SetActive(true);
         }
     }
+    
 }

@@ -42,6 +42,10 @@ public class PlayUI : MonoBehaviour
 
     public GameObject fireworkUI;
 
+    public Button nextmapButton;
+
+    
+
     private void Start()
     {
         launchButton.onClick.AddListener(ShowLaunchUI);
@@ -54,6 +58,8 @@ public class PlayUI : MonoBehaviour
         huamanRewardButton.onClick.AddListener(RewardHumanUI);
 
         newfireworkUI.onClick.AddListener(HideFireworkUI);
+
+        nextmapButton.onClick.AddListener(NextMap);
     }
     public void UpdateUI(int curLevel = 1)
     {
@@ -304,6 +310,11 @@ public class PlayUI : MonoBehaviour
     public void HideFireworkUI()
     {
         fireworkUI.SetActive(false);
+    }
+    public void NextMap()
+    {
+        int map =PlayerPrefs.GetInt(G.MAP, 0);
+        GameManager.instance.map.ShowModel(map);
     }
 
 }

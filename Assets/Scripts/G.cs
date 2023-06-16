@@ -30,6 +30,8 @@ public static class G
 
     public const string MAP = "map";
 
+    public const string FIREWORKTIMES = "fireworktimes";
+
     public static string FormatNum(int num)
     {
         if (num > 1000000000)

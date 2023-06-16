@@ -45,6 +45,7 @@ public class PlayUI : MonoBehaviour
     public Button nextmapButton;
 
     public GameObject nextmap;
+    public GameObject unnextmap;
 
     public Text nextmapcost;
     public Text unnextmapcost;
@@ -214,17 +215,30 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateNextmap(int map)
     {
-
-        if (G.dc.GetMoney() >= G.dc.gd.levelDict[map + 1].nextmapcost)
+        if (map < G.dc.gd.levels.Length)
         {
-            nextmap.SetActive(true);
-            nextmapcost.text = G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
+            if (PlayerPrefs.GetInt(G.FIREWORKTIMES, 0) >= G.dc.gd.levelDict[map].limitmaxlevel)
+            {
+                if (G.dc.GetMoney() >= G.dc.gd.levelDict[map + 1].nextmapcost)
+                {
+                    nextmap.SetActive(true);
+                    nextmapcost.text = G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
+                }
+                else
+                {
+                    unnextmapcost.text = G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
+                    nextmap.SetActive(false);
+                    unnextmap.SetActive(true);
+                }
+            }
         }
         else
         {
-            unnextmapcost.text= G.FormatNum(G.dc.gd.levelDict[map + 1].nextmapcost);
             nextmap.SetActive(false);
+            unnextmap.SetActive(false);
         }
+        
+        
     }
     public void MoneyUI(int curLevel)
     {
@@ -335,7 +349,14 @@ public class PlayUI : MonoBehaviour
     {
         int map =PlayerPrefs.GetInt(G.MAP, 1);
         GameManager.instance.map.ShowModel(map+1);
-        //PlayerPrefs.SetInt(G.MAP, map + 1);
-    }
+        PlayerPrefs.SetInt(G.MAP, map + 1);
+        UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
+        GameManager.instance.preparePlaneManager.InitNextMapPrepareFirePlane();
+        GameManager.instance.firePlaneManager.InitNextMapFirePlane();
 
+    }
+    public void InitModel()
+    {
+        GameManager.instance.map.ShowModel(PlayerPrefs.GetInt(G.MAP, 1));
+    }
 }

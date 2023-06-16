@@ -5,15 +5,15 @@
             "mapId": 1,
             "firelevel":1,
             "money":20,
-            "limitmaxlevel":10,
+            "limitmaxlevel":5,
             "nextmapcost":0
         },
         {
             "id": 2,
             "mapId": 2,
-            "firelevel":9,
+            "firelevel":3,
             "money":20,
-            "limitmaxlevel":21,
+            "limitmaxlevel":10,
             "nextmapcost":50
         }
     ],

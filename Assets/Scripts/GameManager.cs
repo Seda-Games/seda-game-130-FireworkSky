@@ -91,7 +91,9 @@ public class GameManager : SingleInstance<GameManager>
         preparePlaneManager.InitPrepareFirePlane();
         firePlaneManager.InitFirePlane();
         fireWorkManager.ShowOrHideSlide();
+        playUI.InitModel();
         IsEnoughMoney();
+
     }
 
     public void InitGameData()

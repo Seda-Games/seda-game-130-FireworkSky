@@ -48,6 +48,47 @@ public class FirePlaneManager : MonoBehaviour
             }
         }
     }
+    public void InitNextMapFirePlane()
+    {
+        foreach (var item in firePlanes)
+        {
+            int level = PlayerPrefs.GetInt("FireWorkLevel" + item.FirePlaneID, 0);
+            if (item.fireWork != null)
+            {
+                Destroy(item.fireWork.gameObject);
+            }
+            if (level >= G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel)
+            {
+                if (level > 0)
+                {
+                    GameObject cub = Instantiate(GameManager.instance.fireWorkManager.firework, item.transform.position, Quaternion.identity);
+                    item.fireWork = cub.GetComponent<FireWork>();
+                    item.fireWork.ShowModel(level);
+                    cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
+                    cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
+                    
+                    item.fireWork.PlayFx(cub, FireWorkPhase.Fire);
+                }
+            }
+            else
+            {
+                
+                if (level > 0)
+                {
+                    level = G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel;
+                    GameObject cub = Instantiate(GameManager.instance.fireWorkManager.firework, item.transform.position, Quaternion.identity);
+                    item.fireWork = cub.GetComponent<FireWork>();
+                    item.fireWork.ShowModel(level);
+                    cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
+                    cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
+                    
+                    item.fireWork.PlayFx(cub, FireWorkPhase.Fire);
+                    PlayerPrefs.SetInt("FireWorkLevel" + item.FirePlaneID, level);
+                }
+            }
+            
+        }
+    }
     public void UnlockFirePlane()
     {
         AudioManager.instance?.Tap();

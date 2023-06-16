@@ -37,6 +37,8 @@ public class FireWorkManager : MonoBehaviour
     private bool isachieve;
     private float duration=0;
     public bool isfinish = false;
+
+    public int times;
     void Awake()
     {
         //InitFireWork();
@@ -1022,6 +1024,7 @@ public class FireWorkManager : MonoBehaviour
     public void AddFireWork()
     {
         AudioManager.instance?.Tap();
+        times = PlayerPrefs.GetInt(G.FIREWORKTIMES, 0);
         fireWorkLevel = PlayerPrefs.GetInt(G.FIREWORKLEVEL, 2);
         fireWorkLevel = Mathf.Clamp(fireWorkLevel, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDatas[G.dc.gd.addFireWorkDatas.Length - 1].level);
         if (G.dc.GetMoney() >= G.dc.gd.addFireWorkDataDict[fireWorkLevel].cost)
@@ -1048,15 +1051,18 @@ public class FireWorkManager : MonoBehaviour
                 cub = Instantiate(firework, GameManager.instance.preparePlaneManager.preparePlanes[item1].transform.position, Quaternion.identity);
                 cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 GameManager.instance.preparePlaneManager.preparePlanes[item1].fireWork = cub.GetComponent<FireWork>();
-                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[1].level;
-                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[1].income;
-                cub.GetComponent<FireWork>().ShowModel(1);
+                int fireworklevel = G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel;
+                cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[fireworklevel].level;
+                cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[fireworklevel].income;
+                cub.GetComponent<FireWork>().ShowModel(fireworklevel);
                
                // GameManager.instance.fireworkUI.ShowUI(1);
                 //PlayerPrefs.SetInt("Rocket" + 1,1);
-                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[1].level);
+                PlayerPrefs.SetInt("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID, G.dc.gd.fireWorkDataDict[fireworklevel].level);
                 //Debug.Log("FireWorkLevel" + GameManager.instance.preparePlaneManager.preparePlanes[item1].PreparePlaneID);
                 //fireworkNum.Add(cub);
+                PlayerPrefs.SetInt(G.FIREWORKTIMES, times + 1);
+                GameManager.instance.playUI.UpdateNextmap(PlayerPrefs.GetInt(G.MAP,1));
             }
             else
             {

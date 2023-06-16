@@ -131,6 +131,7 @@ public class LevelData
     public int mapId;
     public int firelevel;
     public int money;
+    public int showlevel;
     public int limitmaxlevel;
     public int nextmapcost;
 }

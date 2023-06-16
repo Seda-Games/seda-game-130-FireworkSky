@@ -1,21 +1,11 @@
 {
     "levels": [
-        {
-            "id": 1,
-            "mapId": 1,
-            "firelevel":1,
-            "money":20,
-            "limitmaxlevel":5,
-            "nextmapcost":0
-        },
-        {
-            "id": 2,
-            "mapId": 2,
-            "firelevel":3,
-            "money":20,
-            "limitmaxlevel":10,
-            "nextmapcost":50
-        }
+        {"id":1 ,"mapId":1 ,"firelevel":1 ,"money":50 ,"limitmaxlevel":32 ,"showlevel":0 ,"nextmapcost":0},
+        {"id":2 ,"mapId":2 ,"firelevel":4 ,"money":1000 ,"limitmaxlevel":64 ,"showlevel":20 ,"nextmapcost":11664},
+        {"id":3 ,"mapId":1 ,"firelevel":8 ,"money":10000 ,"limitmaxlevel":96 ,"showlevel":50 ,"nextmapcost":718848},
+        {"id":4 ,"mapId":2 ,"firelevel":12 ,"money":100000 ,"limitmaxlevel":128 ,"showlevel":80 ,"nextmapcost":58942080},
+        {"id":5 ,"mapId":1 ,"firelevel":16 ,"money":1000000 ,"limitmaxlevel":200 ,"showlevel":110 ,"nextmapcost":1906364160}
+       
     ],
     "adsConfig": {
         "masterSwitch": 0,

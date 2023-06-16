@@ -14,6 +14,7 @@ public class Rocket
 public class FireWorkUI : MonoBehaviour
 {
     [SerializeField] List<Rocket> rockets;
+    
 
     public void ShowUI(int level)
     {
@@ -23,9 +24,19 @@ public class FireWorkUI : MonoBehaviour
             foreach (var item in rockets)
             {
                 item.rocketObj.SetActive(item.rocketLevel == level);
+                Debug.Log("亜込込込込込込込込"+ gameObject.name);
             }
             
         }    
+    }
+
+    public void ShowButtonUI(int level)
+    {
+        foreach (var item in rockets)
+        {
+            item.rocketObj.SetActive(item.rocketLevel == level);
+            Debug.Log("dasdasdasda"+gameObject.name);
+        }
     }
 
     // Start is called before the first frame update

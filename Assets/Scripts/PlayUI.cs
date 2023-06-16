@@ -217,7 +217,7 @@ public class PlayUI : MonoBehaviour
     {
         if (map < G.dc.gd.levels.Length)
         {
-            if (PlayerPrefs.GetInt(G.FIREWORKTIMES, 0) >= G.dc.gd.levelDict[map].limitmaxlevel)
+            if (PlayerPrefs.GetInt(G.FIREWORKTIMES, 0) >= G.dc.gd.levelDict[map + 1].showlevel)
             {
                 if (G.dc.GetMoney() >= G.dc.gd.levelDict[map + 1].nextmapcost)
                 {
@@ -230,6 +230,11 @@ public class PlayUI : MonoBehaviour
                     nextmap.SetActive(false);
                     unnextmap.SetActive(true);
                 }
+            }
+            else
+            {
+                nextmap.SetActive(false);
+                unnextmap.SetActive(false);
             }
         }
         else
@@ -348,15 +353,17 @@ public class PlayUI : MonoBehaviour
     public void NextMap()
     {
         int map =PlayerPrefs.GetInt(G.MAP, 1);
-        GameManager.instance.map.ShowModel(map+1);
         PlayerPrefs.SetInt(G.MAP, map + 1);
+        
+        GameManager.instance.map.ShowModel(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].mapId);
         UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
         GameManager.instance.preparePlaneManager.InitNextMapPrepareFirePlane();
         GameManager.instance.firePlaneManager.InitNextMapFirePlane();
+        GameManager.instance.buttonFireworkUI.ShowButtonUI(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel);
 
     }
     public void InitModel()
     {
-        GameManager.instance.map.ShowModel(PlayerPrefs.GetInt(G.MAP, 1));
+        GameManager.instance.map.ShowModel(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].mapId);
     }
 }

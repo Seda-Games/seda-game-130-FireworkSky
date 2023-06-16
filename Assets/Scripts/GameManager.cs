@@ -52,6 +52,8 @@ public class GameManager : SingleInstance<GameManager>
     public bool ismax1=false;
     public Transform fireroot;
     public GameObject[] skybox;
+    public FireWorkUI buttonFireworkUI;
+    public FireWorkUI NewFirework;
     private void Awake()
     {
         if (instance == null)
@@ -92,6 +94,8 @@ public class GameManager : SingleInstance<GameManager>
         firePlaneManager.InitFirePlane();
         fireWorkManager.ShowOrHideSlide();
         playUI.InitModel();
+
+        buttonFireworkUI.ShowButtonUI(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel);
         IsEnoughMoney();
 
     }

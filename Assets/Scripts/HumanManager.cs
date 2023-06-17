@@ -97,9 +97,9 @@ public class HumanManager : MonoBehaviour
             
             // 随机生成一个区域内的点
             Vector3 targetPoint = new Vector3(
-                Random.Range(areaCenter[1].x - areaSize[1].x / 2, areaCenter[1].x + areaSize[1].x / 2),
-                Random.Range(areaCenter[1].y - areaSize[1].y / 2, areaCenter[1].y + areaSize[1].y / 2),
-                Random.Range(areaCenter[1].z - areaSize[1].z / 2, areaCenter[1].z + areaSize[1].z / 2)
+                Random.Range(areaCenter[0].x - areaSize[0].x / 2, areaCenter[0].x + areaSize[0].x / 2),
+                Random.Range(areaCenter[0].y - areaSize[0].y / 2, areaCenter[0].y + areaSize[0].y / 2),
+                Random.Range(areaCenter[0].z - areaSize[0].z / 2, areaCenter[0].z + areaSize[0].z / 2)
             );
             float duration = Vector3.Distance(characterObj.transform.position, targetPoint) / 2f;
             if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
@@ -175,13 +175,13 @@ public class HumanManager : MonoBehaviour
                             if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
                             {
                                 GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
-                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
                             }
                             else
                             {
                                 int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                                 GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num-1].multiple);
-                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num-1].multiple);
+                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num-1].multiple);
                             }
                            
                            
@@ -190,7 +190,7 @@ public class HumanManager : MonoBehaviour
                         if(isachieve == false)
                         {
                             GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
-                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome);
+                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome);
                         }
                         animator.SetTrigger("Walk");
                         // 使用 DOTween 让人物始终面向移动方向
@@ -228,9 +228,9 @@ public class HumanManager : MonoBehaviour
 
             // 随机生成一个区域内的点
             Vector3 targetPoint = new Vector3(
-                Random.Range(areaCenter[0].x - areaSize[0].x / 2, areaCenter[0].x + areaSize[0].x / 2),
-                Random.Range(areaCenter[0].y - areaSize[0].y / 2, areaCenter[0].y + areaSize[0].y / 2),
-                Random.Range(areaCenter[0].z - areaSize[0].z / 2, areaCenter[0].z + areaSize[0].z / 2)
+                Random.Range(areaCenter[1].x - areaSize[1].x / 2, areaCenter[1].x + areaSize[1].x / 2),
+                Random.Range(areaCenter[1].y - areaSize[1].y / 2, areaCenter[1].y + areaSize[1].y / 2),
+                Random.Range(areaCenter[1].z - areaSize[1].z / 2, areaCenter[1].z + areaSize[1].z / 2)
             );
             float duration = Vector3.Distance(characterObj.transform.position, targetPoint) / 2f;
             if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)

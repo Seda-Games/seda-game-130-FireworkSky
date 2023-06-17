@@ -10,10 +10,13 @@ public class SceneCanvas : MonoBehaviour
     public GameObject moneyTextObj;
     public GameObject upgradeFxObj;
     public GameObject[] emojiObj;
+    public GameObject[] sademojiObj;
     GameObjectPool moneyTextObjPool;
     GameObjectPool UpgradeFxPool;
     public GameObjectPool EmojiPool;
+    public GameObjectPool SadEmojiPool;
     public int number;
+    public int number1;
     private void Awake()
     {
         moneyTextObjPool = new GameObjectPool(moneyTextObj);
@@ -65,7 +68,21 @@ public class SceneCanvas : MonoBehaviour
         emoji.transform.position = pos+new Vector3(0,2,0);
         StartCoroutine(ShowEmo(EmojiPool, emoji, 1.6f));
     }
+    public void UnShowEmoji(Vector3 pos)
+    {
+        GameObject emoji = SadEmojiPool.GetGameObject(sademojiObj[number1].transform.parent);
+        emoji.transform.position = pos + new Vector3(0, 2, 0);
+        StartCoroutine(SadShowEmo(SadEmojiPool, emoji, 1.6f));
+    }
     IEnumerator ShowEmo(GameObjectPool objPool, GameObject obj, float time)
+    {
+        obj.transform.localScale = Vector3.one * 1f;
+        obj.transform.DOMove(obj.transform.position + Vector3.up * 0.5f, time * 0.7f);
+        //obj.transform.DOScale(Vector3.one * 0.014f, time * 0.5f);
+        yield return new WaitForSeconds(time);
+        objPool.RemoveGameObject(obj);
+    }
+    IEnumerator SadShowEmo(GameObjectPool objPool, GameObject obj, float time)
     {
         obj.transform.localScale = Vector3.one * 1f;
         obj.transform.DOMove(obj.transform.position + Vector3.up * 0.5f, time * 0.7f);

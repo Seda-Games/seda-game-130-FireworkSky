@@ -157,57 +157,93 @@ public class HumanManager : MonoBehaviour
                         }
                     }
                 }
-                //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
-                characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
-                characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
+                if (maxlevel != 0)
                 {
-                    Debug.Log("dwqdqwdqwdqwdqwdqd");
-                    number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
-                    GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
-                    GameSceneManager.Instance.sceneCanvas.emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
-                    GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position+new Vector3(0,0.2f,0));
-                    // 让人物在目标点停留10秒
-                    DOVirtual.DelayedCall(10f, () =>
+                    //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
+                    characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
+                    characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        if (isachieve == true)
+                        Debug.Log("dwqdqwdqwdqwdqwdqd");
+                        number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
+                        GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
+                        GameSceneManager.Instance.sceneCanvas.emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                        GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
+                        // 让人物在目标点停留10秒
+                        DOVirtual.DelayedCall(10f, () =>
                         {
-                            Debug.Log("现在的人数等级是多少" + PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
-                            if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
+                            if (isachieve == true)
                             {
-                                GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
-                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                                Debug.Log("现在的人数等级是多少" + PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
+                                if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
+                                {
+                                    GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                                }
+                                else
+                                {
+                                    int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                                    GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
+                                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
+                                }
+
+
                             }
                             else
+                            if (isachieve == false)
                             {
-                                int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
-                                GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num-1].multiple);
-                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num-1].multiple);
+                                GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
+                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
                             }
-                           
-                           
-                        }
-                        else
-                        if(isachieve == false)
+                            animator.SetTrigger("Walk");
+                            // 使用 DOTween 让人物始终面向移动方向
+                            characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
+                            {
+                                // 计算移动时间
+                                float duration = Vector3.Distance(characterObj.transform.position, destroyPoint[0]) / 2f;
+                                // 使用 DOTween 让人物移动到销毁点
+                                characterObj.transform.DOMove(destroyPoint[0], duration).SetEase(Ease.Linear).OnComplete(() =>
+                                {
+                                    // 销毁人物
+                                    Destroy(characterObj);
+                                });
+                            });
+
+                        });
+                    });
+                }
+                else
+                {
+                    characterObj.GetComponent<Human>().curIncome = 0;
+                    characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        Debug.Log("dwqdqwdqwdqwdqwdqd");
+                        number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
+                        GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj[number]);
+                        GameSceneManager.Instance.sceneCanvas.sademojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                        GameSceneManager.Instance.sceneCanvas.UnShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
+                        // 让人物在目标点停留10秒
+                        DOVirtual.DelayedCall(2f, () =>
                         {
                             GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
-                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position , characterObj.GetComponent<Human>().curIncome);
-                        }
-                        animator.SetTrigger("Walk");
-                        // 使用 DOTween 让人物始终面向移动方向
-                        characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
-                        {
-                            // 计算移动时间
-                            float duration = Vector3.Distance(characterObj.transform.position, destroyPoint[0]) / 2f;
-                            // 使用 DOTween 让人物移动到销毁点
-                            characterObj.transform.DOMove(destroyPoint[0], duration).SetEase(Ease.Linear).OnComplete(() =>
+                            GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
+                            animator.SetTrigger("Walk");
+                            // 使用 DOTween 让人物始终面向移动方向
+                            characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
                             {
-                                // 销毁人物
-                                Destroy(characterObj);
+                                // 计算移动时间
+                                float duration = Vector3.Distance(characterObj.transform.position, destroyPoint[0]) / 2f;
+                                // 使用 DOTween 让人物移动到销毁点
+                                characterObj.transform.DOMove(destroyPoint[0], duration).SetEase(Ease.Linear).OnComplete(() =>
+                                {
+                                    // 销毁人物
+                                    Destroy(characterObj);
+                                });
                             });
-                        });
 
+                        });
                     });
-                });
+                }
+               
             });
             yield return new WaitForSeconds(1f);
         }
@@ -288,10 +324,9 @@ public class HumanManager : MonoBehaviour
                         }
                     }
                 }
-                //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
-                characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
-                //characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
-                //{
+                if (maxlevel != 0)
+                {
+                    characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
                     Debug.Log("dwqdqwdqwdqwdqwdqd");
                     number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
                     GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
@@ -323,7 +358,7 @@ public class HumanManager : MonoBehaviour
                             GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
                             GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome);
                         }
-                        animator.SetTrigger("Walk");
+                        //animator.SetTrigger("Walk");
                         // 使用 DOTween 让人物始终面向移动方向
                         characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
                         {
@@ -338,7 +373,38 @@ public class HumanManager : MonoBehaviour
                         });
 
                     });
-               // });
+                }
+                else
+                {
+                    characterObj.GetComponent<Human>().curIncome = 0;
+                    Debug.Log("dwqdqwdqwdqwdqwdqd");
+                    number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
+                    GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj[number]);
+                    GameSceneManager.Instance.sceneCanvas.sademojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                    GameSceneManager.Instance.sceneCanvas.UnShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
+                    // 让人物在目标点停留10秒
+                    DOVirtual.DelayedCall(2f, () =>
+                    {
+                        GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
+                        //animator.SetTrigger("Walk");
+                        // 使用 DOTween 让人物始终面向移动方向
+                        characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
+                        {
+                            // 计算移动时间
+                            float duration = Vector3.Distance(characterObj.transform.position, destroyPoint[0]) / 2f;
+                            // 使用 DOTween 让人物移动到销毁点
+                            characterObj.transform.DOMove(destroyPoint[0], duration).SetEase(Ease.Linear).OnComplete(() =>
+                            {
+                                // 销毁人物
+                                Destroy(characterObj);
+                            });
+                        });
+
+                    });
+                    
+                }
+                   
             });
             yield return new WaitForSeconds(1f);
         }

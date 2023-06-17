@@ -9,6 +9,15 @@ public class GM : MonoBehaviour
     [SerializeField]
     Button panel, showPanelButton,camerapositionButton1, camerapositionButton2,camerapositionButton3, camerapositionButton4, camerapositionButton5;
     // Start is called before the first frame update
+    public bool m_drop = true;
+    public bool m_nextmap = true;
+    public bool m_topui = true;
+
+    [SerializeField]
+    GameObject[] icon_x2,nextmap,topui;
+    [SerializeField]
+    Button addMoney, Icon, NextMap, TopUI;
+
     void Start()
     {
         Invoke("InitGM", 0.1f);
@@ -39,6 +48,10 @@ public class GM : MonoBehaviour
         camerapositionButton3.onClick.AddListener(CameraToTarget2);
         camerapositionButton4.onClick.AddListener(CameraToTarget3);
         camerapositionButton5.onClick.AddListener(CameraToTarget4);
+        addMoney.onClick.AddListener(()=> { GameManager.instance.AddMoney(100 * 100); });
+        Icon.onClick.AddListener(ShowAndHireIcon);
+        NextMap.onClick.AddListener(ShowAndHireNextMap);
+        TopUI.onClick.AddListener(ShowAndHireTopUI);
     }
     public void CameraToTarget()
     {
@@ -64,5 +77,23 @@ public class GM : MonoBehaviour
     {
         PlayerPrefs.SetInt(G.STAGE, 5);
         CameraManager.Instance.MoveToTarget();
+    }
+    public void ShowAndHireIcon()
+    {
+        m_drop = !m_drop;
+        icon_x2[0].SetActive(m_drop);
+        icon_x2[1].SetActive(m_drop);
+    }
+    public void ShowAndHireNextMap()
+    {
+        m_nextmap = !m_nextmap;
+        nextmap[0].SetActive(m_nextmap);
+        nextmap[1].SetActive(m_nextmap);
+    }
+    public void ShowAndHireTopUI()
+    {
+        m_topui = !m_topui;
+        topui[0].SetActive(m_topui);
+        topui[1].SetActive(m_topui);
     }
 }

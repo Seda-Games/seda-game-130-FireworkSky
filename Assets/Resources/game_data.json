@@ -308,10 +308,10 @@
         {"prepareid":5,"unlockcost":900000,"isunlock":0}
     ],
     "achievementTables":[
-        {"level":1 ,"accumulatelauncher":30 ,"accumulatehuman":10 ,"multiple":2},
-        {"level":2 ,"accumulatelauncher":60 ,"accumulatehuman":30 ,"multiple":3},
-        {"level":3 ,"accumulatelauncher":120 ,"accumulatehuman":60 ,"multiple":4},
-        {"level":4 ,"accumulatelauncher":240 ,"accumulatehuman":180 ,"multiple":5},
+        {"level":1 ,"accumulatelauncher":30 ,"accumulatehuman":20 ,"multiple":2},
+        {"level":2 ,"accumulatelauncher":60 ,"accumulatehuman":40 ,"multiple":3},
+        {"level":3 ,"accumulatelauncher":120 ,"accumulatehuman":80 ,"multiple":4},
+        {"level":4 ,"accumulatelauncher":240 ,"accumulatehuman":240 ,"multiple":5},
         {"level":5 ,"accumulatelauncher":500 ,"accumulatehuman":500 ,"multiple":6},
         {"level":6 ,"accumulatelauncher":800 ,"accumulatehuman":1000 ,"multiple":7},
         {"level":7 ,"accumulatelauncher":1300 ,"accumulatehuman":2000 ,"multiple":8},
@@ -319,7 +319,7 @@
         {"level":9 ,"accumulatelauncher":3000 ,"accumulatehuman":8000 ,"multiple":10}
        
     ],
-    "UnlockFirePlaneTable":[
+    "unlockFirePlaneTables":[
         {"fireplaneid":1001,"unlockcost":0,"isunlock":1},
         {"fireplaneid":1002,"unlockcost":0,"isunlock":1},
         {"fireplaneid":1003,"unlockcost":0,"isunlock":1},

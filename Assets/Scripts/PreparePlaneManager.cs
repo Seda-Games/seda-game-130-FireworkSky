@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PreparePlaneManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PreparePlaneManager : MonoBehaviour
                 GameObject cub = Instantiate(GameManager.instance.fireWorkManager.firework, item.transform.position, Quaternion.identity);
                 item.fireWork = cub.GetComponent<FireWork>();
                 item.fireWork.ShowModel(level);
+                item.fireWork.gameObject.transform.localScale=new Vector3(0.7f,0.7f,0.7f);
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
                 cub.transform.parent = CameraManager.Instance.prepareRoot.transform;

@@ -28,6 +28,7 @@ public class FirePlaneManager : MonoBehaviour
                 item.fireWork.ShowModel(level);
                 cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                 cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
+                //item.fireWork.gameObject.transform.localScale = new Vector3(1f, 1f, 0.7f);
                 //cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 item.fireWork.PlayFx(cub,FireWorkPhase.Fire);
             }

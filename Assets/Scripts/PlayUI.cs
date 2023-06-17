@@ -68,7 +68,7 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateUI(int curLevel = 1)
     {
-        coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
+        coinText.text = G.FormatNum(G.dc.GetMoney());
         levelText.text = "Level " + curLevel;
        
 
@@ -104,13 +104,13 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateLevelUI(int level)
     {
-        coinText.text = "$"+G.FormatNum(G.dc.GetMoney());
+        coinText.text = G.FormatNum(G.dc.GetMoney());
         level = Mathf.Clamp(level+1, G.dc.gd.addFireWorkDatas[0].level, G.dc.gd.addFireWorkDataDict[G.dc.gd.addFireWorkDatas.Length].level);
         AddFireWorkText.text = G.FormatNum(G.dc.gd.addFireWorkDataDict[level].cost);
     }
     public void UpdateLevelHumanUI(int level)
     {
-        coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
+        coinText.text = G.FormatNum(G.dc.GetMoney());
         humanText.text = G.FormatNum1((G.dc.gd.humanDataDataDict[level].flow / G.dc.gd.humanDataDataDict[level].second)*60)+"/min";
         //humanText.text = G.FormatNum(G.dc.gd.humanDataDataDict[level].flow);
         //Debug.Log("客流量" + G.FormatNum1(G.dc.gd.humanDataDataDict[level].flow));
@@ -122,7 +122,7 @@ public class PlayUI : MonoBehaviour
     public void UpdateLevelIncomeUI(int level)
     {
         
-        coinText.text = "$"+ G.FormatNum(G.dc.GetMoney());
+        coinText.text = G.FormatNum(G.dc.GetMoney());
         //level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
         AddIncomeText.text= G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost);
         //Debug.Log("weishenmebukouqian"+G.FormatNum(G.dc.gd.AddIncomeDataDict[level].cost));
@@ -131,7 +131,7 @@ public class PlayUI : MonoBehaviour
     public void UpdateLevelUnlockFirePlaneUI(int level)
     {
 
-        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+        coinText.text =  G.FormatNum(G.dc.GetMoney());
         level = Mathf.Clamp(level + 1, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTableDict[G.dc.gd.firworkPlaneTables.Length].level);
         //level=Mathf.Clamp(GameManager.instance.fireWorkManager.addIncomelevel + 1, G.dc.gd.addIncomeDatas[0].level, G.dc.gd.AddIncomeDataDict[G.dc.gd.addIncomeDatas.Length - 1].level);
         AddIncomeText.text = G.FormatNum(G.dc.gd.firworkPlaneTableDict[level].unlockcost);
@@ -139,11 +139,11 @@ public class PlayUI : MonoBehaviour
     }
     public void UpdateUnlockPreparePlaneUI()
     {
-        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+        coinText.text = G.FormatNum(G.dc.GetMoney());
     }
     public void UpdateUnlockFirePlaneUI()
     {
-        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+        coinText.text =  G.FormatNum(G.dc.GetMoney());
     }
     public void UpdateLauncherNumber(int level)
     {

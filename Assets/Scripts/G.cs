@@ -36,15 +36,15 @@ public static class G
     {
         if (num > 1000000000)
         {
-            return string.Format("{0:0.0}B", num / 1000000000.0f);
+            return string.Format("{0:0.00}B", num / 1000000000.00f);
         }
         else if (num > 1000000)
         {
-            return string.Format("{0:0.0}M", num / 1000000.0f);
+            return string.Format("{0:0.00}M", num / 1000000.00f);
         }
         else if (num > 1000)
         {
-            return string.Format("{0:0.0}K", num / 1000.0f);
+            return string.Format("{0:0.00}K", num / 1000.00f);
         }
         return num.ToString();
     }
@@ -52,15 +52,15 @@ public static class G
     {
         if (num > 1000000000)
         {
-            return string.Format("{0:0.0}B", num / 1000000000.0f);
+            return string.Format("{0:0.00}B", num / 1000000000.00f);
         }
         else if (num > 1000000)
         {
-            return string.Format("{0:0.0}M", num / 1000000.0f);
+            return string.Format("{0:0.00}M", num / 1000000.00f);
         }
         else if (num > 1000)
         {
-            return string.Format("{0:0.0}K", num / 1000.0f);
+            return string.Format("{0:0.00}K", num / 1000.00f);
         }
         return num.ToString();
     }

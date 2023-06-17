@@ -36,7 +36,7 @@ public class SceneCanvas : MonoBehaviour
     {
         GameObject moneyText = moneyTextObjPool.GetGameObject(moneyTextObj.transform.parent);
         moneyText.transform.position = pos;
-        moneyText.GetComponent<Text>().text = "+" + money;
+        moneyText.GetComponent<Text>().text = "+" + G.FormatNum(money);
         StartCoroutine(MoneyText(moneyTextObjPool, moneyText, 1.6f));
     }
     IEnumerator MoneyText(GameObjectPool objPool, GameObject obj, float time)

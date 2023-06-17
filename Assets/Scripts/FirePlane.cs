@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FirePlane : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class FirePlane : MonoBehaviour
     public int FirePlaneID;
     public GameObject Lock, Unlock;
     public bool isUnlock;
+    public Text unlockcost;
     // Start is called before the first frame update
 
 

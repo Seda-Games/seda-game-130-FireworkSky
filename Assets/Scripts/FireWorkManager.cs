@@ -103,6 +103,12 @@ public class FireWorkManager : MonoBehaviour
                     element4 = hit.collider.gameObject;
                     Debug.Log(hit.transform.tag);
                 }
+                else
+                if (hit.transform.CompareTag(Tag.FireUnlock))
+                {
+                    element4 = hit.collider.gameObject;
+                    Debug.Log(hit.transform.tag);
+                }
                 if (hit.transform.CompareTag(Tag.FireWork))
                 {
                     element = hit.collider.gameObject;
@@ -243,9 +249,9 @@ public class FireWorkManager : MonoBehaviour
                     }
                     element4 = null;
                     element3 = null;
-                }
+                }else
                 //½âËø·¢ÉäÌ¨
-                /*if (hit.transform.CompareTag(Tag.FireUnlock))
+                if (hit.transform.CompareTag(Tag.FireUnlock))
                 {
                     element3 = hit.collider.gameObject;
                     if (element)
@@ -257,12 +263,13 @@ public class FireWorkManager : MonoBehaviour
                         element4 = null;
                     }
                     else
-                    if (G.dc.GetMoney() >= G.dc.gd.unlockFirePlaneTables[element3.transform.parent.GetComponent<FirePlane>().FirePlaneID].unlockcost && element4 == element3)
+                    if (G.dc.GetMoney() >= G.dc.gd.unlockFirePlaneTableDict[element3.transform.parent.GetComponent<FirePlane>().FirePlaneID].unlockcost && element4 == element3)
                     {
                         element3.SetActive(false);
                         element3.transform.parent.GetComponent<FirePlane>().isUnlock = true;
+                        element3.transform.parent.GetComponent<FirePlane>().Unlock.SetActive(true);
                         PlayerPrefs.SetInt("FireUnlock" + element3.transform.parent.GetComponent<FirePlane>().FirePlaneID, 1);
-                        GameManager.instance.UnlockPreparePlaneMoney(element3.transform.parent.GetComponent<FirePlane>().FirePlaneID);
+                        GameManager.instance.UnlockFireMoney(element3.transform.parent.GetComponent<FirePlane>().FirePlaneID);
                     }
                     else
                     if (element4 == element3)
@@ -272,7 +279,7 @@ public class FireWorkManager : MonoBehaviour
                     }
                     element4 = null;
                     element3 = null;
-                }*/
+                }
             }
             else
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.Plane))

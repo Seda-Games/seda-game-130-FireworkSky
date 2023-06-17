@@ -10,6 +10,7 @@ public class FirePlaneManager : MonoBehaviour
     private int nextObjectToUnlock = 1004;
     int item1;
     public int unlockLevel;
+    
     void Start()
     {
         
@@ -30,6 +31,7 @@ public class FirePlaneManager : MonoBehaviour
                 //cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                 item.fireWork.PlayFx(cub,FireWorkPhase.Fire);
             }
+            /*
             if (item.FirePlaneID < 1004)
             {
                 PlayerPrefs.SetInt("FirePlane" + item.FirePlaneID, 1);
@@ -45,7 +47,18 @@ public class FirePlaneManager : MonoBehaviour
             {
                 item.Lock.SetActive(false);
                 item.Unlock.SetActive(true);
+            }*/
+            if (PlayerPrefs.GetInt("FireUnlock" + item.FirePlaneID, G.dc.gd.unlockFirePlaneTableDict[item.FirePlaneID].isunlock) == 1)
+            {
+                item.Lock.SetActive(false);
+                item.Unlock.SetActive(true);
             }
+            else
+            {
+                item.Lock.SetActive(true);
+                item.Unlock.SetActive(false);
+            }
+            item.unlockcost.text = "$" + G.FormatNum(G.dc.gd.unlockFirePlaneTableDict[item.FirePlaneID].unlockcost);
         }
     }
     public void InitNextMapFirePlane()

@@ -141,6 +141,10 @@ public class PlayUI : MonoBehaviour
     {
         coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
     }
+    public void UpdateUnlockFirePlaneUI()
+    {
+        coinText.text = "$" + G.FormatNum(G.dc.GetMoney());
+    }
     public void UpdateLauncherNumber(int level)
     {
         if (level == G.dc.gd.achievementTables.Length + 1)

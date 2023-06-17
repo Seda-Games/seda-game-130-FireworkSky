@@ -69,6 +69,10 @@ public class GameData
         {
             achievementTableDict[v.level] = v;
         }
+        foreach (var v in unlockFirePlaneTables)
+        {
+            unlockFirePlaneTableDict[v.fireplaneid] = v;
+        }
         /*foreach (var v in unlockDatas)
         {
             unlockDatasDict[v.id] = v;

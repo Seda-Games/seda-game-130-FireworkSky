@@ -262,6 +262,13 @@ public class GameManager : SingleInstance<GameManager>
         G.dc.Save();
         playUI.UpdateUnlockPreparePlaneUI();
     }
+    public void UnlockFireMoney(int id)
+    {
+
+        G.dc.UseMoney(G.dc.gd.unlockFirePlaneTableDict[id].unlockcost);
+        G.dc.Save();
+        playUI.UpdateUnlockFirePlaneUI();
+    }
     void AddLevel()
     {
         PlayerPrefs.SetInt(G.LEVEL, curLevel + 1);
@@ -388,7 +395,7 @@ public class GameManager : SingleInstance<GameManager>
         }
         
         
-
+        /*
         firePlaneManager.unlockLevel = PlayerPrefs.GetInt(G.UNLOCK, 2);
         firePlaneManager.unlockLevel = Mathf.Clamp(firePlaneManager.unlockLevel, G.dc.gd.firworkPlaneTables[0].level, G.dc.gd.firworkPlaneTables[G.dc.gd.firworkPlaneTables.Length - 1].level);
 
@@ -406,7 +413,7 @@ public class GameManager : SingleInstance<GameManager>
                 bottomPanel.addplatform.SetActive(true);
                 bottomPanel.IncomeButton.interactable = false;
             }
-        }
+        }*/
         playUI.UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
 
     }

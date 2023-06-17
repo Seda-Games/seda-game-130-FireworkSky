@@ -129,14 +129,14 @@
         {"level":4,"accumulatelauncher":400,"accumulatehuman":160,"duration":30,"multiple":5},
         {"level":5,"accumulatelauncher":800,"accumulatehuman":320,"duration":30,"multiple":6}
     ],
-    "UnlockFirePlaneTable":[
-        {"fireplaneid":1,"unlockcost":0,"isunlock":1},
-        {"fireplaneid":2,"unlockcost":0,"isunlock":1},
-        {"fireplaneid":3,"unlockcost":0,"isunlock":1},
-        {"fireplaneid":4,"unlockcost":500,"isunlock":0},
-        {"fireplaneid":5,"unlockcost":5000,"isunlock":0},
-        {"fireplaneid":6,"unlockcost":50000,"isunlock":0},
-        {"fireplaneid":7,"unlockcost":500000,"isunlock":0}
+    "unlockFirePlaneTables":[
+        {"fireplaneid":1001,"unlockcost":0,"isunlock":1},
+        {"fireplaneid":1002,"unlockcost":0,"isunlock":1},
+        {"fireplaneid":1003,"unlockcost":50,"isunlock":0},
+        {"fireplaneid":1004,"unlockcost":500,"isunlock":0},
+        {"fireplaneid":1005,"unlockcost":5000,"isunlock":0},
+        {"fireplaneid":1006,"unlockcost":50000,"isunlock":0},
+        {"fireplaneid":1007,"unlockcost":500000,"isunlock":0}
     ]
     
     

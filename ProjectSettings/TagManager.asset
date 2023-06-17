@@ -10,6 +10,7 @@ TagManager:
   - prepareplane
   - fireplane
   - prepareunlock
+  - fireunlock
   layers:
   - Default
   - TransparentFX

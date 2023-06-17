@@ -6,6 +6,8 @@ using DG.Tweening;
 public class HumanManager : MonoBehaviour
 {
     public GameObject[] characterPrefab; // 人物预制体
+    public GameObject[] boatPrefab;//船的预制体
+    public List<GameObject> humanPrefab;
     public Vector3[] spawnPoint; // 出生点
     public Vector3[] areaCenter; // 区域中心点
     public Vector3[] areaSize; // 区域大小
@@ -72,6 +74,7 @@ public class HumanManager : MonoBehaviour
             int number = Random.Range(0, characterPrefab.Length);
             // 在出生点生成一个人物
             GameObject characterObj = Instantiate(characterPrefab[number], spawnPoint[0], Quaternion.identity);
+            humanPrefab.Add(characterObj);
             Animator animator = characterObj.GetComponent<Animator>();
             
             // 随机生成一个区域内的点
@@ -192,7 +195,13 @@ public class HumanManager : MonoBehaviour
         }
         
     }
-   
+    public void deletePrefab()
+    {
+        foreach (var item in humanPrefab)
+        {
+            Destroy(item.gameObject);
+        }
+    }
     public void AddVisitor()
     {
         Debug.Log(visitorLevel);

@@ -369,6 +369,7 @@ public class PlayUI : MonoBehaviour
         
         GameManager.instance.map.ShowModel(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].mapId);
         UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
+        GameManager.instance.humanManager.deletePrefab();
         GameManager.instance.preparePlaneManager.InitNextMapPrepareFirePlane();
         GameManager.instance.firePlaneManager.InitNextMapFirePlane();
         GameManager.instance.buttonFireworkUI.ShowButtonUI(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel);

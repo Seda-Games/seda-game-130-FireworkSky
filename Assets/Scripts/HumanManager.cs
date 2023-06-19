@@ -416,6 +416,7 @@ public class HumanManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+        humanPrefab.Clear();
     }
     public void AddVisitor()
     {

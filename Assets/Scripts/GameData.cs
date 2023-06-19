@@ -246,4 +246,5 @@ public class UnlockFirePlaneTable
     public int fireplaneid;
     public int unlockcost;
     public int isunlock;
+    public int mapid;
 }

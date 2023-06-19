@@ -60,6 +60,16 @@ public class FirePlaneManager : MonoBehaviour
                 item.Unlock.SetActive(false);
             }
             item.unlockcost.text = "$" + G.FormatNum(G.dc.gd.unlockFirePlaneTableDict[item.FirePlaneID].unlockcost);
+
+
+            if (G.dc.gd.unlockFirePlaneTableDict[item.FirePlaneID].mapid <= PlayerPrefs.GetInt(G.MAP, 1))
+            {
+                item.gameObject.SetActive(true);
+            }
+            else
+            {
+                item.gameObject.SetActive(false);
+            }
         }
     }
     public void InitNextMapFirePlane()
@@ -100,7 +110,15 @@ public class FirePlaneManager : MonoBehaviour
                     PlayerPrefs.SetInt("FireWorkLevel" + item.FirePlaneID, level);
                 }
             }
-            
+            if (G.dc.gd.unlockFirePlaneTableDict[item.FirePlaneID].mapid <= PlayerPrefs.GetInt(G.MAP, 1))
+            {
+                item.gameObject.SetActive(true);
+            }
+            else
+            {
+                item.gameObject.SetActive(false);
+            }
+
         }
     }
     public void UnlockFirePlane()

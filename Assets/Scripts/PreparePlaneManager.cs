@@ -64,6 +64,7 @@ public class PreparePlaneManager : MonoBehaviour
                     cub.GetComponent<FireWork>().curFireworkIcome = G.dc.gd.fireWorkDataDict[level].income;
                     cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
                     cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
+                    item.fireWork.gameObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 }
             }
             else
@@ -79,6 +80,7 @@ public class PreparePlaneManager : MonoBehaviour
                     cub.GetComponent<FireWork>().curFireworkLevel = G.dc.gd.fireWorkDataDict[level].level;
                     cub.transform.parent = CameraManager.Instance.prepareRoot.transform;
                     PlayerPrefs.SetInt("FireWorkLevel" + item.PreparePlaneID, level);
+                    item.fireWork.gameObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 }
             }
             

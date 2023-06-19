@@ -48,7 +48,7 @@ public class GM : MonoBehaviour
         camerapositionButton3.onClick.AddListener(CameraToTarget2);
         camerapositionButton4.onClick.AddListener(CameraToTarget3);
         camerapositionButton5.onClick.AddListener(CameraToTarget4);
-        addMoney.onClick.AddListener(()=> { GameManager.instance.AddMoney(100 * 100); });
+        addMoney.onClick.AddListener(()=> { GameManager.instance.AddMoney(1000 * 1000); });
         Icon.onClick.AddListener(ShowAndHireIcon);
         NextMap.onClick.AddListener(ShowAndHireNextMap);
         TopUI.onClick.AddListener(ShowAndHireTopUI);

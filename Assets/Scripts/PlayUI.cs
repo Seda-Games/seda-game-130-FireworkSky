@@ -145,6 +145,11 @@ public class PlayUI : MonoBehaviour
     {
         coinText.text =  G.FormatNum(G.dc.GetMoney());
     }
+
+    public void UpdateNextmap()
+    {
+        coinText.text = G.FormatNum(G.dc.GetMoney());
+    }
     public void UpdateLauncherNumber(int level)
     {
         if (level == G.dc.gd.achievementTables.Length + 1)
@@ -368,7 +373,9 @@ public class PlayUI : MonoBehaviour
         PlayerPrefs.SetInt(G.MAP, map + 1);
         
         GameManager.instance.map.ShowModel(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].mapId);
+        GameManager.instance.UseNextMapMoney(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].id);
         UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
+
         GameManager.instance.humanManager.deletePrefab();
         GameManager.instance.preparePlaneManager.InitNextMapPrepareFirePlane();
         GameManager.instance.firePlaneManager.InitNextMapFirePlane();

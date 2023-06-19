@@ -218,6 +218,13 @@ public class GameManager : SingleInstance<GameManager>
         playUI.UpdateUI(curLevel);
         IsEnoughMoney();
     }
+    public void UseNextMapMoney(int id)
+    {
+        G.dc.UseMoney(G.dc.gd.levelDict[id].nextmapcost);
+        G.dc.Save();
+        playUI.UpdateNextmap();
+
+    }
 
     public void UseFireWorkMoney(int level)
     {

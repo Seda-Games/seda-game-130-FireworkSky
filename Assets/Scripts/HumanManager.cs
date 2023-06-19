@@ -20,6 +20,12 @@ public class HumanManager : MonoBehaviour
     public bool isachieve;
     private float duration1 = 0;
     public bool isfinish = false;
+    public int humanreward;
+    public GameObject money;
+    public List<Transform> moneytarget;
+    public Transform target;
+    public GameObject moneyparent;
+    private int random;
     // Start is called before the first frame update
     void Start()
     {
@@ -141,56 +147,74 @@ public class HumanManager : MonoBehaviour
             characterObj.transform.DOLookAt(targetPoint, 0.1f);
             characterObj.transform.DOMove(targetPoint, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
-                animator.SetTrigger("WalkToIdle1");
-                int maxlevel = 0;
-                foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+            animator.SetTrigger("WalkToIdle1");
+            int maxlevel = 0;
+            foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
+            {
+                if (item.fireWork != null)
                 {
-                    if (item.fireWork != null)
+                    if (item.fireWork.curFireworkLevel > maxlevel)
                     {
-                        if (item.fireWork.curFireworkLevel > maxlevel)
-                        {
-                            maxlevel = item.fireWork.curFireworkLevel;
-                        }
+                        maxlevel = item.fireWork.curFireworkLevel;
                     }
                 }
-                if (maxlevel != 0)
+            }
+            if (maxlevel != 0)
+            {
+                //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
+                characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
+                characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                 {
-                    //characterObj.GetComponent<Human>().curLevel = G.dc.gd.humanDataDataDict[visitorLevel - 1].level;
-                    characterObj.GetComponent<Human>().curIncome = G.dc.gd.fireWorkDataDict[maxlevel].humanincome;
-                    characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
+                    Debug.Log("dwqdqwdqwdqwdqwdqd");
+                    number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
+                    GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
+                    GameSceneManager.Instance.sceneCanvas.emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                    GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
+                // 让人物在目标点停留10秒
+                DOVirtual.DelayedCall(10f, () =>
+                {
+                if (isachieve == true)
+                {
+                    Debug.Log("现在的人数等级是多少" + PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
+                    if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
                     {
-                        Debug.Log("dwqdqwdqwdqwdqwdqd");
-                        number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.emojiObj.Length);
-                        GameSceneManager.Instance.sceneCanvas.EmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.emojiObj[number]);
-                        GameSceneManager.Instance.sceneCanvas.emojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
-                        GameSceneManager.Instance.sceneCanvas.ShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
-                        // 让人物在目标点停留10秒
-                        DOVirtual.DelayedCall(10f, () =>
-                        {
-                            if (isachieve == true)
-                            {
-                                Debug.Log("现在的人数等级是多少" + PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
-                                if (PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) == G.dc.gd.achievementTables.Length + 1)
-                                {
-                                    GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
-                                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
-                                }
-                                else
-                                {
-                                    int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
-                                    GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
-                                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
-                                }
+                        GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1) - 1].multiple);
+                    }
+                    else
+                    {
+                        int num = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
+                        GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
+                        GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome * G.dc.gd.achievementTableDict[num - 1].multiple);
+                    }
 
 
-                            }
-                            else
-                            if (isachieve == false)
-                            {
-                                GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
-                                GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
-                            }
-                            animator.SetTrigger("Walk");
+                }
+                else
+                if (isachieve == false)
+                {
+                    GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
+                    GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
+                }
+                    animator.SetTrigger("Walk");
+                    int[] number = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].human;
+                    if (humanreward == 0)
+                    {
+                         random = Random.Range(number[0], number[number.Length - 1]);
+                    }
+                    humanreward += 1;
+                    moneytarget.Add(characterObj.transform);
+                   
+                    
+                    if (humanreward >= random)
+                    {
+                        target = moneytarget[moneytarget.Count-1];
+                        Debug.Log("打印出来的transform" + target);
+                        GameObject cub = Instantiate(money, target.position, Quaternion.identity);
+                        cub.transform.parent = moneyparent.transform;
+                        humanreward = 0;
+                        moneytarget.Clear();
+                    }
                             // 使用 DOTween 让人物始终面向移动方向
                             characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
                             {
@@ -205,6 +229,7 @@ public class HumanManager : MonoBehaviour
                             });
 
                         });
+                        
                     });
                 }
                 else
@@ -349,6 +374,24 @@ public class HumanManager : MonoBehaviour
                         {
                             GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
                             GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome);
+                        }
+                        int[] number = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].human;
+                        if (humanreward == 0)
+                        {
+                            random = Random.Range(number[0], number[number.Length - 1]);
+                        }
+                        humanreward += 1;
+                        moneytarget.Add(characterObj.transform);
+
+
+                        if (humanreward >= random)
+                        {
+                            target = moneytarget[moneytarget.Count - 1];
+                            Debug.Log("打印出来的transform" + target);
+                            GameObject cub = Instantiate(money, target.position, Quaternion.identity);
+                            cub.transform.parent = moneyparent.transform;
+                            humanreward = 0;
+                            moneytarget.Clear();
                         }
                         //animator.SetTrigger("Walk");
                         // 使用 DOTween 让人物始终面向移动方向

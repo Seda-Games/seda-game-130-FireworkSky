@@ -35,6 +35,8 @@ public class GameData
     public Dictionary<int, AchievementTable> achievementTableDict = new Dictionary<int, AchievementTable>();
     public UnlockFirePlaneTable[] unlockFirePlaneTables;
     public Dictionary<int, UnlockFirePlaneTable> unlockFirePlaneTableDict = new Dictionary<int, UnlockFirePlaneTable>();
+    public RewardMoneyTable[] rewardMoneyTables;
+    public Dictionary<int, RewardMoneyTable> rewardMoneyTableDict = new Dictionary<int, RewardMoneyTable>();
     public void Init()
     {
         foreach(var v in levels)
@@ -72,6 +74,10 @@ public class GameData
         foreach (var v in unlockFirePlaneTables)
         {
             unlockFirePlaneTableDict[v.fireplaneid] = v;
+        }
+        foreach (var v in rewardMoneyTables)
+        {
+            rewardMoneyTableDict[v.mapid] = v;
         }
         /*foreach (var v in unlockDatas)
         {
@@ -194,6 +200,7 @@ public class HumanData
     public float second;
     public int cost;
     public int income;
+    public int[] human;
 }
 [System.Serializable]
 public class AddIncomeData
@@ -247,4 +254,10 @@ public class UnlockFirePlaneTable
     public int unlockcost;
     public int isunlock;
     public int mapid;
+}
+[System.Serializable]
+public class RewardMoneyTable
+{
+    public int mapid;
+    public int multiple;
 }

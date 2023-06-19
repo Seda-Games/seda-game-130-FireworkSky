@@ -19,6 +19,8 @@ public class FireWorkManager : MonoBehaviour
     public GameObject element2;
     public GameObject element3;
     public GameObject element4;
+    public GameObject element5;
+    public GameObject element6;
     public FireWork fireWork;
     public List<GameObject> fireworkNum;
     int item1;
@@ -107,6 +109,12 @@ public class FireWorkManager : MonoBehaviour
                 if (hit.transform.CompareTag(Tag.FireUnlock))
                 {
                     element4 = hit.collider.gameObject;
+                    Debug.Log(hit.transform.tag);
+                }
+                else
+                if (hit.transform.CompareTag(Tag.SceneMoney))
+                {
+                    element5 = hit.collider.gameObject;
                     Debug.Log(hit.transform.tag);
                 }
                 if (hit.transform.CompareTag(Tag.FireWork))
@@ -219,6 +227,20 @@ public class FireWorkManager : MonoBehaviour
             }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.REWARDMONEY))
+            {
+                if (hit.transform.CompareTag(Tag.SceneMoney))
+                {
+                    element6 = hit.collider.gameObject;
+                    if (element5 == element6)
+                    {
+                        hit.transform.GetComponent<ItemsBase>().OnClick();
+                        element5 = null;
+                        element6 = null;
+                    }
+                }
+            }
+            else
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << Layer.UNLOCK))
             {
                 //解锁准备台
@@ -249,7 +271,8 @@ public class FireWorkManager : MonoBehaviour
                     }
                     element4 = null;
                     element3 = null;
-                }else
+                }
+                else
                 //解锁发射台
                 if (hit.transform.CompareTag(Tag.FireUnlock))
                 {
@@ -350,11 +373,11 @@ public class FireWorkManager : MonoBehaviour
                                             newfirework.GetComponent<FireWork>().fwp = FireWorkPhase.Fire;
                                             newfirework.GetComponent<FireWork>().PlayFx(newfirework, FireWorkPhase.Fire);
 
-                                            newfirework.transform.parent =  GameManager.Instance.fireroot.transform;
+                                            newfirework.transform.parent = GameManager.Instance.fireroot.transform;
                                             PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                             PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<FirePlane>().FirePlaneID, G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
 
-                                            
+
                                             GameManager.instance.NewFirework.ShowUI(G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level);
                                             PlayerPrefs.SetInt("Rocket" + G.dc.gd.fireWorkDataDict[newfirework.GetComponent<FireWork>().curFireworkLevel].level, 1);
                                             foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
@@ -375,14 +398,14 @@ public class FireWorkManager : MonoBehaviour
                                                         PlayerPrefs.SetInt(G.STAGE, 4);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
                                                     {
                                                         PlayerPrefs.SetInt(G.STAGE, 3);
                                                         CameraManager.Instance.MoveToTarget();
                                                         ShowOrHideSlide();
-                                                        
+
                                                     }
                                                     if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
                                                     {
@@ -538,7 +561,7 @@ public class FireWorkManager : MonoBehaviour
                                         if (element3.GetComponent<FirePlane>().fireWork.curFireworkLevel != element2.GetComponent<PreparePlane>().fireWork.curFireworkLevel)
                                         {
                                             //交换位置
-                                           
+
                                             element2.GetComponent<PreparePlane>().fireWork.gameObject.transform.position = element3.transform.position;
                                             element3.GetComponent<FirePlane>().fireWork.gameObject.transform.position = element2.transform.position;
 
@@ -627,7 +650,7 @@ public class FireWorkManager : MonoBehaviour
                                 element.transform.position = element2.transform.position;
                                 element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                             }
-                            
+
                             element = null;
                             element2 = null;
                             element3 = null;
@@ -652,7 +675,7 @@ public class FireWorkManager : MonoBehaviour
                                         PlayerPrefs.SetInt("FireWorkLevel" + element2.GetComponent<FirePlane>().FirePlaneID, 0);
                                         PlayerPrefs.SetInt("FireWorkLevel" + element3.GetComponent<PreparePlane>().PreparePlaneID, element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel);
                                         element3.GetComponent<PreparePlane>().fireWork.gameObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
-                                        
+
                                         element2.GetComponent<FirePlane>().fireWork = null;
                                         element.transform.parent = CameraManager.Instance.prepareRoot.transform;
                                     }
@@ -864,7 +887,7 @@ public class FireWorkManager : MonoBehaviour
                     {
                         if (element)
                         {
-                            
+
                             element.transform.position = element2.transform.position;
                             element = null;
                             element2 = null;
@@ -878,7 +901,7 @@ public class FireWorkManager : MonoBehaviour
             {
                 if (element)
                 {
-                    
+
                     element.transform.position = element2.transform.position;
                     element = null;
                     element2 = null;

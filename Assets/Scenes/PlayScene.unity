@@ -529,6 +529,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2108177336}
     m_Modifications:
+    - target: {fileID: 332379951175785344, guid: 4f40fc9847b4a2d479b76ba381e2eb04,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 332379951175785344, guid: 4f40fc9847b4a2d479b76ba381e2eb04,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7614522513274561840, guid: 4f40fc9847b4a2d479b76ba381e2eb04,
         type: 3}
       propertyPath: m_Name
@@ -8670,8 +8680,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 32, z: 24}
-  m_Center: {x: 0, y: 16, z: 4.6}
+  m_Size: {x: 10, y: 20, z: 18}
+  m_Center: {x: 0, y: 10, z: 4.6}
 --- !u!114 &352096907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9838,6 +9848,8 @@ MonoBehaviour:
   element2: {fileID: 0}
   element3: {fileID: 0}
   element4: {fileID: 0}
+  element5: {fileID: 0}
+  element6: {fileID: 0}
   fireWork: {fileID: 0}
   fireworkNum: []
   cub: {fileID: 0}
@@ -9866,6 +9878,10 @@ MonoBehaviour:
   - {fileID: 1824039072}
   - {fileID: 1413362047}
   - {fileID: 754319120}
+  launcher: 0
+  stage: 0
+  isachieve: 0
+  duration: 0
   isfinish: 0
   times: 0
 --- !u!1 &460386992
@@ -10999,8 +11015,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 32, z: 24}
-  m_Center: {x: 0, y: 16, z: 4.6}
+  m_Size: {x: 10, y: 20, z: 18}
+  m_Center: {x: 0, y: 10, z: 4.6}
 --- !u!1 &514332414
 GameObject:
   m_ObjectHideFlags: 0
@@ -24279,7 +24295,15 @@ MonoBehaviour:
   - {x: -24, y: 0, z: 18}
   watchPoint: {fileID: 417356685}
   visitorLevel: 1
+  human: 0
+  stage1: 0
+  isachieve: 0
   isfinish: 0
+  humanreward: 0
+  money: {fileID: 4185341639136419538, guid: 99e61bc49cb035f4d87079f126b2e636, type: 3}
+  moneytarget: []
+  target: {fileID: 0}
+  moneyparent: {fileID: 1656073261}
 --- !u!1 &867472020
 GameObject:
   m_ObjectHideFlags: 0
@@ -38254,8 +38278,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 32, z: 24}
-  m_Center: {x: 0, y: 16, z: 4.6}
+  m_Size: {x: 10, y: 20, z: 18}
+  m_Center: {x: 0, y: 10, z: 4.6}
 --- !u!1 &1187782574
 GameObject:
   m_ObjectHideFlags: 0
@@ -64014,6 +64038,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649538412}
   m_CullTransparentMesh: 1
+--- !u!1 &1656073261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656073262}
+  m_Layer: 0
+  m_Name: RewardMoney
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656073262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656073261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1926154309}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657476036
 GameObject:
   m_ObjectHideFlags: 0
@@ -65502,8 +65557,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 32, z: 24}
-  m_Center: {x: 0, y: 16, z: 4.6}
+  m_Size: {x: 10, y: 20, z: 18}
+  m_Center: {x: 0, y: 10, z: 4.6}
 --- !u!114 &1772425231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66823,6 +66878,8 @@ MonoBehaviour:
   element2: {fileID: 0}
   element3: {fileID: 0}
   element4: {fileID: 0}
+  element5: {fileID: 0}
+  element6: {fileID: 0}
   fireWork: {fileID: 0}
   fireworkNum: []
   cub: {fileID: 0}
@@ -66843,6 +66900,10 @@ MonoBehaviour:
   addIncomelevel: 0
   particlesystem: {fileID: 0}
   slide: []
+  launcher: 0
+  stage: 0
+  isachieve: 0
+  duration: 0
   isfinish: 0
   times: 0
 --- !u!1001 &1887810818
@@ -67435,6 +67496,7 @@ Transform:
   - {fileID: 4988237319024615117}
   - {fileID: 984408416}
   - {fileID: 963045787}
+  - {fileID: 1656073262}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74537,8 +74599,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 32, z: 24}
-  m_Center: {x: 0, y: 16, z: 4.6}
+  m_Size: {x: 10, y: 20, z: 18}
+  m_Center: {x: 0, y: 10, z: 4.6}
 --- !u!1 &2124726781
 GameObject:
   m_ObjectHideFlags: 0

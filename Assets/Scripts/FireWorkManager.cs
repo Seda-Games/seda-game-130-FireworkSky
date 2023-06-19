@@ -32,10 +32,10 @@ public class FireWorkManager : MonoBehaviour
     public int addIncomelevel;
     public GameObject particlesystem;
     public GameObject[] slide;
-    private int launcher = 0;
-    private int stage;
-    private bool isachieve;
-    private float duration=0;
+    public int launcher = 0;
+    public int stage;
+    public bool isachieve;
+    public float duration=0;
     public bool isfinish = false;
 
     public int times;
@@ -965,24 +965,19 @@ public class FireWorkManager : MonoBehaviour
                     }
                     else
                     {
-                        launcher += 1;
-                        PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                        if(isfinish == false)
+                        {
+                            launcher += 1;
+                            PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
+                        }
+                        
                         stage = Mathf.Clamp(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1), G.dc.gd.achievementTables[0].level, G.dc.gd.achievementTableDict[G.dc.gd.achievementTables.Length].level);
                         if (PlayerPrefs.GetInt(G.ACHIEVEMENT, launcher) >= G.dc.gd.achievementTableDict[stage].accumulatelauncher)
                         {
                             isfinish = true;
                             GameManager.instance.playUI.launchRewardButton.gameObject.SetActive(true);
                             GameManager.instance.playUI.UnRewardLaunch.gameObject.SetActive(false);
-                            if (GameManager.instance.playUI.isreward == true)
-                            {
-
-                                stage += 1;
-                                PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, stage);
-                                isachieve = true;
-                                launcher = 0;
-                                PlayerPrefs.SetInt(G.ACHIEVEMENT, launcher);
-                                isfinish = false;
-                            }
+                           
 
                         }
                         else

@@ -352,6 +352,16 @@ public class PlayUI : MonoBehaviour
         launchUI.SetActive(false);
         isreward = true;
         //GameManager.instance.fireWorkManager.isfinish = false;
+        if (GameManager.instance.playUI.isreward == true)
+        {
+
+            GameManager.instance.fireWorkManager.stage += 1;
+            PlayerPrefs.SetInt(G.ACHIEVEMENTSTAGE, GameManager.instance.fireWorkManager.stage);
+            GameManager.instance.fireWorkManager.isachieve = true;
+            GameManager.instance.fireWorkManager.launcher = 0;
+            PlayerPrefs.SetInt(G.ACHIEVEMENT, GameManager.instance.fireWorkManager.launcher);
+            GameManager.instance.fireWorkManager.isfinish = false;
+        }
         UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
         
         
@@ -361,6 +371,15 @@ public class PlayUI : MonoBehaviour
         humanUI.SetActive(false);
         isrewardhuman = true;
         //GameManager.instance.humanManager.isfinish = false;
+        if (GameManager.instance.playUI.isrewardhuman == true)
+        {
+            GameManager.instance.humanManager.stage1 += 1;
+            PlayerPrefs.SetInt(G.ACHIEVEMENTHUMANSTAGE, GameManager.instance.humanManager.stage1);
+            GameManager.instance.humanManager.isachieve = true;
+            GameManager.instance.humanManager.human = 0;
+            PlayerPrefs.SetInt(G.ACHIEVEMENTHUMAN, GameManager.instance.humanManager.human);
+            GameManager.instance.humanManager.isfinish = false;
+        }
         UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
     }
     public void HideFireworkUI()

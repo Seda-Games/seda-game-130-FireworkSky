@@ -197,7 +197,8 @@ public class HumanManager : MonoBehaviour
                     GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position, characterObj.GetComponent<Human>().curIncome);
                 }
                     animator.SetTrigger("Walk");
-                    int[] number = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].human;
+                    int humanuber = Mathf.Clamp(PlayerPrefs.GetInt(G.VISITOR, 1), G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length].level);
+                    int[] number = G.dc.gd.humanDataDataDict[humanuber].human;
                     if (humanreward == 0)
                     {
                          random = Random.Range(number[0], number[number.Length - 1]);
@@ -380,7 +381,8 @@ public class HumanManager : MonoBehaviour
                             GameManager.instance.AddMoney(characterObj.GetComponent<Human>().curIncome);
                             GameSceneManager.Instance.sceneCanvas.ShowMoneyText(characterObj.transform.position + Vector3.up, characterObj.GetComponent<Human>().curIncome);
                         }
-                        int[] number = G.dc.gd.humanDataDataDict[PlayerPrefs.GetInt(G.VISITOR, 1)].human;
+                        int humanuber=Mathf.Clamp(PlayerPrefs.GetInt(G.VISITOR, 1), G.dc.gd.humanDatas[0].level, G.dc.gd.humanDataDataDict[G.dc.gd.humanDatas.Length].level);
+                        int[] number = G.dc.gd.humanDataDataDict[humanuber].human;
                         if (humanreward == 0)
                         {
                             random = Random.Range(number[0], number[number.Length - 1]);

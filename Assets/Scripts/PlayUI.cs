@@ -395,6 +395,8 @@ public class PlayUI : MonoBehaviour
         GameManager.instance.UseNextMapMoney(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].id);
         UpdateNextmap(PlayerPrefs.GetInt(G.MAP, 1));
 
+        SDKManager.CompleteLevel(PlayerPrefs.GetInt(G.MAP, 1));
+
         GameManager.instance.humanManager.deletePrefab();
         GameManager.instance.preparePlaneManager.InitNextMapPrepareFirePlane();
         GameManager.instance.firePlaneManager.InitNextMapFirePlane();

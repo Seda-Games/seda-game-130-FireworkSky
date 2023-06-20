@@ -54,6 +54,7 @@ public class GameManager : SingleInstance<GameManager>
     public GameObject[] skybox;
     public FireWorkUI buttonFireworkUI;
     public FireWorkUI NewFirework;
+    public int curmaplevel;
     private void Awake()
     {
         if (instance == null)
@@ -103,6 +104,8 @@ public class GameManager : SingleInstance<GameManager>
     public void InitGameData()
     {
         curLevel = PlayerPrefs.GetInt(G.LEVEL, 1);
+        curmaplevel = PlayerPrefs.GetInt(G.MAP, 1);
+        SDKManager.StartLevel(curmaplevel);
         curLevelData = G.dc.gd.GetLevelData(curLevel);
     }
 

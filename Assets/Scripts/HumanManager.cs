@@ -335,7 +335,7 @@ public class HumanManager : MonoBehaviour
             characterObj.transform.DOLookAt(targetPoint, 0.1f);
             characterObj.transform.DOMove(targetPoint, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
-                //animator.SetTrigger("WalkToIdle1");
+                animator.SetTrigger("SitToClap");
                 int maxlevel = 0;
                 foreach (var item in GameManager.instance.firePlaneManager.firePlanes)
                 {
@@ -404,7 +404,7 @@ public class HumanManager : MonoBehaviour
                             humanreward = 0;
                             moneytarget.Clear();
                         }
-                        //animator.SetTrigger("Walk");
+                        animator.SetTrigger("Sit");
                         // 使用 DOTween 让人物始终面向移动方向
                         characterObj.transform.DOLookAt(destroyPoint[0], 0.1f).OnComplete(() =>
                         {

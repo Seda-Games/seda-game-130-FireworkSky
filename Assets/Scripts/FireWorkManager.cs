@@ -39,7 +39,7 @@ public class FireWorkManager : MonoBehaviour
     public bool isachieve;
     public float duration=0;
     public bool isfinish = false;
-
+    public int maxlevel;
     public int times;
     void Awake()
     {
@@ -385,36 +385,43 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
-
-                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
+                                                    if (item.fireWork.curFireworkLevel > maxlevel)
                                                     {
-                                                        PlayerPrefs.SetInt(G.STAGE, 5);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                        break;
+                                                        maxlevel = item.fireWork.curFireworkLevel;
                                                     }
-                                                    if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 4);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 3);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 2);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                    }
+                                                    
 
                                                 }
+                                            }
+                                            if (maxlevel >= 17 && maxlevel < 21)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 5);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+                                                
+                                            }
+                                            else
+                                            if (maxlevel >= 13 && maxlevel < 17)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 4);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 9 && maxlevel < 13)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 5 && maxlevel < 9)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
                                             }
                                             element2.GetComponent<FirePlane>().fireWork = null;
                                         }
@@ -479,36 +486,43 @@ public class FireWorkManager : MonoBehaviour
                                             if (item.fireWork != null)
                                             {
                                                 Debug.Log("到底是多少级");
+                                                if (item.fireWork.curFireworkLevel > maxlevel)
+                                                {
+                                                    maxlevel = item.fireWork.curFireworkLevel;
+                                                }
 
-                                                if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 5);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                    break;
-                                                }
-                                                if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 4);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-
-                                                }
-                                                if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 3);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-
-                                                }
-                                                if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                {
-                                                    PlayerPrefs.SetInt(G.STAGE, 2);
-                                                    CameraManager.Instance.MoveToTarget();
-                                                    ShowOrHideSlide();
-                                                }
 
                                             }
+                                        }
+                                        if (maxlevel >= 17 && maxlevel < 21)
+                                        {
+                                            PlayerPrefs.SetInt(G.STAGE, 5);
+                                            CameraManager.Instance.MoveToTarget();
+                                            ShowOrHideSlide();
+
+                                        }
+                                        else
+                                        if (maxlevel >= 13 && maxlevel < 17)
+                                        {
+                                            PlayerPrefs.SetInt(G.STAGE, 4);
+                                            CameraManager.Instance.MoveToTarget();
+                                            ShowOrHideSlide();
+
+                                        }
+                                        else
+                                        if (maxlevel >= 9 && maxlevel < 13)
+                                        {
+                                            PlayerPrefs.SetInt(G.STAGE, 3);
+                                            CameraManager.Instance.MoveToTarget();
+                                            ShowOrHideSlide();
+
+                                        }
+                                        else
+                                        if (maxlevel >= 5 && maxlevel < 9)
+                                        {
+                                            PlayerPrefs.SetInt(G.STAGE, 2);
+                                            CameraManager.Instance.MoveToTarget();
+                                            ShowOrHideSlide();
                                         }
                                         element2.GetComponent<PreparePlane>().fireWork = null;
                                     }
@@ -543,36 +557,43 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > maxlevel)
+                                                    {
+                                                        maxlevel = item.fireWork.curFireworkLevel;
+                                                    }
 
-                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 5);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                        break;
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 4);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 3);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 2);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                    }
 
                                                 }
+                                            }
+                                            if (maxlevel >= 17 && maxlevel < 21)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 5);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 13 && maxlevel < 17)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 4);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 9 && maxlevel < 13)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 5 && maxlevel < 9)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
                                             }
                                             element2.GetComponent<PreparePlane>().fireWork = null;
                                         }
@@ -610,36 +631,43 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > maxlevel)
+                                                    {
+                                                        maxlevel = item.fireWork.curFireworkLevel;
+                                                    }
 
-                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 5);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                        break;
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 4);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 3);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 2);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                    }
 
                                                 }
+                                            }
+                                            if (maxlevel >= 17 && maxlevel < 21)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 5);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 13 && maxlevel < 17)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 4);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 9 && maxlevel < 13)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 5 && maxlevel < 9)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
                                             }
                                         }
                                         else
@@ -755,36 +783,43 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > maxlevel)
+                                                    {
+                                                        maxlevel = item.fireWork.curFireworkLevel;
+                                                    }
 
-                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 5);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                        break;
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 4);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 3);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 2);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                    }
 
                                                 }
+                                            }
+                                            if (maxlevel >= 17 && maxlevel < 21)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 5);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 13 && maxlevel < 17)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 4);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 9 && maxlevel < 13)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 5 && maxlevel < 9)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
                                             }
                                             element2.GetComponent<FirePlane>().fireWork = null;
                                         }
@@ -821,36 +856,43 @@ public class FireWorkManager : MonoBehaviour
                                                 if (item.fireWork != null)
                                                 {
                                                     Debug.Log("到底是多少级");
+                                                    if (item.fireWork.curFireworkLevel > maxlevel)
+                                                    {
+                                                        maxlevel = item.fireWork.curFireworkLevel;
+                                                    }
 
-                                                    if (item.fireWork.curFireworkLevel >= 17 && item.fireWork.curFireworkLevel < 21)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 5);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                        break;
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 13 && item.fireWork.curFireworkLevel < 17)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 4);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 9 && item.fireWork.curFireworkLevel < 13)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 3);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-
-                                                    }
-                                                    if (item.fireWork.curFireworkLevel >= 5 && item.fireWork.curFireworkLevel < 9)
-                                                    {
-                                                        PlayerPrefs.SetInt(G.STAGE, 2);
-                                                        CameraManager.Instance.MoveToTarget();
-                                                        ShowOrHideSlide();
-                                                    }
 
                                                 }
+                                            }
+                                            if (maxlevel >= 17 && maxlevel < 21)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 5);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 13 && maxlevel < 17)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 4);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 9 && maxlevel < 13)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 3);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
+
+                                            }
+                                            else
+                                            if (maxlevel >= 5 && maxlevel < 9)
+                                            {
+                                                PlayerPrefs.SetInt(G.STAGE, 2);
+                                                CameraManager.Instance.MoveToTarget();
+                                                ShowOrHideSlide();
                                             }
                                         }
                                         else if (element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == element2.GetComponent<FirePlane>().fireWork.curFireworkLevel && element3.GetComponent<PreparePlane>().fireWork.curFireworkLevel == G.dc.gd.fireWorkDataDict[G.dc.gd.fireWorkDatas.Length].level)

@@ -12,11 +12,14 @@ public class GM : MonoBehaviour
     public bool m_drop = true;
     public bool m_nextmap = true;
     public bool m_topui = true;
+    public bool m_mask = true;
 
     [SerializeField]
     GameObject[] icon_x2,nextmap,topui;
     [SerializeField]
-    Button addMoney, Icon, NextMap, TopUI;
+    Button addMoney, Icon, NextMap, TopUI,MaskUI;
+    [SerializeField]
+    GameObject mask;
 
     void Start()
     {
@@ -95,5 +98,10 @@ public class GM : MonoBehaviour
         m_topui = !m_topui;
         topui[0].SetActive(m_topui);
         topui[1].SetActive(m_topui);
+    }
+    public void ShowAndHireMaskUI()
+    {
+        m_mask = !m_mask;
+        mask.SetActive(m_mask);
     }
 }

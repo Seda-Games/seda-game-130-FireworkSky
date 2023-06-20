@@ -324,9 +324,9 @@
         {"fireplaneid":1002,"unlockcost":0,"isunlock":1,"mapid":1},
         {"fireplaneid":1003,"unlockcost":0,"isunlock":1,"mapid":1},
         {"fireplaneid":1004,"unlockcost":18000,"isunlock":0,"mapid":2},
-        {"fireplaneid":1005,"unlockcost":360000,"isunlock":0,"mapid":3},
-        {"fireplaneid":1006,"unlockcost":8000000,"isunlock":0,"mapid":4},
-        {"fireplaneid":1007,"unlockcost":98000000,"isunlock":0,"mapid":5}
+        {"fireplaneid":1005,"unlockcost":360000,"isunlock":0,"mapid":2},
+        {"fireplaneid":1006,"unlockcost":8000000,"isunlock":0,"mapid":3},
+        {"fireplaneid":1007,"unlockcost":98000000,"isunlock":0,"mapid":3}
     ],
     "rewardMoneyTables":[
         {"mapid":1,"multiple":6},

@@ -799,7 +799,10 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
+    Standalone: SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
+    iPhone: SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

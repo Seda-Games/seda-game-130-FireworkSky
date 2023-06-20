@@ -6,11 +6,20 @@ using UnityEngine.SceneManagement;
 public class Prepare : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
+    {
+        SDKManager.supersonicInit(StartGame);
+    }
+    public void StartGame()
     {
         FirstLoginMark();
         LoginMark();
         SceneManager.LoadScene(Scenes.PLAY_SCENE);
+    }
+    void Start()
+    {
+       
     }
 
     void FirstLoginMark()

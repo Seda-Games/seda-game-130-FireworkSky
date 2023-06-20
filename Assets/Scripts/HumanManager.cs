@@ -211,6 +211,11 @@ public class HumanManager : MonoBehaviour
                         target = moneytarget[moneytarget.Count-1];
                         Debug.Log("打印出来的transform" + target);
                         GameObject cub = Instantiate(money, target.position, Quaternion.identity);
+                        GameSceneManager.Instance.sceneCanvas.HappuShowEmoji(target.position + new Vector3(0, 0.2f, 0));
+                        cub.transform.DOScale(1, 0.5f).OnComplete(() => {
+                            cub.transform.DOScale(0.5f, 0.5f);
+                        });
+
                         cub.transform.parent = moneyparent.transform;
                         humanreward = 0;
                         moneytarget.Clear();
@@ -238,9 +243,9 @@ public class HumanManager : MonoBehaviour
                     characterObj.transform.DORotate(watchPoint.eulerAngles, 1).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         Debug.Log("dwqdqwdqwdqwdqwdqd");
-                        number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
-                        GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj[number]);
-                        GameSceneManager.Instance.sceneCanvas.sademojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                        //number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
+                        //GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj);
+                        //GameSceneManager.Instance.sceneCanvas.sademojiObj.transform.forward = CameraManager.Instance.transform.forward;
                         GameSceneManager.Instance.sceneCanvas.UnShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
                         // 让人物在目标点停留10秒
                         DOVirtual.DelayedCall(2f, () =>
@@ -389,6 +394,10 @@ public class HumanManager : MonoBehaviour
                             target = moneytarget[moneytarget.Count - 1];
                             Debug.Log("打印出来的transform" + target);
                             GameObject cub = Instantiate(money, target.position, Quaternion.identity);
+                            GameSceneManager.Instance.sceneCanvas.HappuShowEmoji(target.position + new Vector3(0, 0.2f, 0));
+                            cub.transform.DOScale(1, 0.5f).OnComplete(()=> {
+                                cub.transform.DOScale(0.5f, 0.5f);
+                            });
                             cub.transform.parent = moneyparent.transform;
                             humanreward = 0;
                             moneytarget.Clear();
@@ -413,9 +422,9 @@ public class HumanManager : MonoBehaviour
                 {
                     characterObj.GetComponent<Human>().curIncome = 0;
                     Debug.Log("dwqdqwdqwdqwdqwdqd");
-                    number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
-                    GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj[number]);
-                    GameSceneManager.Instance.sceneCanvas.sademojiObj[number].transform.forward = CameraManager.Instance.transform.forward;
+                    //number = Random.Range(0, GameSceneManager.Instance.sceneCanvas.sademojiObj.Length);
+                    //GameSceneManager.Instance.sceneCanvas.SadEmojiPool = new GameObjectPool(GameSceneManager.Instance.sceneCanvas.sademojiObj);
+                    //GameSceneManager.Instance.sceneCanvas.sademojiObj.transform.forward = CameraManager.Instance.transform.forward;
                     GameSceneManager.Instance.sceneCanvas.UnShowEmoji(characterObj.transform.position + new Vector3(0, 0.2f, 0));
                     // 让人物在目标点停留10秒
                     DOVirtual.DelayedCall(2f, () =>

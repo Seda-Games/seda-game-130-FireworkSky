@@ -29,7 +29,7 @@ public class NewbieGuide : MonoBehaviour
         m_bIsNewbieGuide= PlayerPrefs.GetInt(G.NEWBIEGUIDE, 0) != 1;
         if (m_bIsNewbieGuide)
         {
-            NewbieGuideStart();
+            //NewbieGuideStart();
         }
         
         

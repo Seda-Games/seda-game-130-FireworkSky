@@ -1920,6 +1920,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4630329856032232264, guid: 991337eba6253814785c2fc8d19b24d0,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4899124577112076947, guid: 991337eba6253814785c2fc8d19b24d0,
         type: 3}
       propertyPath: m_LocalScale.x

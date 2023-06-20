@@ -12,7 +12,7 @@ public class GM : MonoBehaviour
     public bool m_drop = true;
     public bool m_nextmap = true;
     public bool m_topui = true;
-    public bool m_mask = true;
+    public bool m_mask = false;
 
     [SerializeField]
     GameObject[] icon_x2,nextmap,topui;
@@ -55,6 +55,7 @@ public class GM : MonoBehaviour
         Icon.onClick.AddListener(ShowAndHireIcon);
         NextMap.onClick.AddListener(ShowAndHireNextMap);
         TopUI.onClick.AddListener(ShowAndHireTopUI);
+        MaskUI.onClick.AddListener(ShowAndHireMaskUI);
     }
     public void CameraToTarget()
     {

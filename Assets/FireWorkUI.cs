@@ -27,7 +27,20 @@ public class FireWorkUI : MonoBehaviour
                 Debug.Log("亜込込込込込込込込"+ gameObject.name);
             }
             
-        }    
+        }
+
+        if (SDKManager.Ads.ShowInterstitialAd(true))
+        {
+            print("ShowInterstitalAd true");
+            AdsManager.successCallback += () =>
+            {
+                Debug.Log("success");
+            };
+        }
+        else
+        {
+            Debug.Log("fail");
+        }
     }
 
     public void ShowButtonUI(int level)

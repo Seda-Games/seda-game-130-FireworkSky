@@ -97,6 +97,7 @@ public class GameManager : SingleInstance<GameManager>
 
         buttonFireworkUI.ShowButtonUI(G.dc.gd.levelDict[PlayerPrefs.GetInt(G.MAP, 1)].firelevel);
         IsEnoughMoney();
+        SDKManager.Ads.ShowBannerAd();
 
     }
 
@@ -287,9 +288,9 @@ public class GameManager : SingleInstance<GameManager>
 
     public void ReloadLevel()
     {
+        System.GC.Collect();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
     public void NextLevel()
     {
         AudioManager.instance?.Tap();

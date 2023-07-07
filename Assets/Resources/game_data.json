@@ -11,8 +11,8 @@
         "masterSwitch": 0,
         "retryAdSeq": [],
         "retryAdPeriod": 99,
-        "noNextLevelAdsDays": 1,
-        "nextLevelSafeDuration": 30
+        "noNextLevelAdsDays": 0,
+        "nextLevelSafeDuration": 20
     },
     "fireWorkDatas":[
         {"level":1, "income":10 ,"humanincome":2},

@@ -27,6 +27,18 @@ public class PileOfMoney : ItemsBase
         {
             GameManager.instance.AddMoney(G.dc.gd.rewardMoneyTableDict[PlayerPrefs.GetInt(G.MAP, 1)].multiple * G.dc.gd.fireWorkDataDict[maxlevel].income);
             GameSceneManager.Instance.sceneCanvas.ShowMoneyText(GameManager.instance.fireWorkManager.element6.transform.position, G.dc.gd.rewardMoneyTableDict[PlayerPrefs.GetInt(G.MAP, 1)].multiple * G.dc.gd.fireWorkDataDict[maxlevel].income);
+            if (SDKManager.Ads.ShowInterstitialAd(true))
+            {
+                print("ShowInterstitalAd true");
+                AdsManager.successCallback += () =>
+                {
+                    Debug.Log("success");
+                };
+            }
+            else
+            {
+                Debug.Log("fail");
+            }
         }
         
         

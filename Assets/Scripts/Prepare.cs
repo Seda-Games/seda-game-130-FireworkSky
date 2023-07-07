@@ -10,6 +10,7 @@ public class Prepare : MonoBehaviour
     {
         FirstLoginMark();
         LoginMark();
+        SDKManager.InitAdUnitySDK();
         SceneManager.LoadScene(Scenes.PLAY_SCENE);
     }
 

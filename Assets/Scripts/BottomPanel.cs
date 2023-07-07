@@ -42,10 +42,34 @@ public class BottomPanel : MonoBehaviour
     {
         //GameManager.instance.AddFireWorkLevel();
         GameManager.Instance.fireWorkManager.AddFireWork();
+        if (SDKManager.Ads.ShowInterstitialAd(true))
+        {
+            print("ShowInterstitalAd true");
+            AdsManager.successCallback += () =>
+            {
+                Debug.Log("success");
+            };
+        }
+        else
+        {
+            Debug.Log("fail");
+        }
     }
     public void OnClickVisitorButton()
     {
         GameManager.Instance.humanManager.AddVisitor();
+        if (SDKManager.Ads.ShowInterstitialAd(true))
+        {
+            print("ShowInterstitalAd true");
+            AdsManager.successCallback += () =>
+            {
+                Debug.Log("success");
+            };
+        }
+        else
+        {
+            Debug.Log("fail");
+        }
     }
     public void OnClickIncomButton()
     {

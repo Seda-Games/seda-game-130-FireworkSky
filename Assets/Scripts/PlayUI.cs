@@ -349,6 +349,19 @@ public class PlayUI : MonoBehaviour
     }
     public void RewardLaunchUI()
     {
+        if (SDKManager.Ads.ShowSpecialHeartReward(true))
+        {
+            print("RewardAd true");
+            AdsManager.successCallback += () =>
+            {
+                Debug.Log("play success");
+            };
+        }
+        else
+        {
+            Debug.Log("play fail");
+        }
+
         launchUI.SetActive(false);
         isreward = true;
         //GameManager.instance.fireWorkManager.isfinish = false;
@@ -363,11 +376,25 @@ public class PlayUI : MonoBehaviour
             GameManager.instance.fireWorkManager.isfinish = false;
         }
         UpdateLauncherNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTSTAGE, 1));
-        
-        
+
+       
+
     }
     public void RewardHumanUI()
     {
+        if (SDKManager.Ads.ShowSpecialHeartReward(true))
+        {
+            print("RewardAd true");
+            AdsManager.successCallback += () =>
+            {
+                Debug.Log("play success");
+            };
+        }
+        else
+        {
+            Debug.Log("play fail");
+        }
+
         humanUI.SetActive(false);
         isrewardhuman = true;
         //GameManager.instance.humanManager.isfinish = false;
@@ -381,6 +408,8 @@ public class PlayUI : MonoBehaviour
             GameManager.instance.humanManager.isfinish = false;
         }
         UpdateHumanNumber(PlayerPrefs.GetInt(G.ACHIEVEMENTHUMANSTAGE, 1));
+
+       
     }
     public void HideFireworkUI()
     {

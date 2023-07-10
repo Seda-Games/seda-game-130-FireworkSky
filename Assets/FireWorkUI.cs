@@ -26,21 +26,23 @@ public class FireWorkUI : MonoBehaviour
                 item.rocketObj.SetActive(item.rocketLevel == level);
                 Debug.Log("亜込込込込込込込込"+ gameObject.name);
             }
-            
-        }
 
-        if (SDKManager.Ads.ShowInterstitialAd(true))
-        {
-            print("ShowInterstitalAd true");
-            AdsManager.successCallback += () =>
+            if (SDKManager.Ads.ShowInterstitialAd(true))
             {
-                Debug.Log("success");
-            };
+                print("ShowInterstitalAd true");
+                AdsManager.successCallback += () =>
+                {
+                    Debug.Log("success");
+                };
+            }
+            else
+            {
+                Debug.Log("fail");
+            }
+
         }
-        else
-        {
-            Debug.Log("fail");
-        }
+        
+        
     }
 
     public void ShowButtonUI(int level)

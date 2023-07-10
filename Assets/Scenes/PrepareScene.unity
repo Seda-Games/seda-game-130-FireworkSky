@@ -172,7 +172,7 @@ MonoBehaviour:
   InterstitialAdTime: 0
   _androidGameId: 5338635
   _iOSGameId: 
-  _testMode: 1
+  _testMode: 0
   _androidAdUnitId: Interstitial_Android
   _iOSAdUnitId: Interstitial_iOS
   _androidAdUnitId_Rewarded: Rewarded_Android

@@ -149,6 +149,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
             {
                 this.ShowAd();
                 InterstitialAdTime = 0;
+                return true;
             }
             else
             {
@@ -158,8 +159,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
         else
         {
             this.ShowAd();
+            return true;
         }
-        return true;
+        
     }
 
     public void ShowAd_Rewarded()
